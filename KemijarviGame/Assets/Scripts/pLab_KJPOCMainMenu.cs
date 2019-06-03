@@ -1,8 +1,8 @@
 ﻿/******************************************************************************
- * File         : pLab_GeoMap.cs            
+ * File         : pLab_KJPOCMainMenu.cs            
  * Lisence      : BSD 3-Clause License
  * Copyright    : Lapland University of Applied Sciences
- * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi)
+ * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi),
  * BSD 3-Clause License
  *
  * Copyright (c) 2019, Lapland University of Applied Sciences
@@ -34,60 +34,75 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System;
+using UnityEngine.SceneManagement;
 
-public class pLab_GeoMap : MonoBehaviour {
+public class pLab_KJPOCMainMenu : MonoBehaviour
+{
+    #region // SerializeField
+    #endregion
+
+    #region // Private Attributes
+    #endregion
+
+    #region // Class Attributes
+
+    #endregion
+
+    #region // Public Attributes
+
+    #endregion
+
+    #region // Protected Attributes
+
+    #endregion
+
+    #region // Set/Get
+
+    #endregion
+
+    #region // Base Class Methods
+    #endregion
+
+    #region // Private Methods
+    #endregion
+
+    #region // Public Methods
 
     /// <summary>
-    /// 
+    /// OnExitClicked
     /// </summary>
-    [SerializeField]
-    private double utmX;
+    public void OnExitClicked()
+    {
+        Application.Quit();
 
-    /// <summary>
-    /// Get 
-    /// </summary>
-    public double UtmX { get { return this.utmX; } set { this.utmX = value; } }
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
 
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [SerializeField]
-    private double utmY;
-
-
-    public double UtmY { get { return this.utmY; } set { this.utmY = value; } }
-
-    /// <summary>
-    /// Singleton
-    /// </summary>
-    public static pLab_GeoMap instance = null;
-
-
-
-    void Awake() {
-        if (instance == null) {
-            instance = this;
-        }
-    }
-
-    // Use this for initialization
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-        if(Input.GetKeyDown(KeyCode.A)){
-            pLab_KJPOCSaveGame.instance.saveData.score++;
-        }
     }
 
 
+    /// <summary>
+    /// OnNewGameClicked
+    /// </summary>
+    public void OnNewGameClicked()
+    {
+        pLab_KJPOCSaveGame.instance.CreateNewGame();
+        SceneManager.LoadScene("Level_001");
+    }
+
+    /// <summary>
+    /// OnContinueClicked
+    /// </summary>
+    public void OnContinueClicked()
+    {
+        pLab_KJPOCSaveGame.instance.LoadGame();
+        SceneManager.LoadScene("Level_001");
+    }
+
+#endregion
 }

@@ -46,7 +46,7 @@ using UnityEngine;
 [System.Serializable]
 public class pLAB_KJPOCGameData
 {
-
+    public QuestSystem questSystem;
     public int score = 0;
 }
 
@@ -119,7 +119,7 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
         saveData = new pLAB_KJPOCGameData();
 
         saveData.score = 0;
-
+        saveData.questSystem = new QuestSystem();
     }
 
 
@@ -158,6 +158,8 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
     /// </summary>
     public void LoadGame()
     {
+
+        Debug.LogError(Application.persistentDataPath + "/gamesave.save");
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             BinaryFormatter bf = new BinaryFormatter();

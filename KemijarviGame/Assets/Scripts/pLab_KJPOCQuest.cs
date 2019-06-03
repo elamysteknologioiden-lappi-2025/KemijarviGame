@@ -74,6 +74,9 @@ public class pLab_KJPOCQuest : MonoBehaviour
     #region // SerializeField
 
     [SerializeField]
+    private GameObject dialog;
+
+    [SerializeField]
     private int questID;
 
     [SerializeField]
@@ -107,14 +110,23 @@ public class pLab_KJPOCQuest : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        Debug.LogError("AEAK");
         qData =  pLab_KJPOCSaveGame.instance.saveData.questSystem.listOfQuest.Find(x => x.questID == questID);
 
         if(null == qData)
         {
-            this.gameObject.SetActive(false);
+            qData = new pLab_KJPOCQuestData();
+            qData.questID = questID;
+            pLab_KJPOCSaveGame.instance.saveData.questSystem.listOfQuest.Add(qData);
         }
 
+        if(true == qData.completed)
+        {
+            gameObject.SetActive(false);
+        } else
+        {
 
+        }
 
     }
     #endregion

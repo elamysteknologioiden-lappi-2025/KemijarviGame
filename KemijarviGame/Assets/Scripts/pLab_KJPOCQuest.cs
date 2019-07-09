@@ -110,7 +110,6 @@ public class pLab_KJPOCQuest : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        Debug.LogError("AEAK");
         qData =  pLab_KJPOCSaveGame.instance.saveData.questSystem.listOfQuest.Find(x => x.questID == questID);
 
         if(null == qData)
@@ -120,12 +119,13 @@ public class pLab_KJPOCQuest : MonoBehaviour
             pLab_KJPOCSaveGame.instance.saveData.questSystem.listOfQuest.Add(qData);
         }
 
-        if(true == qData.completed)
+        if (false == qData.completed && pLab_KJPOCSaveGame.instance.saveData.questSystem.listOfQuest.Find(x => x.questID == prevQuest).completed == true)
+        {
+            gameObject.SetActive(true);
+        }
+        else
         {
             gameObject.SetActive(false);
-        } else
-        {
-
         }
 
     }

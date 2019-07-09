@@ -45,8 +45,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+#if UNITY_EDITOR //Editor only tag
 using UnityEditor;
 using UnityEditor.SceneManagement;
+#endif
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
@@ -461,7 +463,11 @@ public class pLab_OSMReader : MonoBehaviour {
             pLAB_GeoUtils.LatLongtoUTM(minLat, minLon, out UTMN_Zero, out UTME_Zero);
         }
 
-
+        if (GameObject.Find("GeoMap"))
+        {
+            GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmX = UTME_Zero;
+            GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmY = UTMN_Zero;
+        }
 
 
 
@@ -519,7 +525,9 @@ public class pLab_OSMReader : MonoBehaviour {
     /// Save OSMEDitorData
     /// </summary>
     public void SaveOSMEditorData() {
+#if UNITY_EDITOR //Editor only tag
         AssetDatabase.SaveAssets();
+#endif
     }
 
     /// <summary>

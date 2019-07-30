@@ -40,13 +40,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-
-
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class pLAB_KJPOCGameData
 {
-    public QuestSystem questSystem;
+    public QuestList questSystem;
     public int score = 0;
 }
 
@@ -98,12 +97,19 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         instance = this;
     }
-
+    void OnDestroy()
+    {
+#if UNITY_EDITOR
+        Debug.Log("On Destroy called");
+        OnApplicationQuit();
+#endif
+    }
     /// <summary>
     /// OnApplicationQuit
     /// </summary>
     private void OnApplicationQuit()
     {
+        Debug.LogError("TEST");
         SaveGame();
     }
 
@@ -119,7 +125,15 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
         saveData = new pLAB_KJPOCGameData();
 
         saveData.score = 0;
-        saveData.questSystem = new QuestSystem();
+
+        Debug.LogError("LOAD QUSTLIST");
+        saveData.questSystem = QuestList.LoadQuest("Quests/QuestList");
+        Debug.LogError("DONE QUSTLIST");
+        if(saveData.questSystem == null)
+        {
+            Debug.LogError("DONE QUSTLIST NULL");
+        }
+
     }
 
 

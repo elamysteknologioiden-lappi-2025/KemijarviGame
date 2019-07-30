@@ -1,0 +1,25 @@
+<QuestList>
+    <Nodes>
+      <Node>
+        <QuestID>1</QuestID>
+        <Status>0</Status>
+        <PrevQuest>0</PrevQuest>
+        <Type>1</Type>
+        <EndPoint>0</EndPoint>
+      </Node>
+      <Node>
+        <QuestID>2</QuestID>
+        <Status>0</Status>
+        <PrevQuest>1</PrevQuest>
+        <Type>2</Type>
+        <EndPoint>2</EndPoint>
+      </Node>
+      <Node>
+        <QuestID>3</QuestID>
+        <Status>0</Status>
+        <PrevQuest>2</PrevQuest>
+        <Type>1</Type>
+        <EndPoint>3</EndPoint>
+      </Node>
+    </Nodes>
+</QuestList>

@@ -41,50 +41,26 @@ using UnityEngine;
 [System.Serializable]
 public class QuestSystem
 {
-    [SerializeField]
-    public List<pLab_KJPOCQuestData> listOfQuest = new List<pLab_KJPOCQuestData>();
 }
 
 [System.Serializable]
 public class pLab_KJPOCQuestData
 {
-
-    [SerializeField]
-    public int questID;
-
-    public bool completed;
-
-
-
-    [SerializeField]
-    public List<pLab_KJPOCQuestTask> listOfTask = new List<pLab_KJPOCQuestTask>();
 }
 
 
 [System.Serializable]
 public class pLab_KJPOCQuestTask
 {
-    public int taskID;
-    public bool completed;
 
 }
 
 public class pLab_KJPOCQuest : MonoBehaviour
 {
     #region // SerializeField
-
-    [SerializeField]
-    private GameObject dialog;
-
-    [SerializeField]
-    private int questID;
-
-    [SerializeField]
-    private int prevQuest;
     #endregion
 
     #region // Private Attributes
-    private pLab_KJPOCQuestData qData;
     #endregion
 
     #region // Class Attributes
@@ -104,31 +80,6 @@ public class pLab_KJPOCQuest : MonoBehaviour
     #endregion
 
     #region // Base Class Methods
-
-    /// <summary>
-    /// pLab_KJPOCSaveGame
-    /// </summary>
-    private void Awake()
-    {
-        qData =  pLab_KJPOCSaveGame.instance.saveData.questSystem.listOfQuest.Find(x => x.questID == questID);
-
-        if(null == qData)
-        {
-            qData = new pLab_KJPOCQuestData();
-            qData.questID = questID;
-            pLab_KJPOCSaveGame.instance.saveData.questSystem.listOfQuest.Add(qData);
-        }
-
-        if (false == qData.completed && pLab_KJPOCSaveGame.instance.saveData.questSystem.listOfQuest.Find(x => x.questID == prevQuest).completed == true)
-        {
-            gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-
-    }
     #endregion
 
     #region // Private Methods

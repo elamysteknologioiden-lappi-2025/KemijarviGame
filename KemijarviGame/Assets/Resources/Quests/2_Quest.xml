@@ -1,0 +1,21 @@
+<Quest>
+    <QuestTitle>Poimi Kutsut</QuestTitle>
+    <QuestType>2</QuestType>
+    <NPCID>1</NPCID>
+    <QuestID>2</QuestID>
+    <EndPoint>2</EndPoint>
+    <Nodes>
+        <Node>
+            <Title>Lyyli</Title>
+          <Text>Poimi Kutsut</Text>
+            <Image>tmp</Image>
+        </Node>
+    </Nodes>
+    <EndNodes>
+      <EndNode>
+        <Title>Lyyli</Title>
+        <Text>Kiitos Kutsusta</Text>
+        <Image>tmp</Image>
+    </EndNode>
+    </EndNodes>
+</Quest>

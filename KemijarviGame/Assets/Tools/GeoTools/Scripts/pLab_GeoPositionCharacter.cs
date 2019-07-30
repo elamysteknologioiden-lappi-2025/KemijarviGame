@@ -109,6 +109,25 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     /// </summary>
     void Update() {
 
+     /*   if (Input.GetMouseButtonDown(0))
+        {
+
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1000f))
+            {
+                pLab_NPC npc = hit.collider.gameObject.GetComponent<pLab_NPC>();
+
+                if (null != npc)
+                {
+                    Debug.LogError("AKTIVOI");
+                    npc.ActivateNPC();
+                }
+            }
+
+        }
+        return;*/
 
         if(startPosition == Vector3.zero){
             startPosition = transform.position;

@@ -2,7 +2,7 @@
  * File         : pLab_KJPOCMainMenu.cs            
  * Lisence      : BSD 3-Clause License
  * Copyright    : Lapland University of Applied Sciences
- * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi),
+ * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi)
  * BSD 3-Clause License
  *
  * Copyright (c) 2019, Lapland University of Applied Sciences
@@ -34,7 +34,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,67 +41,18 @@ using UnityEngine.SceneManagement;
 
 public class pLab_KJPOCMainMenu : MonoBehaviour
 {
-    #region // SerializeField
-    #endregion
 
-    #region // Private Attributes
-    #endregion
-
-    #region // Class Attributes
-
-    #endregion
-
-    #region // Public Attributes
-
-    #endregion
-
-    #region // Protected Attributes
-
-    #endregion
-
-    #region // Set/Get
-
-    #endregion
-
-    #region // Base Class Methods
-    #endregion
-
-    #region // Private Methods
-    #endregion
-
-    #region // Public Methods
-
-    /// <summary>
-    /// OnExitClicked
-    /// </summary>
-    public void OnExitClicked()
-    {
-        Application.Quit();
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-
-    }
-
-
-    /// <summary>
-    /// OnNewGameClicked
-    /// </summary>
-    public void OnNewGameClicked()
+    public void StartNewGame()
     {
         pLab_KJPOCSaveGame.instance.CreateNewGame();
         SceneManager.LoadScene("Level_001");
     }
 
-    /// <summary>
-    /// OnContinueClicked
-    /// </summary>
-    public void OnContinueClicked()
+
+    public void LoadGame()
     {
         pLab_KJPOCSaveGame.instance.LoadGame();
         SceneManager.LoadScene("Level_001");
     }
 
-#endregion
 }

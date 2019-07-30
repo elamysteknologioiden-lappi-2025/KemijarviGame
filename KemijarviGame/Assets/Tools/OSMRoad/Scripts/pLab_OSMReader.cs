@@ -37,6 +37,8 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
+
+
 using Assets.Tools.OSMRoad.Scripts.Objects;
 using Assets.Tools.OSMRoad.Scripts.XmlObjects;
 using System;
@@ -45,8 +47,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-#if UNITY_EDITOR //Editor only tag
 using UnityEditor;
+#if UNITY_EDITOR //Editor only tag
 using UnityEditor.SceneManagement;
 #endif
 using UnityEngine;
@@ -461,14 +463,15 @@ public class pLab_OSMReader : MonoBehaviour {
                 }
             }
             pLAB_GeoUtils.LatLongtoUTM(minLat, minLon, out UTMN_Zero, out UTME_Zero);
+
+
         }
 
-        if (GameObject.Find("GeoMap"))
-        {
-            GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmX = UTME_Zero;
-            GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmY = UTMN_Zero;
-        }
 
+        if (GameObject.Find("GeoMap")) {
+             GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmX = UTME_Zero;
+             GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmY = UTMN_Zero;
+        }
 
 
         Create(content, 1, UTMN_Zero, UTME_Zero);
@@ -1514,7 +1517,7 @@ public class pLab_OSMReader : MonoBehaviour {
                     }
                 }
                 vectorsWall.Add(new Vector3((float)(y - UTME_Zero), 0, (float)(x - UTMN_Zero)));
-                vectorsWall.Add(new Vector3((float)(y - UTME_Zero), 4f, (float)(x - UTMN_Zero)));
+                vectorsWall.Add(new Vector3((float)(y - UTME_Zero), 0.3f, (float)(x - UTMN_Zero)));
                 if (j < (buildCount - 1)) {
                     vectors.Add(new Vector2((float)(y - UTME_Zero), (float)(x - UTMN_Zero)));
                 }
@@ -1528,7 +1531,7 @@ public class pLab_OSMReader : MonoBehaviour {
 
             List<Vector3> testList = new List<Vector3>() ;
             for (int ii = 0; ii < vertices2D.Length; ii++) {
-                testList.Add ( new Vector3(vertices2D[ii].x, 4f, vertices2D[ii].y));
+                testList.Add ( new Vector3(vertices2D[ii].x, 0.3f, vertices2D[ii].y));
             }
 
             poly.outside = testList;
@@ -1639,22 +1642,22 @@ public class pLab_OSMReader : MonoBehaviour {
             MeshFilter mFilter = roadsObjects[i].gameObject.AddComponent<MeshFilter>();
             MeshRenderer mRender = roadsObjects[i].gameObject.AddComponent<MeshRenderer>();
 
-            float width = 4f;
+            float width = 8f;
 
             switch (category) {
                 case "road":
                     if (roads[i].CategoryType == (int)CategoryType.ECycleWay) {
-                        width = 2f;
+                        width = 4f;
                     }
                     if (roads[i].CategoryType == (int)CategoryType.EMainRoad) {
-                        width = 6f;
+                        width = 8f;
                     }
                     break;
                 case "railway":
-                    width = 3f;
+                    width = 6f;
                     break;
                 case "stream":
-                    width = 2f;
+                    width = 6f;
                     break;
             }
 
@@ -1872,7 +1875,7 @@ public class pLab_OSMReader : MonoBehaviour {
         NavMeshData navData = NavMeshBuilder.BuildNavMeshData(
             NavMesh.GetSettingsByID(0),
             buildSources,
-            new Bounds(new Vector3((float)aY, 0, (float)aX), new Vector3(1000, 100, 1000)),
+            new Bounds(new Vector3((float)aY, 0, (float)aX), new Vector3(10000, 100, 10000)),
             Vector3.down,
             Quaternion.Euler(Vector3.up));
 

@@ -43,13 +43,140 @@ public class pLab_ObjectFollow : MonoBehaviour {
 
     [SerializeField]
     private GameObject followObject;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    [SerializeField]
+    private GameObject rings;
+
+    [SerializeField]
+    private float zoomValue = 0f;
+
+    [SerializeField]
+    private GameObject cameraTransform;
+
+
+    private float camearaMinAngle = 15f;
+    private float camearaMaxAngle = 40f;
+
+    private float cameraMinHeight = -75f;
+    private float camearaMaxHeight = 0f;
+
+    private float cameraMinDistance = -55f;
+    private float cameraMaxDistance = -100f;
+    Vector2 deltaPosition;
+    // Use this for initialization
+    void Start () {
+
+         deltaPosition = Input.mousePosition;
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+        /*
+        Debug.LogError(cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position));
+
+
+        Vector2 touch = Input.mousePosition;
+        Vector2 touchZeroPrevPos = touch - deltaPosition;
+
+
+
+
+
+        Vector2 screenPos = cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+        //screenPos.z = 0;
+
+        Vector3 prevLo = deltaPosition - screenPos;
+        Vector3 nowLo = touch - screenPos;
+
+
+        float angle = Vector3.SignedAngle(prevLo, nowLo, Vector3.forward);
+
+        Debug.LogError(Vector3.SignedAngle(prevLo, nowLo, Vector3.up));
+        Debug.LogError(Vector3.SignedAngle(prevLo, nowLo, Vector3.down));
+        Debug.LogError(Vector3.SignedAngle(prevLo, nowLo, Vector3.left));
+        Debug.LogError(Vector3.SignedAngle(prevLo, nowLo, Vector3.forward));
+
+        Vector3 aa = transform.transform.localEulerAngles;
+        aa.y += angle;
+        transform.transform.localEulerAngles = aa;
+
+
+        deltaPosition = Input.mousePosition;
+        */
+
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            Vector2 touchZeroPrevPos = touch.position - touch.deltaPosition;
+           // touchZeroPrevPos.z = 0;
+            float mmm = touch.deltaPosition.magnitude;
+
+
+            Vector2 screenPos = cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            //screenPos.z = 0;
+
+            Vector3 prevLo = touchZeroPrevPos - screenPos;
+            Vector3 nowLo = touch.position - screenPos;
+
+
+            float angle = Vector3.SignedAngle(prevLo, nowLo, Vector3.forward);
+
+            float sh = Screen.height;
+            float sw = Screen.width;
+
+                Vector3 aa = transform.transform.localEulerAngles;
+                aa.y += angle;
+                transform.transform.localEulerAngles = aa;
+
+            
+
+
+
+        }
+
+        
+            if (Input.touchCount == 2)
+        {
+            // Store both touches.
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
+
+            // Find the position in the previous frame of each touch.
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+            // Find the magnitude of the vector (the distance) between the touches in each frame.
+            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+
+            // Find the difference in the distances between each frame.
+            float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+
+
+            zoomValue += (deltaMagnitudeDiff/1000)*-1;
+
+            if (zoomValue < 0)
+                zoomValue = 0;
+            if (zoomValue > 1)
+                zoomValue = 1;
+        }
+        
         transform.position = followObject.transform.position;
-	}
+
+
+
+        cameraTransform.transform.localPosition = new Vector3(0, ((camearaMaxHeight - cameraMinHeight) * zoomValue) + cameraMinHeight, ((cameraMaxDistance - cameraMinDistance) * zoomValue) + cameraMinDistance);
+
+        cameraTransform.transform.localEulerAngles = new Vector3(((camearaMaxAngle - camearaMinAngle) * zoomValue) + camearaMinAngle,0,0);
+
+
+        Vector3 tasa = new Vector3(0, zoomValue * 0f, 0);
+        Vector3 scala = new Vector3(1,1+ zoomValue * 4f, 1);
+        rings.transform.localPosition = tasa;
+        rings.transform.localScale = scala;
+    }
 }

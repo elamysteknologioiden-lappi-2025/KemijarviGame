@@ -168,12 +168,20 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    public bool IsThereSave()
+    {
+        return File.Exists(Application.persistentDataPath + "/gamesave.save");
+    }
+
+
+    /// <summary>
     /// LoadGame
     /// </summary>
     public void LoadGame()
     {
 
-        Debug.LogError(Application.persistentDataPath + "/gamesave.save");
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             BinaryFormatter bf = new BinaryFormatter();

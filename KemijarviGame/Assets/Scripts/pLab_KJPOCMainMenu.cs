@@ -38,14 +38,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class pLab_KJPOCMainMenu : MonoBehaviour
 {
+    [SerializeField]
+    private Button continueButton;
+
+    [SerializeField]
+    private GameObject areUSureDialog;
+
+    private void Start()
+    {
+        continueButton.interactable = pLab_KJPOCSaveGame.instance.IsThereSave();
+    }
 
     public void StartNewGame()
     {
         pLab_KJPOCSaveGame.instance.CreateNewGame();
         SceneManager.LoadScene("Level_001");
+    }
+
+    public void PrepareToStartNewGame()
+    {
+        if (pLab_KJPOCSaveGame.instance.IsThereSave())
+        {
+            areUSureDialog.SetActive(true);
+        }
+        else
+        {
+            StartNewGame();
+
+        }
     }
 
 

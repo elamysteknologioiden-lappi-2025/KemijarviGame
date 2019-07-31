@@ -47,6 +47,7 @@ public class pLAB_KJPOCGameData
 {
     public QuestList questSystem;
     public int score = 0;
+    public string playerName;
 }
 
 public class pLab_KJPOCSaveGame : MonoBehaviour
@@ -120,18 +121,16 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
     /// <summary>
     /// CreateSaveGameObject
     /// </summary>
-    private void CreateSaveGameObject()
+    private void CreateSaveGameObject(string aName)
     {
         saveData = new pLAB_KJPOCGameData();
 
         saveData.score = 0;
+        saveData.playerName = aName;
 
-        Debug.LogError("LOAD QUSTLIST");
         saveData.questSystem = QuestList.LoadQuest("Quests/QuestList");
-        Debug.LogError("DONE QUSTLIST");
         if(saveData.questSystem == null)
         {
-            Debug.LogError("DONE QUSTLIST NULL");
         }
 
     }
@@ -144,9 +143,9 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
     /// <summary>
     /// CreateNewGame
     /// </summary>
-    public void CreateNewGame()
+    public void CreateNewGame(string aName)
     {
-        CreateSaveGameObject();
+        CreateSaveGameObject(aName);
         SaveGame();
     }
 
@@ -192,7 +191,7 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
         }
         else
         {
-            CreateNewGame();
+            //CreateNewGame();
         }
     }
     #endregion

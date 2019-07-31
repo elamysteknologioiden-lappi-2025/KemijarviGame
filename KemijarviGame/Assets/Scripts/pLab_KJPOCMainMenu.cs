@@ -48,15 +48,34 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
     [SerializeField]
     private GameObject areUSureDialog;
 
+    [SerializeField]
+    private GameObject nameDialog;
+
+    [SerializeField] private InputField playerNameInputField;
+
     private void Start()
     {
         continueButton.interactable = pLab_KJPOCSaveGame.instance.IsThereSave();
     }
 
-    public void StartNewGame()
+    public void StartNewGame(string aName = "")
     {
-        pLab_KJPOCSaveGame.instance.CreateNewGame();
+        string name = playerNameInputField.text.ToString();
+
+        if(name.Length < 1)
+        {
+            name = "Pelaaja";
+        }
+
+        pLab_KJPOCSaveGame.instance.CreateNewGame(name);
         SceneManager.LoadScene("Level_001");
+    }
+
+    public void PlayerNameQuery()
+    {
+
+        Debug.LogError("--------------");
+        nameDialog.SetActive(true);
     }
 
     public void PrepareToStartNewGame()

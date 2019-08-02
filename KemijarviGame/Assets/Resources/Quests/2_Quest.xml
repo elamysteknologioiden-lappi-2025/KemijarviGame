@@ -1,21 +1,43 @@
 <Quest>
     <QuestTitle>Poimi Kutsut</QuestTitle>
     <QuestType>2</QuestType>
+    <BGImage>store</BGImage>
+    <BGENDImage>vpk</BGENDImage>
     <NPCID>1</NPCID>
     <QuestID>2</QuestID>
     <EndPoint>2</EndPoint>
     <Nodes>
         <Node>
-            <Title>Lyyli</Title>
-          <Text>Poimi Kutsut</Text>
-            <Image>tmp</Image>
+        <Title>Lyyli</Title>
+        <Text>Tässä sinulle kutsut, jotka sinun pitäisi toimittaa. Vie ensiksi kutsu Eerikille. Eerik viettää vapaa-aikaansa yleensä VPK-talolla. Käy katsomassa, jos hän on siellä.</Text>
+        <Image>lyyli_transparent</Image>
         </Node>
+      <Node>
+        <Title>Pelaaja</Title>
+        <Text>Kiitos. Käyn viemässä kutsun Eerikille.</Text>
+        <Image>postimies_transparent</Image>
+      </Node>
+      <Node>
+        <Title>Lyyli</Title>
+        <Text>Toinen kutsu tulee toimitaa Aalelle, kun olet saanut toimitettua kutsun Eerikille. Kerron tarkemmin missä Aale on. Muista olla varovainen liikkuessasi ja havannoida ympäristöä</Text>
+        <Image>lyyli_transparent</Image>
+      </Node>
     </Nodes>
     <EndNodes>
       <EndNode>
-        <Title>Lyyli</Title>
+        <Title>Eerik</Title>
+        <Text>Minä olen Eerik Arppe. Omistan parturiliikkeen Kemijärvellä. Harrastuksiini kuuluu torven soitto ja osaanhan minä muutaman taikatempunkin</Text>
+        <Image>erik_arppe_transparent</Image>
+      </EndNode>
+      <EndNode>
+        <Title>Pelaaja</Title>
+        <Text>Ohessa Lyylin lähettämä kutsu sinulle</Text>
+        <Image>postimies_transparent</Image>
+      </EndNode>
+      <EndNode>
+        <Title>Eerik</Title>
         <Text>Kiitos Kutsusta</Text>
-        <Image>tmp</Image>
-    </EndNode>
-    </EndNodes>
+        <Image>erik_arppe_transparent</Image>
+      </EndNode>
+  </EndNodes>
 </Quest>

@@ -109,7 +109,7 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     /// </summary>
     void Update() {
 
-     /*   if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
 
 
@@ -127,7 +127,7 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
             }
 
         }
-        return;*/
+        return;
 
         if(startPosition == Vector3.zero){
             startPosition = transform.position;

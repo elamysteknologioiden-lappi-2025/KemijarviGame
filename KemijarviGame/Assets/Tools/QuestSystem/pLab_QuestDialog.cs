@@ -34,6 +34,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,12 +61,36 @@ public class pLab_QuestDialog : MonoBehaviour{
     [SerializeField]
     private Text text;
 
+
+    /// <summary>
+    /// text
+    /// </summary>
+    [SerializeField]
+    private string stringText;
+
     /// <summary>
     /// qManager
     /// </summary>
     [SerializeField]
     private pLab_QuestManager qManager;
 
+    [SerializeField]
+    private Image bgImage;
+
+    [SerializeField]
+    private Image characterImage;
+
+    [SerializeField]
+    private GameObject playerImage;
+
+
+    [SerializeField]
+    private GameObject characterDialog;
+
+
+
+    [SerializeField]
+    private GameObject playerDialog;
     /// <summary>
     /// currentNode
     /// </summary>
@@ -75,56 +101,164 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// </summary>
     private pLab_QuestNode currentEndNode;
 
+
+    private bool returnQuest;
     /// <summary>
     /// ActivateQuest
     /// </summary>
     /// <param name="aQuest"></param>
     public void ActivateQuest(Quest aQuest){
-       // gameObject.SetActive(true);
+        // gameObject.SetActive(true);
+
+        returnQuest = false;
+        bgImage.sprite = Resources.Load<Sprite>("BGImages/" + aQuest.bgImage);
         quest = aQuest;
         ProgressNode();
 
     }
 
+    private void OnEnable()
+    {
+
+        coroutine = WaitAndPrint(0.02f);
+    }
+
+    private void OnDisable()
+    {
+
+        done = true;
+        StopCoroutine(coroutine);
+    }
+
+
+
+    private IEnumerator coroutine;
+
     /// <summary>
     /// ReturnQuest
     /// </summary>
     public void ReturnQuest(){
+        bgImage.sprite = Resources.Load<Sprite>("BGImages/" + quest.bgEndImage);
+        returnQuest = true; 
+        if (done == false && currentEndNode != null)
+        {
+            done = true;
+            title.text = currentEndNode.title;
+            text.text = currentEndNode.text;
+            StopCoroutine(coroutine);
+            return;
+        }
+
         currentEndNode = quest.FinalizeQuest();
 
         if (currentEndNode == null){
-            qManager.ChangeQuestStatus(3, quest.questID);
             gameObject.SetActive(false);
+            qManager.ChangeQuestStatus(3, quest.questID);
+     
             return;
         }
+
         title.text = currentEndNode.title;
-        text.text = currentEndNode.text;
+        stringText = currentEndNode.text;
+
+        if (currentEndNode.title == "Pelaaja")
+        {
+            title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
+            playerImage.SetActive(true);
+            characterImage.gameObject.SetActive(false);
+            characterDialog.SetActive(false);
+            playerDialog.SetActive(true);
+        }
+        else
+        {
+            playerDialog.SetActive(false);
+            characterDialog.SetActive(true);
+            playerImage.SetActive(false);
+            characterImage.gameObject.SetActive(true);
+            characterImage.sprite = Resources.Load<Sprite>("Characters/" + currentEndNode.image);
+        }
+        text.text = "";
+
+        StopCoroutine(coroutine);
+        coroutine = WaitAndPrint(0.02f);
+        StartCoroutine(coroutine);
     }
 
     /// <summary>
     /// ProgressNode
     /// </summary>
     public void ProgressNode(){
-        Debug.LogError("---"+ gameObject.activeSelf);
+        if (returnQuest)
+        {
+            ReturnQuest();
+            return;
+        }
+        if (done == false && currentNode != null)
+        {
+            done = true;
+            title.text = currentNode.title;
+            text.text = currentNode.text;
+            StopCoroutine(coroutine);
+            return;
+        }
+
         currentNode = quest.DoQuest();
+
         if (currentNode == null){
-            if (quest.questType == 1)
-            {
-                Debug.LogError("-ss--");
+            if (quest.questType == 1){
+                if(quest.endNodes.Count == 0)
                 qManager.ChangeQuestStatus(3, quest.questID);
+                else
+                    qManager.ChangeQuestStatus(2, quest.questID);
             }
             if (quest.questType == 2){
-                Debug.LogError("-aa--");
                 qManager.ChangeQuestStatus(2, quest.questID);
             }
-            Debug.LogError("--sdadsad-");
             gameObject.SetActive(false);
             return;
         }
-        Debug.LogError("--dasdasasassaa-"+ currentNode.title + " -- " +gameObject.activeSelf);
+
         title.text = currentNode.title;
-        text.text = currentNode.text;
+        stringText = currentNode.text;
 
-
+        if (currentNode.title == "Pelaaja")
+        {
+            title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
+            playerImage.SetActive(true);
+            characterImage.gameObject.SetActive(false);
+            characterDialog.SetActive(false);
+            playerDialog.SetActive(true);
+        }
+        else
+        {
+            playerDialog.SetActive(false);
+            characterDialog.SetActive(true);
+            playerImage.SetActive(false);
+            characterImage.gameObject.SetActive(true);
+            characterImage.sprite = Resources.Load<Sprite>("Characters/" + currentNode.image);
+        }
+        text.text = "";
+        StopCoroutine(coroutine);
+        coroutine = WaitAndPrint(0.02f);
+        StartCoroutine(coroutine);
+        gameObject.SetActive(true);
+    }
+    bool done = false;
+    private IEnumerator WaitAndPrint(float waitTime)
+    {
+        done = false;
+        while (!done)
+        {
+            yield return new WaitForSeconds(waitTime);
+            int textCOunt = text.text.Length;
+            if (textCOunt == stringText.Length)
+            {
+                done = true;
+            }
+            else
+            {
+                text.text = stringText.Substring(0, textCOunt + 1);
+            }
+        }
     }
 }

@@ -1,0 +1,53 @@
+<Quest>
+    <QuestTitle>SpecialEvent</QuestTitle>
+    <QuestType>1</QuestType>
+    <BGImage>vpk</BGImage>
+    <BGENDImage>store</BGENDImage>
+    <NPCID>1</NPCID>
+    <QuestID>4</QuestID>
+    <EndPoint>1</EndPoint>
+    <Nodes>
+        <Node>
+        <Title>Pelaaja</Title>
+        <Text>Minullahan on yksi paketti jakamatta, se näyttää olevan Lyylille</Text>
+        <Image>postimies_transparent</Image>
+        </Node>
+      <Node>
+        <Title>Pelaaja</Title>
+        <Text>Käynpä viemässä tämän lyylin muotikaupalle, eiköhän päiväni ole sitten ohitse</Text>
+        <Image>postimies_transparent</Image>
+      </Node>
+    </Nodes>
+    <EndNodes>
+      <EndNode>
+        <Title>Pelaaja</Title>
+        <Text>Minulla oli vielä paketti jakamatta ja se on sinulle Lyyli</Text>
+        <Image>postimies_transparent</Image>
+      </EndNode>
+      <EndNode>
+        <Title>Lyyli</Title>
+        <Text>Kukahan paketin on minulle lähettänyt?</Text>
+        <Image>lyyli_transparent</Image>
+      </EndNode>
+      <EndNode>
+        <Title>Pelaaja</Title>
+        <Text>En tiedä, avaahan paketti, sisältö antaa varmasti vihjeen siitä</Text>
+        <Image>postimies_transparent</Image>
+      </EndNode>
+      <EndNode>
+        <Title>Lyyli</Title>
+        <Text>Liput taikurin esitykseen. Ihanaa, minä pidän kunnon taikatempuista. Arvaatko sinä keneltä tämä paketti on?</Text>
+        <Image>lyyli_transparent</Image>
+      </EndNode>
+      <EndNode>
+        <Title>Lyyli</Title>
+        <Text>Kyllä, tottakai tämä on Eerikiltä! Hän varmaan esiintyy itsekkin ja pääsen ihailemaan hänen kuuluisia taikatemppujaan</Text>
+        <Image>lyyli_transparent</Image>
+      </EndNode>
+      <EndNode>
+        <Title>Lyyli</Title>
+        <Text>Kyllä, tottakai tämä on Eerikiltä! Hän varmaan esiintyy itsekkin ja pääsen ihailemaan hänen kuuluisia taikatemppujaan</Text>
+        <Image>lyyli_transparent</Image>
+      </EndNode>
+  </EndNodes>
+</Quest>

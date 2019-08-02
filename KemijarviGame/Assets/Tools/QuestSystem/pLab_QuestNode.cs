@@ -35,8 +35,9 @@
  *****************************************************************************/
 
 using System.Collections.Generic;
-using System.Xml.Serialization;
 
+using System.Xml.Serialization;
+using UnityEngine;
 
 /// <summary>
 /// pLab_QuestNode
@@ -78,6 +79,13 @@ public class Quest
     /// </summary>
     [XmlElementAttribute("QuestTitle")]
     public string questTitle;
+
+
+    [XmlElementAttribute("BGImage")]
+    public string bgImage;
+    [XmlElementAttribute("BGENDImage")]
+    public string bgEndImage;
+
 
     /// <summary>
     /// questType

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: LWRP-HighQuality
   m_EditorClassIdentifier: 
   k_AssetVersion: 4
-  m_RendererType: 0
-  m_RendererData: {fileID: 11400000, guid: 96ba83b48eceee74cab68a7fe697c217, type: 2}
-  m_RequireDepthTexture: 1
+  m_RendererType: 1
+  m_RendererData: {fileID: 11400000, guid: d489d0c415e5ce34998b4c662165867b, type: 2}
+  m_RequireDepthTexture: 0
   m_RequireOpaqueTexture: 0
   m_OpaqueDownsampling: 1
   m_SupportsHDR: 1

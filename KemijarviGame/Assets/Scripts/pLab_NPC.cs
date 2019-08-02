@@ -96,7 +96,8 @@ public class pLab_NPC : MonoBehaviour{
     /// <param name="aId"></param>
     /// <param name="aAction"></param>
     /// <param name="aCurrentQuest"></param>
-    public void ActivateQuest(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest){
+    public void ActivateQuest(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool aFlag){
+
         if (aId == id){
             currentQuest = aCurrentQuest;
             questPointSymbol.SetActive(true);
@@ -113,7 +114,7 @@ public class pLab_NPC : MonoBehaviour{
     /// <param name="aId"></param>
     /// <param name="aAction"></param>
     /// <param name="aCurrentQuest"></param>
-    public void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest)
+    public void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool aFlag)
     {
         if (aId == id)
         {
@@ -149,6 +150,7 @@ public class pLab_NPC : MonoBehaviour{
     /// ActivateNPC
     /// </summary>
     public void ActivateNPC(){
+
         if (currentQuest == null)
             return;
 

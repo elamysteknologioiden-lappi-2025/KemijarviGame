@@ -73,8 +73,6 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
 
     public void PlayerNameQuery()
     {
-
-        Debug.LogError("--------------");
         nameDialog.SetActive(true);
     }
 

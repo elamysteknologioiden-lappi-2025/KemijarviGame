@@ -5,7 +5,7 @@
         <Status>0</Status>
         <PrevQuest>0</PrevQuest>
         <Type>1</Type>
-        <EndPoint>0</EndPoint>
+        <EndPoint>1</EndPoint>
       </Node>
       <Node>
         <QuestID>2</QuestID>
@@ -20,6 +20,13 @@
         <PrevQuest>2</PrevQuest>
         <Type>1</Type>
         <EndPoint>3</EndPoint>
+      </Node>
+      <Node>
+        <QuestID>4</QuestID>
+        <Status>0</Status>
+        <PrevQuest>3</PrevQuest>
+        <Type>1</Type>
+        <EndPoint>4</EndPoint>
       </Node>
     </Nodes>
 </QuestList>

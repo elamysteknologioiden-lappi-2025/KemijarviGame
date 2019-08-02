@@ -110,7 +110,7 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
     /// </summary>
     private void OnApplicationQuit()
     {
-        Debug.LogError("TEST");
+
         SaveGame();
     }
 

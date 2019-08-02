@@ -1,28 +1,31 @@
 <Quest>
     <QuestTitle>Etsi kutsut</QuestTitle>
+    <BGImage>street</BGImage>
     <QuestType>1</QuestType>
     <NPCID>1</NPCID>
     <QuestID>1</QuestID>
     <Nodes>
         <Node>
           <Title>Lyyli</Title>
-            <Text>Tervetuloa pelaamaan Kemijärvi peliä! Minä olen lyyli ja neuvon sinua pelin edetessä!!!!</Text>
-            <Image>tmp</Image>
+          <Text>Tervetuloa pelaamaan Kemijärvi peliä! Minä olen lyyli ja neuvon sinua pelin edetessä!!!!</Text>
+          <Image>lyyli_transparent</Image>
         </Node>
         <Node>
           <Title>Lyyli</Title>
           <Text>Minulla on pian syntymäpäivä ja aioin järjestää juhlat, jotka koko kylä tulee muistamaan! Muutama kemijärveläinen on vielä ilman kutsua, mutta minulla ei kerta kaikkiaan ole aikaa viedä niitä perille.</Text>
-          <Image>tmp</Image>
+          <Image>lyyli_transparent</Image>
         </Node>
       <Node>
         <Title>Lyyli</Title>
         <Text>Sinä voisit postin jakelukierroksella viedä ne perille! Kutsut ovat muotikauppani tiskillä, voit hakena ne sieltä. </Text>
-        <Image>tmp</Image>
+        <Image>lyyli_transparent</Image>
       </Node>
-      <EndNode>
-        <Title>Lyyli</Title>
-        <Text>Löysit kirjeet </Text>
-        <Image>tmp</Image>
-    </EndNode>
+      <Node>
+        <Title>Pelaaja</Title>
+        <Text>Selvä, haen kirjeet kaupastasi</Text>
+        <Image>postimies_transparent</Image>
+      </Node>
+      <EndNodes>
+      </EndNodes>
     </Nodes>
 </Quest>

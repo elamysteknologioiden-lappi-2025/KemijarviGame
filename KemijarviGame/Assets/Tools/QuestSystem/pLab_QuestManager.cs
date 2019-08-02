@@ -45,10 +45,10 @@ using UnityEngine;
 /// </summary>
 public class pLab_QuestManager : MonoBehaviour{
 
-    public delegate void ActivateQuest(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest);
+    public delegate void ActivateQuest(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool startPoint);
     public static event ActivateQuest OnActivateQuest;
 
-    public delegate void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest);
+    public delegate void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool startPoint);
     public static event ActivateQuestReturn OnActivateQuestReturn;
 
 
@@ -78,9 +78,14 @@ public class pLab_QuestManager : MonoBehaviour{
     /// CheckQuest
     /// </summary>
     public void CheckQuest() {
+
         foreach (QuestItem item in pLab_KJPOCSaveGame.instance.saveData.questSystem.nodes) {
+
+
+
             if (item.status == 0 && (item.prevQuest == 0 || pLab_KJPOCSaveGame.instance.saveData.
                 questSystem.nodes.Find(x => x.questID == item.prevQuest).status == 3)){
+
                 if (item.type == 1){
                     item.status = 2;
                     StartQuest("Quests/" + item.questID + "_Quest");
@@ -89,15 +94,15 @@ public class pLab_QuestManager : MonoBehaviour{
                     StartQuestLate("Quests/" + item.questID + "_Quest");
                 }
             }
-            if (item.status == 1){
+           if (item.status == 1){
                 if (OnActivateQuest != null){
                     UnityEngine.Events.UnityAction action = () => { Debug.LogError("Herra"); };
-                    OnActivateQuest(currentQuest.npcId, action, currentQuest);
+                    OnActivateQuest(currentQuest.npcId, action, currentQuest, true);
                 }
             }
             if (item.status == 2 && item.endPoint != 0){
-                UnityEngine.Events.UnityAction action = () => { Debug.LogError("Herra"); };
-                OnActivateQuestReturn(currentQuest.endPoint, action, currentQuest);
+                UnityEngine.Events.UnityAction action = () => {  };
+                OnActivateQuestReturn(currentQuest.endPoint, action, currentQuest,false);
             }
         }
     }
@@ -107,7 +112,7 @@ public class pLab_QuestManager : MonoBehaviour{
     /// </summary>
     /// <param name="aFilePath"></param>
     public void StartQuestLate(string aFilePath){
-
+        Debug.LogError("StartQuestLate");
         TextAsset xml = Resources.Load<TextAsset>(aFilePath);
         XmlSerializer serializer = new XmlSerializer(typeof(Quest));
         StringReader reader = new StringReader(xml.ToString());
@@ -122,6 +127,7 @@ public class pLab_QuestManager : MonoBehaviour{
     /// </summary>
     /// <param name="aFilePath"></param>
     public void StartQuest(string aFilePath){
+        Debug.LogError("StartQuest" + aFilePath);
         TextAsset xml = Resources.Load<TextAsset>(aFilePath);
         XmlSerializer serializer = new XmlSerializer(typeof(Quest));
         StringReader reader = new StringReader(xml.ToString());
@@ -140,6 +146,8 @@ public class pLab_QuestManager : MonoBehaviour{
     /// <param name="aStatus"></param>
     /// <param name="aQuestID"></param>
     public void ChangeQuestStatus(int aStatus, int aQuestID){
+
+        Debug.LogError("ChangeQuestStatus" + aStatus + "  "  + aQuestID);
         pLab_KJPOCSaveGame.instance.saveData.
                 questSystem.nodes.Find(x => x.questID == aQuestID).status = aStatus;
         if(aStatus == 3) {

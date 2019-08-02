@@ -1,21 +1,35 @@
 <Quest>
-    <QuestTitle>Poimi Kutsut</QuestTitle>
+    <QuestTitle>Viimeinen kutsu</QuestTitle>
     <QuestType>1</QuestType>
     <NPCID>2</NPCID>
+    <BGImage>street</BGImage>
+    <BGENDImage>church</BGENDImage>
     <QuestID>3</QuestID>
     <EndPoint>3</EndPoint>
     <Nodes>
-        <Node>
-            <Title>Lyyli</Title>
-            <Text>Vie viela tama aaaa</Text>
-          <Image>tmp</Image>
-        </Node>
+      <Node>
+        <Title>Lyyli</Title>
+        <Text>Vie seuraavaksi kutsu Aalelle. Aale viettää usein aikaansa Kemijärven kirkolla</Text>
+        <Image>lyyli_transparent</Image>
+      </Node>
     </Nodes>
     <EndNodes>
       <EndNode>
-        <Title>Lyyli</Title>
-        <Text>Kiitos Kutsusta</Text>
-        <Image>tmp</Image>
+
+        <Title>Aale</Title>
+        <Text>Hei Olen Aale Hakava ja minusta tulee jonain päivänä taidemaalari</Text>
+        <Image>aale_hakava_transparent</Image>
+      </EndNode>
+      <EndNode>
+        <Title>Pelaaja</Title>
+        <Text>Ohessa Lyylin lähettämä kutsu sinulle</Text>
+        <Image>postimies_transparent</Image>
+      </EndNode>
+      <EndNode>
+        
+        <Title>Aale</Title>
+        <Text>Kiitos Kutsusta ja hyvää päivän jatkoa!</Text>
+        <Image>aale_hakava_transparent</Image>
     </EndNode>
     </EndNodes>
 </Quest>

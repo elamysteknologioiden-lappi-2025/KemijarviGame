@@ -90,6 +90,17 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                Application.Quit();
+            }
+        }
+    }
+
     public void LoadGame()
     {
         pLab_KJPOCSaveGame.instance.LoadGame();

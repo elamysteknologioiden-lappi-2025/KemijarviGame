@@ -121,7 +121,7 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
                 if (null != npc)
                 {
-                    Debug.LogError("AKTIVOI");
+
                     npc.ActivateNPC();
                 }
             }

@@ -63,6 +63,12 @@ public class pLab_QuestManager : MonoBehaviour{
     private GameObject questDialog;
 
     /// <summary>
+    /// endDialog
+    /// </summary>
+    [SerializeField]
+    private GameObject endDialog;
+
+    /// <summary>
     /// currentQuest
     /// </summary>
     private Quest currentQuest;
@@ -92,6 +98,11 @@ public class pLab_QuestManager : MonoBehaviour{
                 } else if (item.type == 2) {
                     item.status = 1;
                     StartQuestLate("Quests/" + item.questID + "_Quest");
+                }
+                else if (item.type == 6){
+                    item.status = 3;
+
+                    endDialog.SetActive(true);
                 }
             }
            if (item.status == 1){

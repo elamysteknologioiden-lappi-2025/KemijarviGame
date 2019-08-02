@@ -28,5 +28,12 @@
         <Type>1</Type>
         <EndPoint>4</EndPoint>
       </Node>
+      <Node>
+        <QuestID>5</QuestID>
+        <Status>0</Status>
+        <PrevQuest>4</PrevQuest>
+        <Type>6</Type>
+        <EndPoint>0</EndPoint>
+      </Node>
     </Nodes>
 </QuestList>

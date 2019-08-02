@@ -1,0 +1,16 @@
+<Quest>
+    <QuestTitle>SpecialEventEND</QuestTitle>
+    <QuestType>1</QuestType>
+    <BGImage>vpk</BGImage>
+    <BGENDImage>store</BGENDImage>
+    <NPCID>0</NPCID>
+    <QuestID>5</QuestID>
+    <EndPoint>0</EndPoint>
+    <Nodes>
+        <Node>
+        <Title></Title>
+        <Text></Text>
+        <Image></Image>
+        </Node>
+    </Nodes>
+</Quest>

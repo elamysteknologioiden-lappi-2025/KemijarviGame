@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingOrder: 1
   m_BoneTransforms:
   - {fileID: 3109667799875300786}
@@ -81,6 +81,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -90,7 +91,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingLayer: 1
   m_SortingOrder: 1
   serializedVersion: 2
@@ -215,7 +216,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3109667798423276098}
   - component: {fileID: 3109667798423276099}
-  - component: {fileID: 3109667798423276101}
+  - component: {fileID: 44035548}
+  - component: {fileID: 44035549}
   m_Layer: 0
   m_Name: lyyli_mouth
   m_TagString: Untagged
@@ -253,13 +255,13 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: 1229736199
+  m_SortingLayerID: -93697161
   m_SortingOrder: 0
   m_BoneTransforms:
   - {fileID: 3109667799474792079}
   - {fileID: 3109667799136656547}
---- !u!137 &3109667798423276101
-SkinnedMeshRenderer:
+--- !u!23 &44035548
+MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -283,6 +285,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -292,23 +295,17 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1229736199
+  m_SortingLayerID: -93697161
   m_SortingLayer: -1
   m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
+--- !u!33 &44035549
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3109667798423276102}
   m_Mesh: {fileID: 0}
-  m_Bones:
-  - {fileID: 3109667799474792079}
-  - {fileID: 3109667799136656547}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 3109667799474792079}
-  m_AABB:
-    m_Center: {x: 0.44421667, y: 0.06652588, z: 0}
-    m_Extent: {x: 0.66453284, y: 0.6788554, z: 0}
-  m_DirtyAABB: 0
 --- !u!1 &3109667798448408314
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3109667798448408311}
   - component: {fileID: 3109667798448408312}
-  - component: {fileID: 3109667798448408313}
+  - component: {fileID: 1587257253}
   m_Layer: 0
   m_Name: lyyli_right_eyebrow
   m_TagString: Untagged
@@ -357,13 +354,13 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingOrder: 0
   m_BoneTransforms:
   - {fileID: 3109667800150555290}
   - {fileID: 3109667799957630578}
   - {fileID: 3109667798211195611}
---- !u!137 &3109667798448408313
+--- !u!137 &1587257253
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -388,6 +385,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -397,7 +395,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingLayer: 1
   m_SortingOrder: 0
   serializedVersion: 2
@@ -412,8 +410,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3109667800150555290}
   m_AABB:
-    m_Center: {x: 0.44703424, y: 0.06006545, z: 0}
-    m_Extent: {x: 0.49405456, y: 0.29285192, z: 0}
+    m_Center: {x: 0.43773836, y: 0.07937366, z: 0}
+    m_Extent: {x: 0.5033521, y: 0.31216598, z: 0}
   m_DirtyAABB: 0
 --- !u!1 &3109667798642968917
 GameObject:
@@ -605,7 +603,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingOrder: 0
   m_BoneTransforms:
   - {fileID: 3109667799966590661}
@@ -636,6 +634,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -645,7 +644,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingLayer: 1
   m_SortingOrder: 0
   serializedVersion: 2
@@ -740,6 +739,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingOrder: 2
   m_BoneTransforms:
   - {fileID: 3109667798203326414}
@@ -1110,6 +1110,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1120,7 +1121,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -694705013
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 2
   serializedVersion: 2
   m_Quality: 0
@@ -1279,7 +1280,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: 1229736199
+  m_SortingLayerID: -93697161
   m_SortingOrder: 0
   m_BoneTransforms:
   - {fileID: 3109667798642968915}
@@ -1308,6 +1309,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1317,7 +1319,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1229736199
+  m_SortingLayerID: -93697161
   m_SortingLayer: -1
   m_SortingOrder: 0
   serializedVersion: 2
@@ -1381,7 +1383,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingOrder: 0
   m_BoneTransforms:
   - {fileID: 3109667800072200773}
@@ -1414,6 +1416,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1423,7 +1426,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -694705013
+  m_SortingLayerID: 2027731345
   m_SortingLayer: 1
   m_SortingOrder: 0
   serializedVersion: 2
@@ -2092,8 +2095,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.39183176
-  m_ChildTransform: {fileID: 3109667799957630578}
+  m_Length: 0.3918316
+  m_ChildTransform: {fileID: 0}
   m_AttachedIK: {fileID: 0}
 --- !u!114 &3109667800150555289
 MonoBehaviour:
@@ -2207,7 +2210,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: 1229736199
+  m_SortingLayerID: -93697161
   m_SortingOrder: 0
   m_BoneTransforms:
   - {fileID: 3109667798895155120}
@@ -2236,6 +2239,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2245,7 +2249,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1229736199
+  m_SortingLayerID: -93697161
   m_SortingLayer: -1
   m_SortingOrder: 0
   serializedVersion: 2

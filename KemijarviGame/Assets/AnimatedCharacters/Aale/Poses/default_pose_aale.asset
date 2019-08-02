@@ -26,7 +26,7 @@ MonoBehaviour:
     localRotation: {x: 0.7071068, y: 0.7071068, z: -0, w: 0}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_left_eyebrow
-    localPosition: {x: 6.410428, y: -0.8615737, z: 0}
+    localPosition: {x: 6.385935, y: -0.8571205, z: 0}
     localRotation: {x: 0, y: 0, z: 0.5999469, w: 0.8000398}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_left_eyebrow/B_left_eyebrow_2
@@ -38,7 +38,7 @@ MonoBehaviour:
     localRotation: {x: 0, y: 0, z: 0.07396101, w: 0.99726117}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_right_eyebrow
-    localPosition: {x: 6.336109, y: 0.9214711, z: 0}
+    localPosition: {x: 6.324977, y: 0.91924477, z: 0}
     localRotation: {x: 0, y: 0, z: -0.51827633, w: 0.8552132}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_right_eyebrow/B_right_eyebrow_2
@@ -59,39 +59,39 @@ MonoBehaviour:
     localScale: {x: 1, y: 1, z: 1}
   - path: B_upper_lip/B_upper_lip_L
     localPosition: {x: -0.022325044, y: -0.031431437, z: 0}
-    localRotation: {x: 0, y: 0, z: -0.6067587, w: 0.7948861}
+    localRotation: {x: 0, y: 0, z: -0.69882107, w: 0.71529657}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_upper_lip/B_upper_lip_L/B_upper_lip_L_2
-    localPosition: {x: 0.30894917, y: -0.07123424, z: 0}
-    localRotation: {x: 0, y: 0, z: 0.5956432, w: 0.8032491}
+    localPosition: {x: 0.3709225, y: 0.010263354, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.703742, w: 0.71045566}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_upper_lip/B_upper_lip_R
-    localPosition: {x: -0.044110898, y: -0.8202971, z: 0}
-    localRotation: {x: 0, y: 0, z: 0.61349297, w: 0.78970015}
+    localPosition: {x: -0.023537636, y: -1.000608, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.65784204, w: 0.753156}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_upper_lip/B_upper_lip_R/B_upper_lip__2
-    localPosition: {x: 0.40061548, y: 0.07161158, z: 0}
-    localRotation: {x: 0, y: 0, z: -0.6324485, w: 0.7746024}
+    localPosition: {x: 0.44747198, y: 0.04785332, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.6523431, w: 0.7579238}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_lower_lip
-    localPosition: {x: 4.856458, y: 0.5080333, z: 0}
+    localPosition: {x: 4.8588796, y: 0.5237651, z: 0}
     localRotation: {x: 0, y: 0, z: 1, w: 0}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_lower_lip/B_lower_lip_L
     localPosition: {x: -0.030791529, y: 0.023919106, z: 0}
-    localRotation: {x: 0, y: 0, z: 0.7511951, w: 0.6600804}
+    localRotation: {x: 0, y: 0, z: 0.64207876, w: 0.76663876}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_lower_lip/B_lower_lip_L/B_lower_lip_L_2
-    localPosition: {x: 0.2967424, y: -0.049036503, z: 0}
-    localRotation: {x: 0, y: 0, z: -0.75813437, w: 0.6520984}
+    localPosition: {x: 0.3150677, y: 0.017249435, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.6413492, w: 0.76724917}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_lower_lip/B_lower_lip_R
-    localPosition: {x: -0.008735538, y: 0.8051735, z: 0}
-    localRotation: {x: 0, y: -0, z: 0.7584361, w: -0.6517474}
+    localPosition: {x: -0.03657055, y: 1.009687, z: 0}
+    localRotation: {x: 0, y: -0, z: 0.6676378, w: -0.7444862}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_lower_lip/B_lower_lip_R/B_lower_lip_R_2
-    localPosition: {x: 0.4113175, y: 0.051604956, z: 0}
-    localRotation: {x: 0, y: 0, z: 0.76147044, w: 0.6481997}
+    localPosition: {x: 0.43282747, y: -0.0057429373, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.66348237, w: 0.74819195}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_mouth
     localPosition: {x: 5.2345595, y: -0.25384855, z: 0}
@@ -106,6 +106,6 @@ MonoBehaviour:
     localRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
     localScale: {x: 1, y: 1, z: 1}
   - path: eyelids/eyelid_2
-    localPosition: {x: -0.7895247, y: -0.025286555, z: 0}
+    localPosition: {x: -0.82711995, y: -0.021529078, z: 0}
     localRotation: {x: 0, y: 0, z: -0.99780846, w: -0.0661694}
     localScale: {x: 1, y: 1, z: 1}

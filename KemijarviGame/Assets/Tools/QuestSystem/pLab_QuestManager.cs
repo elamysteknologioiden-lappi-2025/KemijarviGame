@@ -112,7 +112,6 @@ public class pLab_QuestManager : MonoBehaviour{
     /// </summary>
     /// <param name="aFilePath"></param>
     public void StartQuestLate(string aFilePath){
-        Debug.LogError("StartQuestLate");
         TextAsset xml = Resources.Load<TextAsset>(aFilePath);
         XmlSerializer serializer = new XmlSerializer(typeof(Quest));
         StringReader reader = new StringReader(xml.ToString());
@@ -127,7 +126,6 @@ public class pLab_QuestManager : MonoBehaviour{
     /// </summary>
     /// <param name="aFilePath"></param>
     public void StartQuest(string aFilePath){
-        Debug.LogError("StartQuest" + aFilePath);
         TextAsset xml = Resources.Load<TextAsset>(aFilePath);
         XmlSerializer serializer = new XmlSerializer(typeof(Quest));
         StringReader reader = new StringReader(xml.ToString());
@@ -147,7 +145,6 @@ public class pLab_QuestManager : MonoBehaviour{
     /// <param name="aQuestID"></param>
     public void ChangeQuestStatus(int aStatus, int aQuestID){
 
-        Debug.LogError("ChangeQuestStatus" + aStatus + "  "  + aQuestID);
         pLab_KJPOCSaveGame.instance.saveData.
                 questSystem.nodes.Find(x => x.questID == aQuestID).status = aStatus;
         if(aStatus == 3) {

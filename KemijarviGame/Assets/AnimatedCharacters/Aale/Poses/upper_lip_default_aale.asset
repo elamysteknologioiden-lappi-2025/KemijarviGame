@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0543fe805424df99fe08ce744cbe49, type: 3}
+  m_Name: upper_lip_default_aale
+  m_EditorClassIdentifier: 
+  m_PoseEntries:
+  - path: 
+    localPosition: {x: 4.9896555, y: 0.51736164, z: 0}
+    localRotation: {x: 0, y: 0, z: 0, w: 1}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_top
+    localPosition: {x: 0.15385151, y: -0.36580133, z: 0}
+    localRotation: {x: -0, y: -0, z: -0.7061067, w: 0.7081055}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_L
+    localPosition: {x: -0.022325044, y: -0.031431437, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.6988239, w: 0.71529377}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_L/B_upper_lip_L_2
+    localPosition: {x: 0.3709225, y: 0.010263354, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.703744, w: 0.7104537}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_R
+    localPosition: {x: -0.023537636, y: -1.000608, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.65784144, w: 0.7531565}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_R/B_upper_lip__2
+    localPosition: {x: 0.44747198, y: 0.04785332, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.65234435, w: 0.7579227}
+    localScale: {x: 1, y: 1, z: 1}

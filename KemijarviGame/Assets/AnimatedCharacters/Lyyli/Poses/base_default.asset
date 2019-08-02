@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0543fe805424df99fe08ce744cbe49, type: 3}
+  m_Name: base_default
+  m_EditorClassIdentifier: 
+  m_PoseEntries:
+  - path: 
+    localPosition: {x: 0.871299, y: -5.102874, z: 0}
+    localRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_eye_right
+    localPosition: {x: 5.297729, y: -0.15638065, z: 0}
+    localRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_eye_left
+    localPosition: {x: 5.3985057, y: 0.942204, z: 0}
+    localRotation: {x: 0.7071068, y: 0.7071068, z: -0, w: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_right_eyebrow
+    localPosition: {x: 5.4317727, y: -0.5008812, z: 0}
+    localRotation: {x: -0, y: -0, z: 0.46801922, w: 0.8837183}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_right_eyebrow/B_right_eyebrow_2
+    localPosition: {x: 0.3918312, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.19234964, w: 0.98132646}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_right_eyebrow/B_right_eyebrow_2/B_right_eyebrow_3
+    localPosition: {x: 0.25950468, y: 0.00000002561137, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.1314191, w: 0.9913269}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_left_eyebrow
+    localPosition: {x: 5.6917777, y: 1.4074345, z: 0}
+    localRotation: {x: -0, y: -0, z: -0.5244242, w: 0.85145724}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_left_eyebrow/B_left_eyebrow_2
+    localPosition: {x: 0.20053439, y: -0.0000000027939677, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.18447404, w: 0.9828374}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_left_eyebrow/B_left_eyebrow_2/B_left_eyebrow_3
+    localPosition: {x: 0.15895723, y: -0.0000000030267984, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.18929793, w: 0.9819197}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip
+    localPosition: {x: 4.008181, y: 1.1067004, z: 0}
+    localRotation: {x: -0, y: -0, z: -0, w: 1}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip/B_upper_lip_L
+    localPosition: {x: -0.022325044, y: -0.031431437, z: 0}
+    localRotation: {x: -0, y: -0, z: -0.60675806, w: 0.7948866}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip/B_upper_lip_L/B_upper_lip_L_2
+    localPosition: {x: 0.29122144, y: -0.00858286, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.99968904, w: 0.024935935}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip/B_upper_lip_R
+    localPosition: {x: -0.044110898, y: -0.8202971, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.6228754, w: 0.78232104}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip/B_upper_lip_R/B_upper_lip__2
+    localPosition: {x: 0.41537547, y: 0.0016242266, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.9999888, w: 0.004732369}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip
+    localPosition: {x: 3.9519405, y: 1.1113191, z: 0}
+    localRotation: {x: 0, y: 0, z: 1, w: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip/B_lower_lip_L
+    localPosition: {x: -0.030791529, y: 0.023919106, z: 0}
+    localRotation: {x: -0, y: -0, z: 0.6164704, w: 0.7873781}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip/B_lower_lip_L/B_lower_lip_L_2
+    localPosition: {x: 0.32855806, y: -0.0036981176, z: 0}
+    localRotation: {x: -0, y: -0, z: -0.6164704, w: 0.7873781}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip/B_lower_lip_R
+    localPosition: {x: -0.008735538, y: 0.8051735, z: 0}
+    localRotation: {x: -0, y: -0, z: 0.6579713, w: -0.75304306}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip/B_lower_lip_R/B_lower_lip_R_2
+    localPosition: {x: 0.40627834, y: 0.00708811, z: 0}
+    localRotation: {x: -0, y: -0, z: -0.65797126, w: -0.7530431}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_mouth
+    localPosition: {x: 4.2556953, y: 0.3615136, z: 0}
+    localRotation: {x: -0, y: -0, z: -0.9052664, w: -0.42484453}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_mouth/B_mouth_2
+    localPosition: {x: 0.44107422, y: 0.000000029802322, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.096092045, w: 0.9953725}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: eyelids
+    localPosition: {x: 5.359847, y: 0.8552966, z: 0}
+    localRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: eyelids/eyelid_2
+    localPosition: {x: -0.72315073, y: 0.06574106, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.99831176, w: -0.058083043}
+    localScale: {x: 1, y: 1, z: 1}

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0543fe805424df99fe08ce744cbe49, type: 3}
+  m_Name: right_eyebrow_lowered
+  m_EditorClassIdentifier: 
+  m_PoseEntries:
+  - path: 
+    localPosition: {x: 5.4534583, y: -0.46206427, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.5305922, w: 0.8476273}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_right_eyebrow_2
+    localPosition: {x: 0.3918312, y: 0, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.23249887, w: 0.9725967}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_right_eyebrow_2/B_right_eyebrow_3
+    localPosition: {x: 0.25950468, y: 0.00000002561137, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.05447394, w: 0.9985152}
+    localScale: {x: 1, y: 1, z: 1}

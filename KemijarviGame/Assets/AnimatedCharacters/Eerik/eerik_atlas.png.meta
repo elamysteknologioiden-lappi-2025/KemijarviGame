@@ -1,0 +1,342 @@
+fileFormatVersion: 2
+guid: fb418a980865c7546b698ad29dba9dcf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8973914318562371655
+    second: eerik_right_eyebrow
+  - first:
+      213: -4779603868181048245
+    second: eerik_left_eyebrow
+  - first:
+      213: 7652334945385459946
+    second: eerik_eyelids
+  - first:
+      213: 4670702537351133508
+    second: eerik_atlas_3
+  - first:
+      213: 8621964042674137912
+    second: eerik_head
+  - first:
+      213: 6546676448224568596
+    second: eerik_right_eye
+  - first:
+      213: -2771733155563682861
+    second: eerik_left_eye
+  - first:
+      213: 6745630544926531551
+    second: eerik_mouth
+  - first:
+      213: -2927079094555750449
+    second: eerik_upper_lip
+  - first:
+      213: 5381158938680923780
+    second: eerik_lower_lip
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: eerik_right_eyebrow
+      rect:
+        serializedVersion: 2
+        x: 389.54193
+        y: 970.0839
+        width: 77.54193
+        height: 44.09314
+      alignment: 9
+      pivot: {x: 0.50886106, y: 0.4970405}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebafaacf5c08f214bb789a160ae9e4cd
+      internalID: 8973914318562371655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eerik_left_eyebrow
+      rect:
+        serializedVersion: 2
+        x: 492.686
+        y: 976.67346
+        width: 110.461334
+        height: 39.294434
+      alignment: 9
+      pivot: {x: 0.5098073, y: 0.50456357}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49ad7f7532dcdf74ea261886ad105c82
+      internalID: -4779603868181048245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eerik_eyelids
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 901.666
+        width: 183.33784
+        height: 43.890625
+      alignment: 9
+      pivot: {x: 0.4799882, y: 0.49746352}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 174df705c4458c041b0004beefdda3e0
+      internalID: 7652334945385459946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eerik_head
+      rect:
+        serializedVersion: 2
+        x: 156.34901
+        y: 0
+        width: 867.651
+        height: 976.40735
+      alignment: 9
+      pivot: {x: 0.51190054, y: 0.49620685}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c2c085ecd8ce2f4f84c232746456c87
+      internalID: 8621964042674137912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eerik_right_eye
+      rect:
+        serializedVersion: 2
+        x: 49.730568
+        y: 780.00006
+        width: 90.26943
+        height: 90.26941
+      alignment: 9
+      pivot: {x: 0.5014924, y: 0.49850705}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 845b1fcf2622455419b1447dc7e0837e
+      internalID: 6546676448224568596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eerik_left_eye
+      rect:
+        serializedVersion: 2
+        x: 49.12185
+        y: 583.00006
+        width: 90.87815
+        height: 89.70758
+      alignment: 9
+      pivot: {x: 0.5048315, y: 0.5016292}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 573deb03b0c57a045b8fc06cc7993ddd
+      internalID: -2771733155563682861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eerik_mouth
+      rect:
+        serializedVersion: 2
+        x: 15.69463
+        y: 352.86987
+        width: 146.77701
+        height: 107.198944
+      alignment: 9
+      pivot: {x: 0.4926206, y: 0.500286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16a27f13c8455504aaa1859ff377cebe
+      internalID: 6745630544926531551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eerik_upper_lip
+      rect:
+        serializedVersion: 2
+        x: 27.284988
+        y: 134.16814
+        width: 131.84312
+        height: 75.69704
+      alignment: 9
+      pivot: {x: 0.50222576, y: 0.42051664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2505a6b4ac114cf4395502863302ba3d
+      internalID: -2927079094555750449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eerik_lower_lip
+      rect:
+        serializedVersion: 2
+        x: 31.152687
+        y: 80.76343
+        width: 116.65038
+        height: 44.754105
+      alignment: 9
+      pivot: {x: 0.4959033, y: 0.45217243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1af5fda303fea8543a8870ce95f35e35
+      internalID: 5381158938680923780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d6dd00867cecc5941a77a5b9d7752dcf
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 637001533905797835
+  assetBundleName: 
+  assetBundleVariant: 

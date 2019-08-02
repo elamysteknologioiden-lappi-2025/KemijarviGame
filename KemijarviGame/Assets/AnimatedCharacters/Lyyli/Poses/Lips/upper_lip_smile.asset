@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0543fe805424df99fe08ce744cbe49, type: 3}
+  m_Name: upper_lip_smile
+  m_EditorClassIdentifier: 
+  m_PoseEntries:
+  - path: 
+    localPosition: {x: 4.066999, y: 1.1139235, z: 5.482525}
+    localRotation: {x: 0, y: 0, z: 0, w: 1}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_L
+    localPosition: {x: -0.022325044, y: -0.031431437, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.60533416, w: 0.7959715}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_L/B_upper_lip_L_2
+    localPosition: {x: 0.28028804, y: -0.08221164, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.9990478, w: 0.043629058}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_R
+    localPosition: {x: -0.044110898, y: -0.8202971, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.6199022, w: 0.7846791}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_upper_lip_R/B_upper_lip__2
+    localPosition: {x: 0.3899526, y: 0.07262501, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.9994125, w: 0.034273695}
+    localScale: {x: 1, y: 1, z: 1}

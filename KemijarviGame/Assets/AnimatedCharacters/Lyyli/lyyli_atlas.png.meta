@@ -1,0 +1,343 @@
+fileFormatVersion: 2
+guid: c390097939b82654bad3f2d8e0a71d70
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3367896102062421408
+    second: lyyli_base
+  - first:
+      213: 9066528982820653981
+    second: lyyli_eye_left
+  - first:
+      213: -2597438931771438756
+    second: lyyli_eye_right
+  - first:
+      213: 8880693210623549199
+    second: lyyli_left_eyebrow
+  - first:
+      213: -4045273078805231495
+    second: lyyli_upper_lip
+  - first:
+      213: 4823239775958536445
+    second: lyyli_lower_lip
+  - first:
+      213: -2581882351363637922
+    second: lyyli_mouth
+  - first:
+      213: 7185481733890665932
+    second: lyyli_eyelids
+  - first:
+      213: 7613677986364746860
+    second: lyyli_right_eyebrow
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lyyli_base
+      rect:
+        serializedVersion: 2
+        x: 402.12863
+        y: 76.5169
+        width: 621.87134
+        height: 868.4831
+      alignment: 9
+      pivot: {x: 0.50230867, y: 0.50142956}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 097a95ef36bdb0c44bf361ee089cbb1f
+      internalID: -3367896102062421408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyyli_eye_left
+      rect:
+        serializedVersion: 2
+        x: 47.595665
+        y: 861
+        width: 128.87244
+        height: 125
+      alignment: 9
+      pivot: {x: 0.49975258, y: 0.504}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1324484268f63140b98ee8e359577a5
+      internalID: 9066528982820653981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyyli_eye_right
+      rect:
+        serializedVersion: 2
+        x: 226.31885
+        y: 869
+        width: 118.61737
+        height: 119.894165
+      alignment: 9
+      pivot: {x: 0.49470964, y: 0.47541928}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2220a38709ff56488019820d24010ec
+      internalID: -2597438931771438756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyyli_left_eyebrow
+      rect:
+        serializedVersion: 2
+        x: 91.14471
+        y: 781.60443
+        width: 70.64399
+        height: 34.0119
+      alignment: 9
+      pivot: {x: 0.45663255, y: 0.4787986}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 572e403f2e24e6348b70f257cfe2269e
+      internalID: 8880693210623549199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyyli_upper_lip
+      rect:
+        serializedVersion: 2
+        x: 102.864685
+        y: 663.05096
+        width: 134.89807
+        height: 36.595703
+      alignment: 9
+      pivot: {x: 0.5050874, y: 0.5451196}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a24a8cb2df9ef9f4a8c20a04d2dc90d6
+      internalID: -4045273078805231495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyyli_lower_lip
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 587
+        width: 130.00002
+        height: 48
+      alignment: 9
+      pivot: {x: 0.47688487, y: 0.540507}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09b945e6ba2f5814cbe249f8223a077d
+      internalID: 4823239775958536445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyyli_mouth
+      rect:
+        serializedVersion: 2
+        x: 86.719505
+        y: 401.4991
+        width: 137.28049
+        height: 94.500885
+      alignment: 9
+      pivot: {x: 0.54836994, y: 0.47090444}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5523ae557afdb794e9fcde12513e60b0
+      internalID: -2581882351363637922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyyli_eyelids
+      rect:
+        serializedVersion: 2
+        x: 47.25382
+        y: 288.67404
+        width: 190.74619
+        height: 56.740875
+      alignment: 9
+      pivot: {x: 0.5438965, y: 0.44634417}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23091f8411017db4a88081a079421c8d
+      internalID: 7185481733890665932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lyyli_right_eyebrow
+      rect:
+        serializedVersion: 2
+        x: 199.12
+        y: 755.8228
+        width: 104.731384
+        height: 49.35431
+      alignment: 9
+      pivot: {x: 0.5335555, y: 0.59117806}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eceb84a210cafc42a5dd1af7ff0a4f0
+      internalID: 7613677986364746860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d5cad87e62b004d41855876357071826
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 637002466462010392
+  assetBundleName: 
+  assetBundleVariant: 

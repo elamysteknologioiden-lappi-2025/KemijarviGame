@@ -1,0 +1,342 @@
+fileFormatVersion: 2
+guid: 4937382165a65b04db6dc100d6ced8e4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2447286838337978934
+    second: aale_eye_left
+  - first:
+      213: 2907811235505263582
+    second: aale_eyebrow_left
+  - first:
+      213: 804739255883464912
+    second: aale-eyebrow_right
+  - first:
+      213: 7188928965100982394
+    second: aale_eye_right
+  - first:
+      213: 55524851220965553
+    second: aale_base
+  - first:
+      213: -3801340896384539281
+    second: aale_atlas_5
+  - first:
+      213: 4791938659740381359
+    second: aale_eyelids
+  - first:
+      213: -6618025552043115443
+    second: aale_mouth
+  - first:
+      213: -832070682304897577
+    second: aale_upper_lip
+  - first:
+      213: -7377651089953393573
+    second: aale_lower_lip
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: aale_eye_left
+      rect:
+        serializedVersion: 2
+        x: 36.529366
+        y: 901.4706
+        width: 102.94126
+        height: 102
+      alignment: 9
+      pivot: {x: 0.5, y: 0.49538648}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06eeab93ae5babb47b11cb1dc720cd8a
+      internalID: -2447286838337978934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aale_eyebrow_left
+      rect:
+        serializedVersion: 2
+        x: 395.982
+        y: 974.3883
+        width: 87.3945
+        height: 26.071594
+      alignment: 9
+      pivot: {x: 0.49794903, y: 0.5029111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ca368504a45104a9cb6ee1a538322a
+      internalID: 2907811235505263582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aale-eyebrow_right
+      rect:
+        serializedVersion: 2
+        x: 506.7766
+        y: 976.5589
+        width: 93.52942
+        height: 29.882324
+      alignment: 9
+      pivot: {x: 0.50490415, y: 0.49999797}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8326cfd7f5aed7841b1f0aa78804c897
+      internalID: 804739255883464912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aale_eye_right
+      rect:
+        serializedVersion: 2
+        x: 42.52936
+        y: 755
+        width: 102.70596
+        height: 102.23535
+      alignment: 9
+      pivot: {x: 0.5011456, y: 0.49884897}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ec32fb6ac4e3314aa15bdf002352eb6
+      internalID: 7188928965100982394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aale_base
+      rect:
+        serializedVersion: 2
+        x: 154.3017
+        y: 0
+        width: 869.6983
+        height: 960.35187
+      alignment: 9
+      pivot: {x: 0.5044258, y: 0.4925278}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b2c0560068cf5d46bcff8b352748351
+      internalID: 55524851220965553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aale_eyelids
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 641
+        width: 167
+        height: 40
+      alignment: 9
+      pivot: {x: 0.48502997, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ec883da479ac3342b83dcdb57064a12
+      internalID: 4791938659740381359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aale_mouth
+      rect:
+        serializedVersion: 2
+        x: 2.9161558
+        y: 462.31082
+        width: 161.99486
+        height: 105.290375
+      alignment: 9
+      pivot: {x: 0.49744695, y: 0.5004178}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe5bfe342388cc24a9fbaf9f0f04e0f9
+      internalID: -6618025552043115443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aale_upper_lip
+      rect:
+        serializedVersion: 2
+        x: 9.818482
+        y: 371.0704
+        width: 131.97362
+        height: 33.13745
+      alignment: 9
+      pivot: {x: 0.49768674, y: 0.8881068}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efa9e3f3a38702b42ab886bf786eb542
+      internalID: -832070682304897577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: aale_lower_lip
+      rect:
+        serializedVersion: 2
+        x: 6.933921
+        y: 314.06607
+        width: 136.69092
+        height: 44.42511
+      alignment: 9
+      pivot: {x: 0.5052719, y: 0.42619884}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4668371ccdea7a1449f08b84f53df691
+      internalID: -7377651089953393573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 84350f3f9d7b6ea4db690bbe14e03d20
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 637002557793026623
+  assetBundleName: 
+  assetBundleVariant: 

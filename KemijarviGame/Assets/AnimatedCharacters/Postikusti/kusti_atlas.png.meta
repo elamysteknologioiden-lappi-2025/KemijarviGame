@@ -1,0 +1,343 @@
+fileFormatVersion: 2
+guid: 7ab0193cc6abeb542b095187ca34b0ad
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5689717946066369995
+    second: kusti_eyelids
+  - first:
+      213: 5957214256731522485
+    second: kusti_right_eyebrow
+  - first:
+      213: 7687043795803351181
+    second: kusti_left_eyebrow
+  - first:
+      213: -4485977554724680176
+    second: kusti_left_eye
+  - first:
+      213: 1666641660133054534
+    second: kusti_base
+  - first:
+      213: -2779863441112475060
+    second: kusti_right_eye
+  - first:
+      213: 381302518018218036
+    second: kusti_mouth
+  - first:
+      213: -1076210611261505921
+    second: kusti_upper_lip
+  - first:
+      213: 8744205051053268968
+    second: kusti_lower_lip
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: kusti_eyelids
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 972
+        width: 187
+        height: 49
+      alignment: 9
+      pivot: {x: 0.48663104, y: 0.4489796}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad3aeca88faa0a41afb13211d2d5c94
+      internalID: 5689717946066369995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kusti_right_eyebrow
+      rect:
+        serializedVersion: 2
+        x: 464.27313
+        y: 970.56946
+        width: 94.56665
+        height: 40.023193
+      alignment: 9
+      pivot: {x: 0.49940297, y: 0.5104676}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf041365b182f2542ad5612b9a5c1c0d
+      internalID: 5957214256731522485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kusti_left_eyebrow
+      rect:
+        serializedVersion: 2
+        x: 584.8873
+        y: 971.6822
+        width: 89.430725
+        height: 38.783264
+      alignment: 9
+      pivot: {x: 0.50444263, y: 0.49809656}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 994bb9308d6381748babf1f71f86ae14
+      internalID: 7687043795803351181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kusti_left_eye
+      rect:
+        serializedVersion: 2
+        x: 40.48019
+        y: 786.5197
+        width: 117.693054
+        height: 116.480225
+      alignment: 9
+      pivot: {x: 0.50147235, y: 0.49776936}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76f8db4d6cb2b114bbc4cbbf426422b0
+      internalID: -4485977554724680176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kusti_base
+      rect:
+        serializedVersion: 2
+        x: 168.68695
+        y: 0
+        width: 855.31305
+        height: 979.92114
+      alignment: 9
+      pivot: {x: 0.5112901, y: 0.49187633}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0c61532b13e3de4abd84f1cb206da02
+      internalID: 1666641660133054534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kusti_right_eye
+      rect:
+        serializedVersion: 2
+        x: 44.999996
+        y: 622.8267
+        width: 117.65346
+        height: 117.17328
+      alignment: 9
+      pivot: {x: 0.5014728, y: 0.5007394}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fde9c87ab15aeb4a8648e86dcd7de38
+      internalID: -2779863441112475060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kusti_mouth
+      rect:
+        serializedVersion: 2
+        x: 31.525688
+        y: 493.25635
+        width: 134.51562
+        height: 97.411804
+      alignment: 9
+      pivot: {x: 0.5016095, y: 0.50552034}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 665827b90936ee84c92be867daca15aa
+      internalID: 381302518018218036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kusti_upper_lip
+      rect:
+        serializedVersion: 2
+        x: 21.787136
+        y: 384.3465
+        width: 136.55939
+        height: 60.071198
+      alignment: 9
+      pivot: {x: 0.565416, y: 0.5519035}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc69c7746230f8740958b08b60dbb387
+      internalID: -1076210611261505921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kusti_lower_lip
+      rect:
+        serializedVersion: 2
+        x: 21.338888
+        y: 333.49417
+        width: 137.49881
+        height: 41.055573
+      alignment: 9
+      pivot: {x: 0.49935785, y: 0.536001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 991d2bcca321aa44aafb392e6f1b5182
+      internalID: 8744205051053268968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: db0bbe1b409f50144b09290c42a679df
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 637006763158995956
+  assetBundleName: 
+  assetBundleVariant: 

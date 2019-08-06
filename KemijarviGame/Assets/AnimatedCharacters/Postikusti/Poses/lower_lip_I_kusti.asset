@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0543fe805424df99fe08ce744cbe49, type: 3}
+  m_Name: lower_lip_I_kusti
+  m_EditorClassIdentifier: 
+  m_PoseEntries:
+  - path: 
+    localPosition: {x: 4.886146, y: 0.55941963, z: 0}
+    localRotation: {x: 0, y: 0, z: 1, w: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip_L
+    localPosition: {x: -0.03339386, y: -0.04111147, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.5951804, w: 0.80359215}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip_L/B_lower_lip_L_2
+    localPosition: {x: 0.34186435, y: 0.0048810244, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.52353305, w: 0.8520054}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip_R
+    localPosition: {x: -0.01734209, y: 1.0164828, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.6209171, w: -0.78387624}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_lower_lip_R/B_lower_lip_R_2
+    localPosition: {x: 0.46620774, y: -0.015701205, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.6384744, w: 0.76964307}
+    localScale: {x: 1, y: 1, z: 1}

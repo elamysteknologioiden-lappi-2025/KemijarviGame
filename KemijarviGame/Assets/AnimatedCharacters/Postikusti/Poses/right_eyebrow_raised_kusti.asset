@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0543fe805424df99fe08ce744cbe49, type: 3}
+  m_Name: right_eyebrow_raised_kusti
+  m_EditorClassIdentifier: 
+  m_PoseEntries:
+  - path: 
+    localPosition: {x: 6.500107, y: 1.0151882, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.49434125, w: 0.869268}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_right_eyebrow_2
+    localPosition: {x: 0.33061358, y: 0.0000016838312, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.1810933, w: 0.98346597}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_right_eyebrow_2/B_right_eyebrow_3
+    localPosition: {x: 0.28562695, y: 0.000001876615, z: 0}
+    localRotation: {x: 0, y: 0, z: -0.027402975, w: 0.9996245}
+    localScale: {x: 1, y: 1, z: 1}

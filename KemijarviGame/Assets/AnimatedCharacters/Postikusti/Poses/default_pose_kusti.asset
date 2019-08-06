@@ -59,11 +59,11 @@ MonoBehaviour:
     localScale: {x: 1, y: 1, z: 1}
   - path: B_upper_lip/B_upper_lip_L
     localPosition: {x: -0.05871153, y: -0.02597332, z: 0}
-    localRotation: {x: 0, y: 0, z: -0.63400996, w: 0.7733249}
+    localRotation: {x: 0, y: 0, z: -0.6340087, w: 0.77332586}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_upper_lip/B_upper_lip_L/B_upper_lip_L_2
     localPosition: {x: 0.34309208, y: 0.00098598, z: 0}
-    localRotation: {x: 0, y: 0, z: 0.6090335, w: 0.7931445}
+    localRotation: {x: 0, y: 0, z: 0.60903144, w: 0.79314613}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_upper_lip/B_upper_lip_R
     localPosition: {x: -0.06538153, y: -0.96785975, z: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
     localRotation: {x: 0, y: 0, z: 0.66348237, w: 0.74819195}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_mouth
-    localPosition: {x: 5.2345595, y: -0.25384855, z: 0}
+    localPosition: {x: 5.263353, y: -0.25384855, z: 0}
     localRotation: {x: -0, y: -0, z: -0.9052664, w: -0.42484453}
     localScale: {x: 1, y: 1, z: 1}
   - path: B_mouth/B_mouth_2

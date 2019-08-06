@@ -1296,9 +1296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Poses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 31d8e28f1bb4fdf4dad31141b997d228, type: 2}
+  - {fileID: 11400000, guid: 118184626417d574cbfd6648955f1366, type: 2}
+  - {fileID: 11400000, guid: 9eda0d286a17df147afc8108625fd260, type: 2}
 --- !u!1 &3695247019538420431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,9 +1600,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Poses:
-  - {fileID: 11400000, guid: 93c4f0f00397b7f4490770aee6ac0d41, type: 2}
-  - {fileID: 11400000, guid: 51791ba965b8fac46a38ee534b7a3382, type: 2}
-  - {fileID: 11400000, guid: abeafa52bd6e0a645b0e29f94bbca2de, type: 2}
+  - {fileID: 11400000, guid: 51470c1933a8e6e43a62ef1ddfc00320, type: 2}
+  - {fileID: 11400000, guid: 2a86db986bfce5743a068a7c9e08ecee, type: 2}
+  - {fileID: 11400000, guid: ba5d948b84b8d2d479925046996c5893, type: 2}
 --- !u!114 &3695247019880391729
 MonoBehaviour:
   m_ObjectHideFlags: 0

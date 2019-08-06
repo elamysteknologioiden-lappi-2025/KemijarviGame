@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0543fe805424df99fe08ce744cbe49, type: 3}
+  m_Name: left_eyebrow_default_aale
+  m_EditorClassIdentifier: 
+  m_PoseEntries:
+  - path: 
+    localPosition: {x: 6.385935, y: -0.8571205, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.5999469, w: 0.8000398}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_left_eyebrow_2
+    localPosition: {x: 0.22306564, y: -0.0000018328428, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.20786618, w: 0.9781573}
+    localScale: {x: 1, y: 1, z: 1}
+  - path: B_left_eyebrow_2/B_left_eyebrow_3
+    localPosition: {x: 0.3368023, y: -0.0000019147992, z: 0}
+    localRotation: {x: 0, y: 0, z: 0.07396101, w: 0.99726117}
+    localScale: {x: 1, y: 1, z: 1}

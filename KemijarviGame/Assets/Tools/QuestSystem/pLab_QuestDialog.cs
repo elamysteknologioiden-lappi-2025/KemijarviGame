@@ -78,7 +78,9 @@ public class pLab_QuestDialog : MonoBehaviour{
     private Image bgImage;
 
     [SerializeField]
-    private Image characterImage;
+    private RawImage characterImage;
+
+    [SerializeField] private GameObject rawCamera;
 
     [SerializeField]
     private GameObject playerImage;
@@ -108,7 +110,6 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// </summary>
     /// <param name="aQuest"></param>
     public void ActivateQuest(Quest aQuest){
-        // gameObject.SetActive(true);
 
         returnQuest = false;
         bgImage.sprite = Resources.Load<Sprite>("BGImages/" + aQuest.bgImage);
@@ -166,6 +167,12 @@ public class pLab_QuestDialog : MonoBehaviour{
             title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
             playerImage.SetActive(true);
             characterImage.gameObject.SetActive(false);
+            Transform[] array = rawCamera.GetComponentsInChildren<Transform>();
+            foreach(Transform item in array)
+            {
+                Destroy(item.gameObject);
+            }
+
             characterDialog.SetActive(false);
             playerDialog.SetActive(true);
         }
@@ -175,7 +182,9 @@ public class pLab_QuestDialog : MonoBehaviour{
             characterDialog.SetActive(true);
             playerImage.SetActive(false);
             characterImage.gameObject.SetActive(true);
-            characterImage.sprite = Resources.Load<Sprite>("Characters/" + currentEndNode.image);
+            GameObject.Instantiate(Resources.Load<GameObject>("Characters/" + currentEndNode.image + "_game"), rawCamera.gameObject.transform);
+            //   characterImage.sprite = Resources.Load<Sprite>("Characters/" + currentEndNode.image);
+            rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
         }
         text.text = "";
 
@@ -195,6 +204,8 @@ public class pLab_QuestDialog : MonoBehaviour{
         }
         if (done == false && currentNode != null)
         {
+            if(rawCamera.GetComponentInChildren<Animator>() != null)
+            rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
             done = true;
             title.text = currentNode.title;
             text.text = currentNode.text;
@@ -226,6 +237,11 @@ public class pLab_QuestDialog : MonoBehaviour{
             title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
             playerImage.SetActive(true);
             characterImage.gameObject.SetActive(false);
+            Animator[] array = rawCamera.GetComponentsInChildren<Animator>();
+            foreach (Animator item in array)
+            {
+                Destroy(item.gameObject);
+            }
             characterDialog.SetActive(false);
             playerDialog.SetActive(true);
         }
@@ -235,7 +251,23 @@ public class pLab_QuestDialog : MonoBehaviour{
             characterDialog.SetActive(true);
             playerImage.SetActive(false);
             characterImage.gameObject.SetActive(true);
-            characterImage.sprite = Resources.Load<Sprite>("Characters/" + currentNode.image);
+
+            Animator[] array = rawCamera.GetComponentsInChildren<Animator>();
+            foreach (Animator item in array)
+            {
+                Debug.LogError(item.gameObject);
+                DestroyImmediate(item.gameObject);
+            }
+            Debug.LogError("Characters/" + currentNode.image + "_game");
+
+
+            GameObject tmpObj = Resources.Load<GameObject>("Characters/" + currentNode.image + "_game");
+            GameObject.Instantiate<GameObject>(tmpObj, rawCamera.gameObject.transform);
+            if (rawCamera.GetComponentInChildren<Animator>() != null)
+                rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
+
+            Debug.LogError(rawCamera.GetComponentInChildren<Animator>().gameObject.name);
+
         }
         text.text = "";
         StopCoroutine(coroutine);
@@ -253,6 +285,8 @@ public class pLab_QuestDialog : MonoBehaviour{
             int textCOunt = text.text.Length;
             if (textCOunt == stringText.Length)
             {
+                if (rawCamera.GetComponentInChildren<Animator>() != null)
+                    rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
                 done = true;
             }
             else

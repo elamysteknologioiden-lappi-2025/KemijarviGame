@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: NewRenderObjects
+  m_Name: Default
   m_EditorClassIdentifier: 
   settings:
-    passTag: NewRenderObjects
+    passTag: Default
     Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:
         serializedVersion: 2
-        m_Bits: 1559
+        m_Bits: 1556
       PassNames: []
     overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
@@ -86,10 +86,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: NewRenderObjects
+  m_Name: EFFECT
   m_EditorClassIdentifier: 
   settings:
-    passTag: NewRenderObjects
+    passTag: EFFECT
     Event: 400
     filterSettings:
       RenderQueueType: 1
@@ -124,16 +124,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: NewRenderObjects
+  m_Name: UILAYER
   m_EditorClassIdentifier: 
   settings:
-    passTag: NewRenderObjects
-    Event: 500
+    passTag: UILAYER
+    Event: 100
     filterSettings:
       RenderQueueType: 1
       LayerMask:
         serializedVersion: 2
-        m_Bits: 32
+        m_Bits: 0
       PassNames: []
     overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 804bf49869d3b4315a850958d8530433, type: 3}
-  m_Name: NewBlit
+  m_Name: Roads
   m_EditorClassIdentifier: 
   settings:
     renderPassEvent: 400

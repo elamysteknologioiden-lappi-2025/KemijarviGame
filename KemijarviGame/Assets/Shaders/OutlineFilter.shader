@@ -70,8 +70,14 @@
 			}
 
             half4 frag (Varyings aInput) : SV_Target {
-                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-                
+               /* UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+
+				float s = pow(1 - saturate(EdgeDetect(aInput.uv)), 50);
+
+				half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, aInput.uv);
+
+				return col * s;
+                */
                 float s = pow(1 - saturate(EdgeDetect(aInput.uv)),  250);
 
                 half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, aInput.uv)* s;;
@@ -80,12 +86,18 @@
 				yellowColor.r = 1;
 				yellowColor.g = 0.88;
 				yellowColor.b = 0.5;
-				yellowColor.a = 1;
-
-				float4 edgeColor = float4(yellowColor.rgb, yellowColor.a * s);
+				yellowColor.a = 0;
+				/*
+				yellowColor.r = 0;
+				yellowColor.g = 0;
+				yellowColor.b = 0;
+				yellowColor.a = 0;
+				*/
+			//	float4 edgeColor = float4(yellowColor.rgb, yellowColor.a * s);
 				float4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, aInput.uv);
-				return alphaBlend(col, edgeColor);
-
+				//return alphaBlend(col, edgeColor);
+				return alphaBlend(col, yellowColor);
+				
             }
             
 			#pragma vertex vert

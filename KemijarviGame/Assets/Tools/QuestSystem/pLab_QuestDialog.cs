@@ -159,6 +159,12 @@ public class pLab_QuestDialog : MonoBehaviour{
             return;
         }
 
+        Animator[] arraya = rawCamera.GetComponentsInChildren<Animator>();
+        foreach (Animator item in arraya)
+        {
+            DestroyImmediate(item.gameObject);
+        }
+
         title.text = currentEndNode.title;
         stringText = currentEndNode.text;
 
@@ -167,10 +173,10 @@ public class pLab_QuestDialog : MonoBehaviour{
             title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
             playerImage.SetActive(true);
             characterImage.gameObject.SetActive(false);
-            Transform[] array = rawCamera.GetComponentsInChildren<Transform>();
-            foreach(Transform item in array)
+            Animator[] array = rawCamera.GetComponentsInChildren<Animator>();
+            foreach(Animator item in array)
             {
-                Destroy(item.gameObject);
+                DestroyImmediate(item.gameObject);
             }
 
             characterDialog.SetActive(false);
@@ -197,6 +203,8 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// ProgressNode
     /// </summary>
     public void ProgressNode(){
+
+
         if (returnQuest)
         {
             ReturnQuest();
@@ -211,6 +219,12 @@ public class pLab_QuestDialog : MonoBehaviour{
             text.text = currentNode.text;
             StopCoroutine(coroutine);
             return;
+        }
+
+        Animator[] arraya = rawCamera.GetComponentsInChildren<Animator>();
+        foreach (Animator item in arraya)
+        {
+            DestroyImmediate(item.gameObject);
         }
 
         currentNode = quest.DoQuest();
@@ -240,7 +254,7 @@ public class pLab_QuestDialog : MonoBehaviour{
             Animator[] array = rawCamera.GetComponentsInChildren<Animator>();
             foreach (Animator item in array)
             {
-                Destroy(item.gameObject);
+                DestroyImmediate(item.gameObject);
             }
             characterDialog.SetActive(false);
             playerDialog.SetActive(true);

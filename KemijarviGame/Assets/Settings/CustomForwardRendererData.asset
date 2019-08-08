@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     renderPassEvent: 500
-    material: {fileID: 0}
+    material: {fileID: 2100000, guid: f57bceed07e1dc646923028adceefcf0, type: 2}
     materialPassIndex: 0
     textureId: _BlitPassTexture
 --- !u!114 &11400000
@@ -39,10 +39,10 @@ MonoBehaviour:
     samplingPS: {fileID: 4800000, guid: 04c410c9937594faa893a11dceb85f7e, type: 3}
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0

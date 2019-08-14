@@ -1773,7 +1773,7 @@ GameObject:
   - component: {fileID: 4081297128562060136}
   - component: {fileID: 4081297128562060151}
   m_Layer: 13
-  m_Name: aale_hakava_transparent_game 1
+  m_Name: aale_hakava_transparent_game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

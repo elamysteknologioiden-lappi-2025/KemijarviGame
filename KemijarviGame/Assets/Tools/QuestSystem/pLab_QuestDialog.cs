@@ -143,6 +143,8 @@ public class pLab_QuestDialog : MonoBehaviour{
         returnQuest = true; 
         if (done == false && currentEndNode != null)
         {
+            if (rawCamera.GetComponentInChildren<Animator>() != null)
+                rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
             done = true;
             title.text = currentEndNode.title;
             text.text = currentEndNode.text;
@@ -173,11 +175,8 @@ public class pLab_QuestDialog : MonoBehaviour{
             title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
             playerImage.SetActive(true);
             characterImage.gameObject.SetActive(false);
-            Animator[] array = rawCamera.GetComponentsInChildren<Animator>();
-            foreach(Animator item in array)
-            {
-                DestroyImmediate(item.gameObject);
-            }
+            GameObject.Instantiate(Resources.Load<GameObject>("Characters/postikusti"), rawCamera.gameObject.transform);
+            rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
 
             characterDialog.SetActive(false);
             playerDialog.SetActive(true);
@@ -189,7 +188,6 @@ public class pLab_QuestDialog : MonoBehaviour{
             playerImage.SetActive(false);
             characterImage.gameObject.SetActive(true);
             GameObject.Instantiate(Resources.Load<GameObject>("Characters/" + currentEndNode.image + "_game"), rawCamera.gameObject.transform);
-            //   characterImage.sprite = Resources.Load<Sprite>("Characters/" + currentEndNode.image);
             rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
         }
         text.text = "";
@@ -251,11 +249,8 @@ public class pLab_QuestDialog : MonoBehaviour{
             title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
             playerImage.SetActive(true);
             characterImage.gameObject.SetActive(false);
-            Animator[] array = rawCamera.GetComponentsInChildren<Animator>();
-            foreach (Animator item in array)
-            {
-                DestroyImmediate(item.gameObject);
-            }
+            GameObject.Instantiate(Resources.Load<GameObject>("Characters/postikusti"), rawCamera.gameObject.transform);
+            rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
             characterDialog.SetActive(false);
             playerDialog.SetActive(true);
         }

@@ -2,7 +2,7 @@
  * File         : pLab_QuestManager.cs            
  * Lisence      : BSD 3-Clause License
  * Copyright    : Lapland University of Applied Sciences
- * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi)
+ * Authors      : 
  * BSD 3-Clause License
  *
  * Copyright (c) 2019, Lapland University of Applied Sciences
@@ -51,7 +51,6 @@ public class pLab_QuestManager : MonoBehaviour{
     public delegate void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool startPoint);
     public static event ActivateQuestReturn OnActivateQuestReturn;
 
-
     public delegate void DisableQuest(int aId);
     public static event DisableQuest OnDisableQuest;
 
@@ -59,14 +58,12 @@ public class pLab_QuestManager : MonoBehaviour{
     /// <summary>
     /// questDialog
     /// </summary>
-    [SerializeField]
-    private GameObject questDialog;
+    [SerializeField]private GameObject questDialog;
 
     /// <summary>
     /// endDialog
     /// </summary>
-    [SerializeField]
-    private GameObject endDialog;
+    [SerializeField]private GameObject endDialog;
 
     /// <summary>
     /// currentQuest
@@ -86,9 +83,6 @@ public class pLab_QuestManager : MonoBehaviour{
     public void CheckQuest() {
 
         foreach (QuestItem item in pLab_KJPOCSaveGame.instance.saveData.questSystem.nodes) {
-
-
-
             if (item.status == 0 && (item.prevQuest == 0 || pLab_KJPOCSaveGame.instance.saveData.
                 questSystem.nodes.Find(x => x.questID == item.prevQuest).status == 3)){
 
@@ -98,20 +92,18 @@ public class pLab_QuestManager : MonoBehaviour{
                 } else if (item.type == 2) {
                     item.status = 1;
                     StartQuestLate("Quests/" + item.questID + "_Quest");
-                }
-                else if (item.type == 6){
+                } else if (item.type == 6) {
                     item.status = 3;
 
                     endDialog.SetActive(true);
                 }
-            }
-           if (item.status == 1){
-                if (OnActivateQuest != null){
+            }if (item.status == 1){
+                if (OnActivateQuest != null) {
                     UnityEngine.Events.UnityAction action = () => { Debug.LogError("Herra"); };
                     OnActivateQuest(currentQuest.npcId, action, currentQuest, true);
                 }
             }
-            if (item.status == 2 && item.endPoint != 0){
+            if (item.status == 2 && item.endPoint != 0) {
                 UnityEngine.Events.UnityAction action = () => {  };
                 OnActivateQuestReturn(currentQuest.endPoint, action, currentQuest,false);
             }
@@ -141,9 +133,6 @@ public class pLab_QuestManager : MonoBehaviour{
         XmlSerializer serializer = new XmlSerializer(typeof(Quest));
         StringReader reader = new StringReader(xml.ToString());
         currentQuest = serializer.Deserialize(reader) as Quest;
-
-
-        Debug.LogError(currentQuest.questTitle);
         reader.Close();
         questDialog.gameObject.SetActive(true);
         questDialog.GetComponent<pLab_QuestDialog>().ActivateQuest(currentQuest);

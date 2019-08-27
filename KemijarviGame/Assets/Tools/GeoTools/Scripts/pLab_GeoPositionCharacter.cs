@@ -2,7 +2,7 @@
  * File         : pLab_GeoPositionCharacter.cs            
  * Lisence      : BSD 3-Clause License
  * Copyright    : Lapland University of Applied Sciences
- * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi)
+ * Authors      : 
  * BSD 3-Clause License
  *
  * Copyright (c) 2019, Lapland University of Applied Sciences

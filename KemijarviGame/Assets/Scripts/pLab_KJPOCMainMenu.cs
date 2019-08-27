@@ -42,28 +42,28 @@ using UnityEngine.UI;
 
 public class pLab_KJPOCMainMenu : MonoBehaviour
 {
-    [SerializeField]
-    private Button continueButton;
+    [SerializeField]private Button continueButton;
 
-    [SerializeField]
-    private GameObject areUSureDialog;
+    [SerializeField]private GameObject areUSureDialog;
 
-    [SerializeField]
-    private GameObject nameDialog;
+    [SerializeField]private GameObject nameDialog;
 
     [SerializeField] private InputField playerNameInputField;
 
-    private void Start()
-    {
+    /// <summary>
+    /// 
+    /// </summary>
+    private void Start(){
         continueButton.interactable = pLab_KJPOCSaveGame.instance.IsThereSave();
     }
-
-    public void StartNewGame(string aName = "")
-    {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="aName"></param>
+    public void StartNewGame(string aName = ""){
         string name = playerNameInputField.text.ToString();
 
-        if(name.Length < 1)
-        {
+        if(name.Length < 1){
             name = "Pelaaja";
         }
 
@@ -71,38 +71,37 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
         SceneManager.LoadScene("Level_001");
     }
 
-    public void PlayerNameQuery()
-    {
+    /// <summary>
+    /// 
+    /// </summary>
+    public void PlayerNameQuery(){
         nameDialog.SetActive(true);
     }
 
-    public void PrepareToStartNewGame()
-    {
-        if (pLab_KJPOCSaveGame.instance.IsThereSave())
-        {
+    /// <summary>
+    /// 
+    /// </summary>
+    public void PrepareToStartNewGame(){
+        if (pLab_KJPOCSaveGame.instance.IsThereSave()) {
             areUSureDialog.SetActive(true);
-        }
-        else
-        {
+        }else{
             StartNewGame();
 
         }
     }
 
-
-    private void Update()
-    {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-
+    /// <summary>
+    /// 
+    /// </summary>
+    private void Update(){
+        if (Application.platform == RuntimePlatform.Android){
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 Application.Quit();
             }
         }
     }
 
-    public void LoadGame()
-    {
+    public void LoadGame() {
         pLab_KJPOCSaveGame.instance.LoadGame();
         SceneManager.LoadScene("Level_001");
     }

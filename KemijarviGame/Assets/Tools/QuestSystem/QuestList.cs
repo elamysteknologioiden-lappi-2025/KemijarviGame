@@ -2,7 +2,7 @@
  * File         : QuestItem.cs            
  * Lisence      : BSD 3-Clause License
  * Copyright    : Lapland University of Applied Sciences
- * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi)
+ * Authors      : 
  * BSD 3-Clause License
  *
  * Copyright (c) 2019, Lapland University of Applied Sciences
@@ -100,14 +100,12 @@ public class QuestList{
     /// <summary>
     /// currentNode
     /// </summary>
-    [System.NonSerialized()]
-    private QuestItem currentNode;
+    [System.NonSerialized()]private QuestItem currentNode;
 
     /// <summary>
     /// position
     /// </summary>
-    [System.NonSerialized]
-    private int position;
+    [System.NonSerialized]private int position;
 
     /// <summary>
     /// ProgressQuest

@@ -101,8 +101,7 @@ public class pLab_NPC : MonoBehaviour{
         if (aId == id){
             currentQuest = aCurrentQuest;
             questPointSymbol.SetActive(true);
-        }else
-        {
+        }else{
             questPointSymbol.SetActive(false);
             returnQuestPointSymbol.SetActive(false);
         }
@@ -114,15 +113,11 @@ public class pLab_NPC : MonoBehaviour{
     /// <param name="aId"></param>
     /// <param name="aAction"></param>
     /// <param name="aCurrentQuest"></param>
-    public void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool aFlag)
-    {
-        if (aId == id)
-        {
+    public void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool aFlag){
+        if (aId == id) {
             currentQuest = aCurrentQuest;
             returnQuestPointSymbol.SetActive(true);
-        }
-        else
-        {
+        } else {
             questPointSymbol.SetActive(false);
             returnQuestPointSymbol.SetActive(false);
         }
@@ -134,12 +129,9 @@ public class pLab_NPC : MonoBehaviour{
     /// <param name="aId"></param>
     /// <param name="aAction"></param>
     /// <param name="aCurrentQuest"></param>
-    public void DisableQuest(int aId)
-    {
-        if (aId == id)
-        {
+    public void DisableQuest(int aId){
+        if (aId == id){
             currentQuest = null;
-
             questPointSymbol.SetActive(false);
             returnQuestPointSymbol.SetActive(false);
         }
@@ -150,16 +142,14 @@ public class pLab_NPC : MonoBehaviour{
     /// ActivateNPC
     /// </summary>
     public void ActivateNPC(){
-
         if (currentQuest == null)
             return;
-
         questDialog.gameObject.SetActive(true);
         if (currentQuest.endPoint == id) {
             questDialog.gameObject.SetActive(true);
             questDialog.ReturnQuest();
         }
-        else{
+        else {
             questDialog.ActivateQuest(currentQuest);
         }
     }

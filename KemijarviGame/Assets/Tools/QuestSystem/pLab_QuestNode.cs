@@ -2,7 +2,7 @@
  * File         : pLab_QuestNode.cs            
  * Lisence      : BSD 3-Clause License
  * Copyright    : Lapland University of Applied Sciences
- * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi)
+ * Authors      : 
  * BSD 3-Clause License
  *
  * Copyright (c) 2019, Lapland University of Applied Sciences
@@ -43,14 +43,11 @@ using UnityEngine;
 /// pLab_QuestNode
 /// </summary>
 public class pLab_QuestNode{
-    [XmlElementAttribute("Title")]
-    public string title;
+    [XmlElementAttribute("Title")] public string title;
 
-    [XmlElementAttribute("Text")]
-    public string text;
+    [XmlElementAttribute("Text")] public string text;
 
-    [XmlElementAttribute("Image")]
-    public string image;
+    [XmlElementAttribute("Image")]public string image;
 }
 
 /// <summary>
@@ -80,13 +77,18 @@ public class Quest
     [XmlElementAttribute("QuestTitle")]
     public string questTitle;
 
-
+    /// <summary>
+    /// bgImage
+    /// </summary>
     [XmlElementAttribute("BGImage")]
     public string bgImage;
+
+    /// <summary>
+    /// bgEndImage
+    /// </summary>
     [XmlElementAttribute("BGENDImage")]
     public string bgEndImage;
-
-
+    
     /// <summary>
     /// questType
     /// </summary>
@@ -115,26 +117,22 @@ public class Quest
     /// <summary>
     /// currentNode
     /// </summary>
-    [System.NonSerialized]
-    private pLab_QuestNode currentNode;
+    [System.NonSerialized]private pLab_QuestNode currentNode;
 
     /// <summary>
     /// currentEndNode
     /// </summary>
-    [System.NonSerialized]
-    private pLab_QuestNode currentEndNode;
+    [System.NonSerialized]private pLab_QuestNode currentEndNode;
 
     /// <summary>
     /// position
     /// </summary>
-    [System.NonSerialized]
-    private int position;
+    [System.NonSerialized]private int position;
 
     /// <summary>
     /// endposition
     /// </summary>
-    [System.NonSerialized]
-    private int endPosition;
+    [System.NonSerialized]private int endPosition;
     #endregion
 
     #region // From Base Class

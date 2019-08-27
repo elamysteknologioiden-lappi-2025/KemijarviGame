@@ -2,7 +2,8 @@
  * File         : pLab_QuestDialog.cs            
  * Lisence      : BSD 3-Clause License
  * Copyright    : Lapland University of Applied Sciences
- * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi)
+ * Authors      :
+ * Note         : Prototype Code, Please Fix
  * BSD 3-Clause License
  *
  * Copyright (c) 2019, Lapland University of Applied Sciences
@@ -52,47 +53,55 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// <summary>
     /// title
     /// </summary>
-    [SerializeField]
-    private Text title;
+    [SerializeField]private Text title;
 
     /// <summary>
     /// text
     /// </summary>
-    [SerializeField]
-    private Text text;
+    [SerializeField]private Text text;
 
 
     /// <summary>
     /// text
     /// </summary>
-    [SerializeField]
-    private string stringText;
+    [SerializeField]private string stringText;
 
     /// <summary>
     /// qManager
     /// </summary>
-    [SerializeField]
-    private pLab_QuestManager qManager;
+    [SerializeField]private pLab_QuestManager qManager;
 
-    [SerializeField]
-    private Image bgImage;
+    /// <summary>
+    /// bgImage
+    /// </summary>
+    [SerializeField]private Image bgImage;
 
-    [SerializeField]
-    private RawImage characterImage;
+    /// <summary>
+    /// characterImage
+    /// </summary>
+    [SerializeField]private RawImage characterImage;
 
-    [SerializeField] private GameObject rawCamera;
+    /// <summary>
+    /// rawCamera
+    /// </summary>
+    [SerializeField]private GameObject rawCamera;
 
-    [SerializeField]
-    private GameObject playerImage;
+    /// <summary>
+    /// playerImage
+    /// </summary>
+    [SerializeField]private GameObject playerImage;
+
+    /// <summary>
+    /// characterDialog
+    /// </summary>
+    [SerializeField]private GameObject characterDialog;
 
 
-    [SerializeField]
-    private GameObject characterDialog;
+    /// <summary>
+    /// playerDialog
+    /// </summary>
+    [SerializeField]private GameObject playerDialog;
 
-
-
-    [SerializeField]
-    private GameObject playerDialog;
     /// <summary>
     /// currentNode
     /// </summary>
@@ -103,48 +112,58 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// </summary>
     private pLab_QuestNode currentEndNode;
 
-
+    /// <summary>
+    /// returnQuest
+    /// </summary>
     private bool returnQuest;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private IEnumerator coroutine;
+
+    /// <summary>
+    /// done
+    /// </summary>
+    private bool done = false;
+
+
     /// <summary>
     /// ActivateQuest
     /// </summary>
     /// <param name="aQuest"></param>
     public void ActivateQuest(Quest aQuest){
-
         returnQuest = false;
-        bgImage.sprite = Resources.Load<Sprite>("BGImages/" + aQuest.bgImage);
+        bgImage.sprite = Resources.Load<Sprite>("BGImages/"+aQuest.bgImage);
         quest = aQuest;
         ProgressNode();
 
     }
 
-    private void OnEnable()
-    {
-
+    /// <summary>
+    /// OnEnable
+    /// </summary>
+    private void OnEnable() {
         coroutine = WaitAndPrint(0.02f);
     }
 
-    private void OnDisable()
-    {
-
+    private void OnDisable(){
         done = true;
         StopCoroutine(coroutine);
     }
 
-
-
-    private IEnumerator coroutine;
-
     /// <summary>
     /// ReturnQuest
+    /// TODO: FIX, FAST PROTOTYPE CODE
     /// </summary>
     public void ReturnQuest(){
         bgImage.sprite = Resources.Load<Sprite>("BGImages/" + quest.bgEndImage);
         returnQuest = true; 
-        if (done == false && currentEndNode != null)
-        {
-            if (rawCamera.GetComponentInChildren<Animator>() != null)
+
+        if (done == false && currentEndNode != null){
+            if (rawCamera.GetComponentInChildren<Animator>() != null) {
                 rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
+            }
             done = true;
             title.text = currentEndNode.title;
             text.text = currentEndNode.text;
@@ -157,21 +176,18 @@ public class pLab_QuestDialog : MonoBehaviour{
         if (currentEndNode == null){
             gameObject.SetActive(false);
             qManager.ChangeQuestStatus(3, quest.questID);
-     
             return;
         }
 
         Animator[] arraya = rawCamera.GetComponentsInChildren<Animator>();
-        foreach (Animator item in arraya)
-        {
+        foreach (Animator item in arraya) {
             DestroyImmediate(item.gameObject);
         }
 
         title.text = currentEndNode.title;
         stringText = currentEndNode.text;
 
-        if (currentEndNode.title == "Pelaaja")
-        {
+        if (currentEndNode.title == "Pelaaja") {
             title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
             playerImage.SetActive(true);
             characterImage.gameObject.SetActive(false);
@@ -180,9 +196,7 @@ public class pLab_QuestDialog : MonoBehaviour{
 
             characterDialog.SetActive(false);
             playerDialog.SetActive(true);
-        }
-        else
-        {
+        } else {
             playerDialog.SetActive(false);
             characterDialog.SetActive(true);
             playerImage.SetActive(false);
@@ -199,17 +213,14 @@ public class pLab_QuestDialog : MonoBehaviour{
 
     /// <summary>
     /// ProgressNode
+    /// TODO: FIX, FAST PROTOTYPE CODE
     /// </summary>
     public void ProgressNode(){
-
-
-        if (returnQuest)
-        {
+        if (returnQuest){
             ReturnQuest();
             return;
         }
-        if (done == false && currentNode != null)
-        {
+        if (done == false && currentNode != null) {
             if(rawCamera.GetComponentInChildren<Animator>() != null)
             rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
             done = true;
@@ -220,8 +231,7 @@ public class pLab_QuestDialog : MonoBehaviour{
         }
 
         Animator[] arraya = rawCamera.GetComponentsInChildren<Animator>();
-        foreach (Animator item in arraya)
-        {
+        foreach (Animator item in arraya){
             DestroyImmediate(item.gameObject);
         }
 
@@ -244,8 +254,7 @@ public class pLab_QuestDialog : MonoBehaviour{
         title.text = currentNode.title;
         stringText = currentNode.text;
 
-        if (currentNode.title == "Pelaaja")
-        {
+        if (currentNode.title == "Pelaaja") {
             title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
             playerImage.SetActive(true);
             characterImage.gameObject.SetActive(false);
@@ -253,17 +262,14 @@ public class pLab_QuestDialog : MonoBehaviour{
             rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
             characterDialog.SetActive(false);
             playerDialog.SetActive(true);
-        }
-        else
-        {
+        } else {
             playerDialog.SetActive(false);
             characterDialog.SetActive(true);
             playerImage.SetActive(false);
             characterImage.gameObject.SetActive(true);
 
             Animator[] array = rawCamera.GetComponentsInChildren<Animator>();
-            foreach (Animator item in array)
-            {
+            foreach (Animator item in array) {
                 Debug.LogError(item.gameObject);
                 DestroyImmediate(item.gameObject);
             }
@@ -284,22 +290,19 @@ public class pLab_QuestDialog : MonoBehaviour{
         StartCoroutine(coroutine);
         gameObject.SetActive(true);
     }
-    bool done = false;
-    private IEnumerator WaitAndPrint(float waitTime)
-    {
+
+
+
+    private IEnumerator WaitAndPrint(float waitTime) {
         done = false;
-        while (!done)
-        {
+        while (!done) {
             yield return new WaitForSeconds(waitTime);
             int textCOunt = text.text.Length;
-            if (textCOunt == stringText.Length)
-            {
+            if (textCOunt == stringText.Length) {
                 if (rawCamera.GetComponentInChildren<Animator>() != null)
                     rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
                 done = true;
-            }
-            else
-            {
+            } else {
                 text.text = stringText.Substring(0, textCOunt + 1);
             }
         }

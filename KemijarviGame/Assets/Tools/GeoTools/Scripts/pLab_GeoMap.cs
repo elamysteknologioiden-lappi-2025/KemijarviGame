@@ -37,7 +37,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using System;
 
 public class pLab_GeoMap : MonoBehaviour {
@@ -68,23 +67,10 @@ public class pLab_GeoMap : MonoBehaviour {
     /// </summary>
     public static pLab_GeoMap instance = null;
 
-
-
     void Awake() {
         if (instance == null) {
             instance = this;
         }
     }
-
-    // Use this for initialization
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-
 
 }

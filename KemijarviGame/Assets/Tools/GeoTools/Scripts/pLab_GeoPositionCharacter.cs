@@ -35,6 +35,7 @@
  *****************************************************************************/
 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,50 +70,70 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     [SerializeField]
     private GeoCharacterMoveType geoCharacterMoveType = GeoCharacterMoveType.EGps;
 
+    [SerializeField]
+    private pLab_LocationProvider locationProvider;
+
     #endregion
 
     #region // From Base Class
 
-
-    /// <summary>
-    /// 
-    /// </summary>
     void Start() {
-        objectTransform = GetComponent<Transform>();
+        objectTransform = transform;
         XRSettings.enabled = false;
-        desiredPos = transform.position;
+        desiredPos = objectTransform.position;
+
+        if(startPosition == Vector3.zero){
+            startPosition = transform.position;
+        }
+
+        if (desiredPos == Vector3.zero) {
+            desiredPos = transform.position;
+        }
+
+        if (newPos == Vector3.zero) {
+            newPos = transform.position;
+        }
     }
 
 
     private void OnEnable() {
+        if (locationProvider != null) {
+            locationProvider.OnLocationUpdated += OnLocationUpdated;
+        }
     }
 
 
-    public Text pos;
-    private float startTime;
-    private Vector3 startPosition = Vector3.zero;
-    public Vector3 desiredPos = Vector3.zero;
-    public Vector3 changePos = new Vector3();
-    public Vector3 hitPos;
-    float speed = 0;
-    public Animator characterAnimator;
-    float timeDif = 0;
-    float distance = 0;
-    public Vector3 lastPos = new Vector3();
+    private void OnDisable() {
+        if (locationProvider != null) {
+            locationProvider.OnLocationUpdated -= OnLocationUpdated;
+        }
+    }
 
-    Vector3 newPos;
+    public Text pos;
+    private float startTime = 0f;
+    private Vector3 startPosition = Vector3.zero;
+    private Vector3 desiredPos = Vector3.zero;
+    private Vector3 changePos = Vector3.zero;
+    public Vector3 hitPos;
+    private float speed = 0;
+
+    [SerializeField]
+    private Animator characterAnimator;
+    private float timeDif = 0;
+    private float distance = 0;
+    private Vector3 lastPos = new Vector3();
+
+    private Vector3 newPos = Vector3.zero;
 
 
     float timme;
-    /// <summary>
-    /// 
-    /// </summary>
+
     void Update() {
 
+        #if UNITY_EDITOR
+        
         if (Input.GetMouseButtonDown(0))
         {
-
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000f))
@@ -121,22 +142,15 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
                 if (null != npc)
                 {
-
                     npc.ActivateNPC();
                 }
             }
+        }
 
-        }
-        return;
+        #endif
 
-        if(startPosition == Vector3.zero){
-            startPosition = transform.position;
-        }
-        if (desiredPos == Vector3.zero) {
-            desiredPos = transform.position;
-        }
-        newPos = new Vector3((float)( pLab_GeoLocation.instance.UtmX - pLab_GeoMap.instance.UtmX),
-            0f, (float)(pLab_GeoLocation.instance.UtmY - pLab_GeoMap.instance.UtmY));
+        // newPos = new Vector3((float)( pLab_GeoLocation.instance.UtmX - pLab_GeoMap.instance.UtmX),
+        //     0f, (float)(pLab_GeoLocation.instance.UtmY - pLab_GeoMap.instance.UtmY));
 
         // If moved, compute new pos;
         if (Vector3.Distance(newPos, desiredPos) > 0.1f) {
@@ -148,7 +162,7 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
             timeDif = Time.time - startTime;
 
             if(timeDif > 0.5f){
-                    timeDif = 0.5f;
+                timeDif = 0.5f;
             }
 
             speed = distance / timeDif;
@@ -163,14 +177,12 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
             desiredPos = newPos;
             timme = 0;
 
-            Debug.LogError(startPosition + " speed" + speed);
-
-
+            // Debug.LogError(startPosition + " speed" + speed);
         }
 
         
-        float distCovereda = (Time.time - startTime) * speed;
-        float fracJourneya = distCovereda / distance;
+        float distCovered = (Time.time - startTime) * speed;
+        float fracJourneya = distCovered / distance;
 
         if(speed == 0)
         {
@@ -190,11 +202,11 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
         Vector3 targetDir = newPos - startPosition;
         float angle = Vector3.Angle(targetDir, transform.forward);
-        Vector3 localRota = characterAnimator.gameObject.transform.localEulerAngles;
-        localRota.y = angle;
+        Vector3 localRot = characterAnimator.gameObject.transform.localEulerAngles;
+        localRot.y = angle;
         if (targetDir.x < 0)
-            localRota.y *= -1;
-        characterAnimator.gameObject.transform.localEulerAngles = localRota;
+            localRot.y *= -1;
+        characterAnimator.gameObject.transform.localEulerAngles = localRot;
 
     }
 
@@ -203,7 +215,22 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
     #region // Private Functions
 
+    /// <summary>
+    /// Event handler for OnLocationUpdated-event
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void OnLocationUpdated(object sender, pLab_LocationUpdatedEventArgs e)
+    {
+        CalculateNewPosition(e.location);
+    }
 
+    private void CalculateNewPosition(pLab_LatLon latLon) {
+        pLab_UTMCoordinates coordinates = new pLab_UTMCoordinates(latLon);
+        newPos = new Vector3((float)(coordinates.UTMX - pLab_GeoMap.instance.UtmX),
+            0f, (float)(coordinates.UTMY - pLab_GeoMap.instance.UtmY));
+        Debug.Log(newPos);
+    }
 
     #endregion
 

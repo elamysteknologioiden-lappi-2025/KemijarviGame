@@ -81,33 +81,35 @@ public class pLab_QuestManager : MonoBehaviour{
     /// CheckQuest
     /// </summary>
     public void CheckQuest() {
+        if (pLab_KJPOCSaveGame.instance != null && pLab_KJPOCSaveGame.instance.saveData != null && pLab_KJPOCSaveGame.instance.saveData.questSystem != null) {
+            foreach (QuestItem item in pLab_KJPOCSaveGame.instance.saveData.questSystem.nodes) {
+                if (item.status == 0 && (item.prevQuest == 0 || pLab_KJPOCSaveGame.instance.saveData.
+                    questSystem.nodes.Find(x => x.questID == item.prevQuest).status == 3)){
 
-        foreach (QuestItem item in pLab_KJPOCSaveGame.instance.saveData.questSystem.nodes) {
-            if (item.status == 0 && (item.prevQuest == 0 || pLab_KJPOCSaveGame.instance.saveData.
-                questSystem.nodes.Find(x => x.questID == item.prevQuest).status == 3)){
+                    if (item.type == 1){
+                        item.status = 2;
+                        StartQuest("Quests/" + item.questID + "_Quest");
+                    } else if (item.type == 2) {
+                        item.status = 1;
+                        StartQuestLate("Quests/" + item.questID + "_Quest");
+                    } else if (item.type == 6) {
+                        item.status = 3;
 
-                if (item.type == 1){
-                    item.status = 2;
-                    StartQuest("Quests/" + item.questID + "_Quest");
-                } else if (item.type == 2) {
-                    item.status = 1;
-                    StartQuestLate("Quests/" + item.questID + "_Quest");
-                } else if (item.type == 6) {
-                    item.status = 3;
-
-                    endDialog.SetActive(true);
+                        endDialog.SetActive(true);
+                    }
+                }if (item.status == 1){
+                    if (OnActivateQuest != null) {
+                        UnityEngine.Events.UnityAction action = () => { Debug.LogError("Herra"); };
+                        OnActivateQuest(currentQuest.npcId, action, currentQuest, true);
+                    }
                 }
-            }if (item.status == 1){
-                if (OnActivateQuest != null) {
-                    UnityEngine.Events.UnityAction action = () => { Debug.LogError("Herra"); };
-                    OnActivateQuest(currentQuest.npcId, action, currentQuest, true);
+                if (item.status == 2 && item.endPoint != 0) {
+                    UnityEngine.Events.UnityAction action = () => {  };
+                    OnActivateQuestReturn(currentQuest.endPoint, action, currentQuest,false);
                 }
-            }
-            if (item.status == 2 && item.endPoint != 0) {
-                UnityEngine.Events.UnityAction action = () => {  };
-                OnActivateQuestReturn(currentQuest.endPoint, action, currentQuest,false);
             }
         }
+        
     }
 
     /// <summary>

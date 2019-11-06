@@ -68,7 +68,7 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
         }
 
         pLab_KJPOCSaveGame.instance.CreateNewGame(name);
-        SceneManager.LoadScene("Level_001");
+        SceneManager.LoadScene("Level_001 AR");
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
 
     public void LoadGame() {
         pLab_KJPOCSaveGame.instance.LoadGame();
-        SceneManager.LoadScene("Level_001");
+        SceneManager.LoadScene("Level_001 AR");
     }
 
 }

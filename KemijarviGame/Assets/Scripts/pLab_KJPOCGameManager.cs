@@ -43,9 +43,6 @@ public class pLab_KJPOCGameManager : MonoBehaviour
 
     #region Variables
 
-    [SerializeField]
-    [Header("Player must be inside this geo area to play")]
-    private pLab_GeoArea playableGeoArea;
 
     #endregion
 

@@ -53,10 +53,17 @@ public class pLab_OutOfGeoAreaBoundsUI : MonoBehaviour
     [SerializeField]
     private GameObject alertIndicatorCanvasObj;
 
+    [SerializeField]
+    private Canvas disableCanvas;
+
     #endregion
 
     #region Inherited Methods
-    
+
+    private void Start() {
+        ToggleAlertIndicatorVisibility(false);
+    }
+
     private void OnEnable() {
         if (locationProvider != null) {
             locationProvider.OnLocationUpdated += OnLocationUpdated;
@@ -91,11 +98,10 @@ public class pLab_OutOfGeoAreaBoundsUI : MonoBehaviour
         bool showAlertIndicator = false;
 
         if (playableGeoArea != null) {
-            showAlertIndicator = playableGeoArea.IsLocationInsideZone(latLon);
+            showAlertIndicator = !playableGeoArea.IsLocationInsideZone(latLon);
         }
 
         ToggleAlertIndicatorVisibility(showAlertIndicator);
-
     }
 
     /// <summary>
@@ -105,6 +111,10 @@ public class pLab_OutOfGeoAreaBoundsUI : MonoBehaviour
     private void ToggleAlertIndicatorVisibility(bool isVisible) {
         if (alertIndicatorCanvasObj != null) {
             alertIndicatorCanvasObj.SetActive(isVisible);
+        }
+
+        if (disableCanvas != null) {
+            disableCanvas.enabled = isVisible;
         }
     }
 

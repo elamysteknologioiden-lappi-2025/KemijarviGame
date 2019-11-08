@@ -77,6 +77,14 @@ public class pLab_QuestManager : MonoBehaviour{
         CheckQuest();
     }
 
+    /*
+    private void OnEnable() {
+        //Maybe we should do this here instead
+        //so if we disable stuff between mode changes,this stuff will update also
+        CheckQuest();
+    }
+    */
+
     /// <summary>
     /// CheckQuest
     /// </summary>
@@ -122,8 +130,6 @@ public class pLab_QuestManager : MonoBehaviour{
         StringReader reader = new StringReader(xml.ToString());
         currentQuest = serializer.Deserialize(reader) as Quest;
         reader.Close();
-
-
     }
 
     /// <summary>
@@ -148,14 +154,13 @@ public class pLab_QuestManager : MonoBehaviour{
     public void ChangeQuestStatus(int aStatus, int aQuestID){
 
         pLab_KJPOCSaveGame.instance.saveData.
-                questSystem.nodes.Find(x => x.questID == aQuestID).status = aStatus;
+            questSystem.nodes.Find(x => x.questID == aQuestID).status = aStatus;
         if(aStatus == 3) {
             OnDisableQuest(currentQuest.npcId);
             OnDisableQuest(currentQuest.endPoint);
             currentQuest = null;
-
-
         }
+
         CheckQuest();
     }
 }

@@ -48,59 +48,64 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// <summary>
     /// quest
     /// </summary>
-    public Quest quest;
+    [SerializeField] private Quest quest;
 
     /// <summary>
     /// title
     /// </summary>
-    [SerializeField]private Text title;
+    [SerializeField] private Text title;
 
     /// <summary>
     /// text
     /// </summary>
-    [SerializeField]private Text text;
+    [SerializeField] private Text text;
 
 
     /// <summary>
     /// text
     /// </summary>
-    [SerializeField]private string stringText;
+    [SerializeField] private string stringText;
 
     /// <summary>
     /// qManager
     /// </summary>
-    [SerializeField]private pLab_QuestManager qManager;
+    [SerializeField] private pLab_QuestManager qManager;
 
     /// <summary>
     /// bgImage
     /// </summary>
-    [SerializeField]private Image bgImage;
+    [SerializeField] private Image bgImage;
 
     /// <summary>
     /// characterImage
     /// </summary>
-    [SerializeField]private RawImage characterImage;
+    [SerializeField] private RawImage characterImage;
 
     /// <summary>
-    /// rawCamera
+    /// Camera transform
     /// </summary>
-    [SerializeField]private GameObject rawCamera;
+    [SerializeField] private Transform rawCameraTransform;
 
     /// <summary>
     /// playerImage
     /// </summary>
-    [SerializeField]private GameObject playerImage;
+    [SerializeField] private GameObject playerImage;
 
     /// <summary>
     /// characterDialog
     /// </summary>
-    [SerializeField]private GameObject characterDialog;
+    [SerializeField] private GameObject characterDialog;
 
 
     /// <summary>
     /// playerDialog
     /// </summary>
-    [SerializeField]private GameObject playerDialog;
+    [SerializeField] private GameObject playerDialog;
+
+    /// <summary>
+    /// How long to wait before adding a character to text
+    /// </summary>
+    [SerializeField] private float waitTimePerCharacter = 0.02f;
 
     /// <summary>
     /// currentNode
@@ -127,6 +132,42 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// </summary>
     private bool done = false;
 
+    /// <summary>
+    /// Currently "loaded" character gameobject with the animator
+    /// </summary>
+    private GameObject currentAnimatorGo;
+
+    /// <summary>
+    /// Currently "loaded" character's animator
+    /// </summary>
+    private Animator currentAnimator;
+
+    /// <summary>
+    /// Wait time cached
+    /// </summary>
+    private WaitForSeconds waitTimeSeconds;
+
+
+    #region Inherited Methods
+    
+    private void Awake() {
+        waitTimeSeconds = new WaitForSeconds(waitTimePerCharacter);
+    }
+
+    private void OnEnable() {
+        coroutine = WaitAndPrint();
+    }
+
+    private void OnDisable(){
+        done = true;
+        if (coroutine != null) {
+            StopCoroutine(coroutine);
+        }
+    }
+
+    #endregion
+
+    #region Public Methods
 
     /// <summary>
     /// ActivateQuest
@@ -134,40 +175,21 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// <param name="aQuest"></param>
     public void ActivateQuest(Quest aQuest){
         returnQuest = false;
-        bgImage.sprite = Resources.Load<Sprite>("BGImages/"+aQuest.bgImage);
+        bgImage.sprite = Resources.Load<Sprite>("BGImages/" + aQuest.bgImage);
         quest = aQuest;
         ProgressNode();
-
     }
 
-    /// <summary>
-    /// OnEnable
-    /// </summary>
-    private void OnEnable() {
-        coroutine = WaitAndPrint(0.02f);
-    }
-
-    private void OnDisable(){
-        done = true;
-        StopCoroutine(coroutine);
-    }
 
     /// <summary>
     /// ReturnQuest
-    /// TODO: FIX, FAST PROTOTYPE CODE
     /// </summary>
     public void ReturnQuest(){
+        Debug.Log("Return quest");
         bgImage.sprite = Resources.Load<Sprite>("BGImages/" + quest.bgEndImage);
         returnQuest = true; 
 
-        if (done == false && currentEndNode != null){
-            if (rawCamera.GetComponentInChildren<Animator>() != null) {
-                rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
-            }
-            done = true;
-            title.text = currentEndNode.title;
-            text.text = currentEndNode.text;
-            StopCoroutine(coroutine);
+        if (ShowFullText(currentEndNode)) {
             return;
         }
 
@@ -179,60 +201,22 @@ public class pLab_QuestDialog : MonoBehaviour{
             return;
         }
 
-        Animator[] arraya = rawCamera.GetComponentsInChildren<Animator>();
-        foreach (Animator item in arraya) {
-            DestroyImmediate(item.gameObject);
-        }
+        UpdateDialogUIFromNode(currentEndNode);
 
-        title.text = currentEndNode.title;
-        stringText = currentEndNode.text;
-
-        if (currentEndNode.title == "Pelaaja") {
-            title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
-            playerImage.SetActive(true);
-            characterImage.gameObject.SetActive(false);
-            GameObject.Instantiate(Resources.Load<GameObject>("Characters/postikusti"), rawCamera.gameObject.transform);
-            rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
-
-            characterDialog.SetActive(false);
-            playerDialog.SetActive(true);
-        } else {
-            playerDialog.SetActive(false);
-            characterDialog.SetActive(true);
-            playerImage.SetActive(false);
-            characterImage.gameObject.SetActive(true);
-            GameObject.Instantiate(Resources.Load<GameObject>("Characters/" + currentEndNode.image + "_game"), rawCamera.gameObject.transform);
-            rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
-        }
-        text.text = "";
-
-        StopCoroutine(coroutine);
-        coroutine = WaitAndPrint(0.02f);
-        StartCoroutine(coroutine);
     }
 
     /// <summary>
     /// ProgressNode
-    /// TODO: FIX, FAST PROTOTYPE CODE
     /// </summary>
     public void ProgressNode(){
+
         if (returnQuest){
             ReturnQuest();
             return;
         }
-        if (done == false && currentNode != null) {
-            if(rawCamera.GetComponentInChildren<Animator>() != null)
-            rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
-            done = true;
-            title.text = currentNode.title;
-            text.text = currentNode.text;
-            StopCoroutine(coroutine);
-            return;
-        }
 
-        Animator[] arraya = rawCamera.GetComponentsInChildren<Animator>();
-        foreach (Animator item in arraya){
-            DestroyImmediate(item.gameObject);
+        if (ShowFullText(currentNode)) {
+            return;
         }
 
         currentNode = quest.DoQuest();
@@ -251,60 +235,106 @@ public class pLab_QuestDialog : MonoBehaviour{
             return;
         }
 
-        title.text = currentNode.title;
-        stringText = currentNode.text;
+        UpdateDialogUIFromNode(currentNode);
 
-        if (currentNode.title == "Pelaaja") {
-            title.text = pLab_KJPOCSaveGame.instance.saveData.playerName;
-            playerImage.SetActive(true);
-            characterImage.gameObject.SetActive(false);
-            GameObject.Instantiate(Resources.Load<GameObject>("Characters/postikusti"), rawCamera.gameObject.transform);
-            rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
-            characterDialog.SetActive(false);
-            playerDialog.SetActive(true);
-        } else {
-            playerDialog.SetActive(false);
-            characterDialog.SetActive(true);
-            playerImage.SetActive(false);
-            characterImage.gameObject.SetActive(true);
-
-            Animator[] array = rawCamera.GetComponentsInChildren<Animator>();
-            foreach (Animator item in array) {
-                Debug.LogError(item.gameObject);
-                DestroyImmediate(item.gameObject);
-            }
-            Debug.LogError("Characters/" + currentNode.image + "_game");
-
-
-            GameObject tmpObj = Resources.Load<GameObject>("Characters/" + currentNode.image + "_game");
-            GameObject.Instantiate<GameObject>(tmpObj, rawCamera.gameObject.transform);
-            if (rawCamera.GetComponentInChildren<Animator>() != null)
-                rawCamera.GetComponentInChildren<Animator>().SetTrigger("Speak");
-
-            Debug.LogError(rawCamera.GetComponentInChildren<Animator>().gameObject.name);
-
-        }
-        text.text = "";
-        StopCoroutine(coroutine);
-        coroutine = WaitAndPrint(0.02f);
-        StartCoroutine(coroutine);
+        
         gameObject.SetActive(true);
     }
 
+    #endregion
 
+    #region Private Methods
 
-    private IEnumerator WaitAndPrint(float waitTime) {
+    /// <summary>
+    /// Updates the dialog window taking info from the node
+    /// </summary>
+    /// <param name="node"></param>
+    private void UpdateDialogUIFromNode(pLab_QuestNode node) {
+
+        //Destroy previous character gameobject
+        if (currentAnimatorGo != null) {
+            currentAnimator = null;
+            Destroy(currentAnimatorGo);
+            currentAnimatorGo = null;
+        }
+
+        stringText = node.text;
+        bool isPlayerNode = node.title == "Pelaaja";
+
+        if (isPlayerNode) {
+            currentAnimatorGo = GameObject.Instantiate(Resources.Load<GameObject>("Characters/postikusti"), rawCameraTransform);
+        } else {
+            currentAnimatorGo = GameObject.Instantiate(Resources.Load<GameObject>("Characters/" + node.image + "_game"), rawCameraTransform);
+        }
+        
+        title.text = isPlayerNode ? pLab_KJPOCSaveGame.instance.saveData.playerName : node.title;
+
+        playerDialog.SetActive(isPlayerNode);
+        playerImage.SetActive(isPlayerNode);
+        
+        characterImage.gameObject.SetActive(!isPlayerNode);
+        characterDialog.SetActive(!isPlayerNode);
+
+        currentAnimator = currentAnimatorGo.GetComponent<Animator>();
+
+        if (currentAnimator != null) {
+            currentAnimator.SetTrigger("Speak");
+        }
+
+        text.text = "";
+
+        StopCoroutine(coroutine);
+        coroutine = WaitAndPrint();
+        StartCoroutine(coroutine);
+    }
+
+    /// <summary>
+    /// Show the whole text at once if not already shown
+    /// </summary>
+    /// <param name="node"></param>
+    /// <returns>True if the whole text not already shown</returns>
+    private bool ShowFullText(pLab_QuestNode node) {
+        bool textWasNotDone = false;
+
+        if (done == false && node != null) {
+            if (currentAnimator != null) {
+                currentAnimator.SetTrigger("Stop");
+            }
+            done = true;
+            text.text = node.text;
+            StopCoroutine(coroutine);
+            textWasNotDone = true;;
+        }
+
+        return textWasNotDone;
+    }
+
+    #endregion
+
+    #region Coroutines & Enumerators
+
+    /// <summary>
+    /// Add character to text one by one
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator WaitAndPrint() {
         done = false;
         while (!done) {
-            yield return new WaitForSeconds(waitTime);
-            int textCOunt = text.text.Length;
-            if (textCOunt == stringText.Length) {
-                if (rawCamera.GetComponentInChildren<Animator>() != null)
-                    rawCamera.GetComponentInChildren<Animator>().SetTrigger("Stop");
+            yield return waitTimeSeconds;
+            int textCount = text.text.Length;
+
+            if (textCount == stringText.Length - 1) {
+                text.text = stringText;
+                if (currentAnimator != null) {
+                    currentAnimator.SetTrigger("Stop");
+                }
+
                 done = true;
             } else {
-                text.text = stringText.Substring(0, textCOunt + 1);
+                text.text = stringText.Substring(0, textCount + 1);
             }
         }
     }
+
+    #endregion
 }

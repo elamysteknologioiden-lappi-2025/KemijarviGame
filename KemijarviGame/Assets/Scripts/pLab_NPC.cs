@@ -44,11 +44,16 @@ using UnityEngine;
 /// </summary>
 public class pLab_NPC : MonoBehaviour{
 
+    #region Variables
     /// <summary>
     /// id
     /// </summary>
     [SerializeField]
     private int id;
+
+    [SerializeField]
+    [Tooltip("How close the player must be to activate NPC")]
+    private float activationRadius = 20f;
 
     /// <summary>
     /// questPointSymbol
@@ -62,6 +67,10 @@ public class pLab_NPC : MonoBehaviour{
     [SerializeField]
     private GameObject returnQuestPointSymbol;
 
+
+    [SerializeField]
+    private GameObject tempHighlightIcon;
+
     /// <summary>
     /// currentQuest
     /// </summary>
@@ -70,8 +79,23 @@ public class pLab_NPC : MonoBehaviour{
     /// <summary>
     /// questDialog
     /// </summary>
-    public pLab_QuestDialog questDialog;
+    [SerializeField]
+    private pLab_QuestDialog questDialog;
 
+    [SerializeField]
+    private Transform playerTransform;
+
+    private bool hasActiveQuest = false;
+    private bool hasActiveQuestReturn = false;
+
+    #endregion
+
+    #region Properties
+    
+    #endregion
+
+
+    #region Inherited Methods
     /// <summary>
     /// OnEnable
     /// </summary>
@@ -79,6 +103,8 @@ public class pLab_NPC : MonoBehaviour{
         pLab_QuestManager.OnActivateQuest += ActivateQuest;
         pLab_QuestManager.OnActivateQuestReturn += ActivateQuestReturn;
         pLab_QuestManager.OnDisableQuest += DisableQuest;
+
+        ToggleHighlight((hasActiveQuest || hasActiveQuestReturn) && IsPlayerInsideActivationRadius());
     }
 
 
@@ -87,8 +113,25 @@ public class pLab_NPC : MonoBehaviour{
     /// </summary>
     void OnDisable(){
         pLab_QuestManager.OnActivateQuest -= ActivateQuest;
+        pLab_QuestManager.OnActivateQuestReturn -= ActivateQuestReturn;
         pLab_QuestManager.OnDisableQuest -= DisableQuest;
     }
+
+    private void Start() {
+        if (playerTransform == null) {
+            GameObject playerGo = GameObject.FindGameObjectWithTag("Player");
+            playerTransform = playerGo.transform;
+        }
+    }
+
+    private void Update() {
+        //This could may be done when player actually moves
+        ToggleHighlight((hasActiveQuest || hasActiveQuestReturn) && IsPlayerInsideActivationRadius());
+    }
+
+    #endregion
+
+    #region Public Methods
 
     /// <summary>
     /// ActivateQuest
@@ -97,14 +140,19 @@ public class pLab_NPC : MonoBehaviour{
     /// <param name="aAction"></param>
     /// <param name="aCurrentQuest"></param>
     public void ActivateQuest(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool aFlag){
-
         if (aId == id){
+            // Debug.Log("Activate quests for " + gameObject.name);
             currentQuest = aCurrentQuest;
-            questPointSymbol.SetActive(true);
-        }else{
-            questPointSymbol.SetActive(false);
-            returnQuestPointSymbol.SetActive(false);
+            hasActiveQuest = true;
         }
+        else{
+            hasActiveQuest = false;
+            hasActiveQuestReturn = false;
+            returnQuestPointSymbol.SetActive(hasActiveQuestReturn);
+        }
+
+        questPointSymbol.SetActive(hasActiveQuest);
+
     }
 
     /// <summary>
@@ -115,12 +163,17 @@ public class pLab_NPC : MonoBehaviour{
     /// <param name="aCurrentQuest"></param>
     public void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool aFlag){
         if (aId == id) {
+            // Debug.Log("Activate quest return for " + gameObject.name);
             currentQuest = aCurrentQuest;
-            returnQuestPointSymbol.SetActive(true);
+            hasActiveQuestReturn = true;
         } else {
-            questPointSymbol.SetActive(false);
-            returnQuestPointSymbol.SetActive(false);
+            hasActiveQuest = false;
+            questPointSymbol.SetActive(hasActiveQuest);
+            hasActiveQuestReturn = false;
         }
+
+        returnQuestPointSymbol.SetActive(hasActiveQuestReturn);
+
     }
 
     /// <summary>
@@ -132,8 +185,10 @@ public class pLab_NPC : MonoBehaviour{
     public void DisableQuest(int aId){
         if (aId == id){
             currentQuest = null;
-            questPointSymbol.SetActive(false);
-            returnQuestPointSymbol.SetActive(false);
+            hasActiveQuest = false;
+            hasActiveQuestReturn = false;
+            questPointSymbol.SetActive(hasActiveQuest);
+            returnQuestPointSymbol.SetActive(hasActiveQuestReturn);
         }
 
     }
@@ -142,9 +197,10 @@ public class pLab_NPC : MonoBehaviour{
     /// ActivateNPC
     /// </summary>
     public void ActivateNPC(){
-        if (currentQuest == null)
+        if (currentQuest == null || !IsPlayerInsideActivationRadius())
             return;
         questDialog.gameObject.SetActive(true);
+
         if (currentQuest.endPoint == id) {
             questDialog.gameObject.SetActive(true);
             questDialog.ReturnQuest();
@@ -153,4 +209,25 @@ public class pLab_NPC : MonoBehaviour{
             questDialog.ActivateQuest(currentQuest);
         }
     }
+
+    /// <summary>
+    /// Check if the player is close to this NPC
+    /// </summary>
+    /// <returns></returns>
+    public bool IsPlayerInsideActivationRadius() {
+        return playerTransform != null && (playerTransform.position - transform.position).magnitude <= activationRadius;
+    }
+
+    /// <summary>
+    /// Toggle highlight of this NPC. Indicating the player is close
+    /// </summary>
+    /// <param name="isOn"></param>
+    public void ToggleHighlight(bool isOn) {
+        //TODO: Insert the actual highlight here
+        if (tempHighlightIcon != null) {
+            tempHighlightIcon.SetActive(isOn);
+        }
+    }
+
+    #endregion
 }

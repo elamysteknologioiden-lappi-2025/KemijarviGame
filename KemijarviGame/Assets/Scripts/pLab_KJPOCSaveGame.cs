@@ -101,7 +101,6 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
     void OnDestroy()
     {
     #if UNITY_EDITOR
-        Debug.Log("On Destroy called");
         OnApplicationQuit();
     #endif
     }

@@ -229,7 +229,6 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
         pLab_UTMCoordinates coordinates = new pLab_UTMCoordinates(latLon);
         newPos = new Vector3((float)(coordinates.UTMX - pLab_GeoMap.instance.UtmX),
             0f, (float)(coordinates.UTMY - pLab_GeoMap.instance.UtmY));
-        Debug.Log(newPos);
     }
 
     #endregion

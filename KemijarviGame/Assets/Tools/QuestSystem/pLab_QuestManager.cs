@@ -45,10 +45,10 @@ using UnityEngine;
 /// </summary>
 public class pLab_QuestManager : MonoBehaviour{
 
-    public delegate void ActivateQuest(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool startPoint);
+    public delegate void ActivateQuest(int aId, Quest aCurrentQuest, bool startPoint);
     public static event ActivateQuest OnActivateQuest;
 
-    public delegate void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool startPoint);
+    public delegate void ActivateQuestReturn(int aId, Quest aCurrentQuest, bool startPoint);
     public static event ActivateQuestReturn OnActivateQuestReturn;
 
     public delegate void DisableQuest(int aId);
@@ -89,9 +89,9 @@ public class pLab_QuestManager : MonoBehaviour{
     /// CheckQuest
     /// </summary>
     public void CheckQuest() {
-        if (pLab_KJPOCSaveGame.instance != null && pLab_KJPOCSaveGame.instance.saveData != null && pLab_KJPOCSaveGame.instance.saveData.questSystem != null) {
-            foreach (QuestItem item in pLab_KJPOCSaveGame.instance.saveData.questSystem.nodes) {
-                if (item.status == 0 && (item.prevQuest == 0 || pLab_KJPOCSaveGame.instance.saveData.
+        if (pLab_KJPOCSaveGame.Instance != null && pLab_KJPOCSaveGame.Instance.SaveData != null && pLab_KJPOCSaveGame.Instance.SaveData.questSystem != null) {
+            foreach (QuestItem item in pLab_KJPOCSaveGame.Instance.SaveData.questSystem.nodes) {
+                if (item.status == 0 && (item.prevQuest == 0 || pLab_KJPOCSaveGame.Instance.SaveData.
                     questSystem.nodes.Find(x => x.questID == item.prevQuest).status == 3)){
 
                     if (item.type == 1){
@@ -105,15 +105,27 @@ public class pLab_QuestManager : MonoBehaviour{
 
                         endDialog.SetActive(true);
                     }
-                }if (item.status == 1){
+                }
+
+                //item.status can be changed in the above if-block
+                if (item.status == 1) {
+                    if (currentQuest == null) {
+                        StartQuestLate("Quests/" + item.questID + "_Quest");
+                    }
+
                     if (OnActivateQuest != null) {
-                        UnityEngine.Events.UnityAction action = () => { Debug.LogError("Herra"); };
-                        OnActivateQuest(currentQuest.npcId, action, currentQuest, true);
+                        OnActivateQuest(currentQuest.npcId, currentQuest, true);
                     }
                 }
+
                 if (item.status == 2 && item.endPoint != 0) {
-                    UnityEngine.Events.UnityAction action = () => {  };
-                    OnActivateQuestReturn(currentQuest.endPoint, action, currentQuest,false);
+                    if (currentQuest == null) {
+                        StartQuest("Quests/" + item.questID + "_Quest");
+                    }
+
+                    if (OnActivateQuestReturn != null) {
+                        OnActivateQuestReturn(currentQuest.endPoint, currentQuest, false);
+                    }
                 }
             }
         }
@@ -121,29 +133,33 @@ public class pLab_QuestManager : MonoBehaviour{
     }
 
     /// <summary>
-    /// StartQuestLate
+    /// Start Quest Late
     /// </summary>
     /// <param name="aFilePath"></param>
     public void StartQuestLate(string aFilePath){
-        TextAsset xml = Resources.Load<TextAsset>(aFilePath);
-        XmlSerializer serializer = new XmlSerializer(typeof(Quest));
-        StringReader reader = new StringReader(xml.ToString());
-        currentQuest = serializer.Deserialize(reader) as Quest;
-        reader.Close();
+        LoadCurrentQuest(aFilePath);
     }
 
     /// <summary>
-    /// StartQuest
+    /// Start Quest
     /// </summary>
     /// <param name="aFilePath"></param>
     public void StartQuest(string aFilePath){
+        LoadCurrentQuest(aFilePath);
+        questDialog.gameObject.SetActive(true);
+        questDialog.GetComponent<pLab_QuestDialog>().ActivateQuest(currentQuest);
+    }
+
+    /// <summary>
+    /// Load current quest from XML-file
+    /// </summary>
+    /// <param name="aFilePath">Path to XML-file</param>
+    private void LoadCurrentQuest(string aFilePath) {
         TextAsset xml = Resources.Load<TextAsset>(aFilePath);
         XmlSerializer serializer = new XmlSerializer(typeof(Quest));
         StringReader reader = new StringReader(xml.ToString());
         currentQuest = serializer.Deserialize(reader) as Quest;
         reader.Close();
-        questDialog.gameObject.SetActive(true);
-        questDialog.GetComponent<pLab_QuestDialog>().ActivateQuest(currentQuest);
     }
 
     /// <summary>
@@ -153,7 +169,7 @@ public class pLab_QuestManager : MonoBehaviour{
     /// <param name="aQuestID"></param>
     public void ChangeQuestStatus(int aStatus, int aQuestID){
 
-        pLab_KJPOCSaveGame.instance.saveData.
+        pLab_KJPOCSaveGame.Instance.SaveData.
             questSystem.nodes.Find(x => x.questID == aQuestID).status = aStatus;
         if(aStatus == 3) {
             OnDisableQuest(currentQuest.npcId);

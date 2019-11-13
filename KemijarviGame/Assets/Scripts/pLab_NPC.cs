@@ -38,6 +38,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// pLab_NPC
@@ -53,16 +54,16 @@ public class pLab_NPC : MonoBehaviour{
 
     [SerializeField]
     [Tooltip("How close the player must be to activate NPC")]
-    private float activationRadius = 20f;
+    private float activationRadius = 25f;
 
     /// <summary>
-    /// questPointSymbol
+    /// Icon indicator for available quest
     /// </summary>
     [SerializeField]
     private GameObject questPointSymbol;
 
     /// <summary>
-    /// returnQuestPointSymbol
+    /// Icon indicator for quest return
     /// </summary>
     [SerializeField]
     private GameObject returnQuestPointSymbol;
@@ -137,11 +138,10 @@ public class pLab_NPC : MonoBehaviour{
     /// ActivateQuest
     /// </summary>
     /// <param name="aId"></param>
-    /// <param name="aAction"></param>
     /// <param name="aCurrentQuest"></param>
-    public void ActivateQuest(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool aFlag){
+    /// <param name="aFlag"></param>
+    public void ActivateQuest(int aId, Quest aCurrentQuest, bool aFlag){
         if (aId == id){
-            // Debug.Log("Activate quests for " + gameObject.name);
             currentQuest = aCurrentQuest;
             hasActiveQuest = true;
         }
@@ -159,9 +159,9 @@ public class pLab_NPC : MonoBehaviour{
     /// ActivateQuestReturn
     /// </summary>
     /// <param name="aId"></param>
-    /// <param name="aAction"></param>
     /// <param name="aCurrentQuest"></param>
-    public void ActivateQuestReturn(int aId, UnityEngine.Events.UnityAction aAction, Quest aCurrentQuest, bool aFlag){
+    /// <param name="aFlag"></param>
+    public void ActivateQuestReturn(int aId, Quest aCurrentQuest, bool aFlag){
         if (aId == id) {
             // Debug.Log("Activate quest return for " + gameObject.name);
             currentQuest = aCurrentQuest;
@@ -180,8 +180,6 @@ public class pLab_NPC : MonoBehaviour{
     /// ActivateQuest
     /// </summary>
     /// <param name="aId"></param>
-    /// <param name="aAction"></param>
-    /// <param name="aCurrentQuest"></param>
     public void DisableQuest(int aId){
         if (aId == id){
             currentQuest = null;
@@ -197,8 +195,8 @@ public class pLab_NPC : MonoBehaviour{
     /// ActivateNPC
     /// </summary>
     public void ActivateNPC(){
-        if (currentQuest == null || !IsPlayerInsideActivationRadius())
-            return;
+        if (currentQuest == null || !IsPlayerInsideActivationRadius()) return;
+
         questDialog.gameObject.SetActive(true);
 
         if (currentQuest.endPoint == id) {
@@ -226,6 +224,13 @@ public class pLab_NPC : MonoBehaviour{
         //TODO: Insert the actual highlight here
         if (tempHighlightIcon != null) {
             tempHighlightIcon.SetActive(isOn);
+        }
+    }
+
+    private void OnMouseUpAsButton() {
+        //Chech that there is not a UI element in front
+        if (!EventSystem.current.IsPointerOverGameObject()) {
+            ActivateNPC();
         }
     }
 

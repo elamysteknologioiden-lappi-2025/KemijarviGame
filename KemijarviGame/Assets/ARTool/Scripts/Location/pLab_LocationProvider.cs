@@ -121,6 +121,8 @@ public class pLab_LocationProvider : MonoBehaviour
             }
         }
     }
+
+    public pLab_LatLon FakeCoordinates { get { return fakeCoordinates; } set { fakeCoordinates = value; } }
     
     #endregion Debug Properties
 

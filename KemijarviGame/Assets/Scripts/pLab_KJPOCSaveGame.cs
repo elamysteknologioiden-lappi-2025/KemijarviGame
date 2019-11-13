@@ -40,7 +40,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class pLAB_KJPOCGameData
@@ -57,13 +56,9 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
 
     #region // Private Attributes
 
-    /// <summary>
-    /// pLAB_KJPOCGameData
-    /// </summary>
-    public pLAB_KJPOCGameData saveData = null;
+    private const string GAMESAVE_FILENAME = "gamesave.save";
 
-
-
+    private string gamesavePath;
 
     #endregion
 
@@ -74,9 +69,14 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
     #region // Public Attributes
 
     /// <summary>
-    /// pLab_KJPOCSaveGame
+    /// Save data
     /// </summary>
-    public static pLab_KJPOCSaveGame instance;
+    private pLAB_KJPOCGameData saveData = null;
+
+    /// <summary>
+    /// Instance
+    /// </summary>
+    private static pLab_KJPOCSaveGame instance;
 
     #endregion
 
@@ -86,30 +86,32 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
 
     #region // Set/Get
 
+    public static pLab_KJPOCSaveGame Instance { get { return instance; } }
+
+    public pLAB_KJPOCGameData SaveData { get { return saveData; } }
+    
+    
     #endregion
 
     #region // Base Class Methods
 
-    /// <summary>
-    /// Awake
-    /// </summary>
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-        instance = this;
+        if (instance == null) {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        } else {
+            Destroy(this.gameObject);
+        }
+
+        gamesavePath = string.Format("{0}/{1}", Application.persistentDataPath, GAMESAVE_FILENAME);
     }
-    void OnDestroy()
-    {
-    #if UNITY_EDITOR
-        OnApplicationQuit();
-    #endif
-    }
+
     /// <summary>
-    /// OnApplicationQuit
+    /// Unity calls this function when application is closing down
     /// </summary>
     private void OnApplicationQuit()
     {
-
         SaveGame();
     }
 
@@ -120,78 +122,66 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
     /// <summary>
     /// CreateSaveGameObject
     /// </summary>
-    private void CreateSaveGameObject(string aName)
+    private void CreateSaveGameObject(string playerName)
     {
         saveData = new pLAB_KJPOCGameData();
 
         saveData.score = 0;
-        saveData.playerName = aName;
+        saveData.playerName = playerName;
 
         saveData.questSystem = QuestList.LoadQuest("Quests/QuestList");
-        if(saveData.questSystem == null)
-        {
-        }
 
     }
-
 
     #endregion
 
     #region // Public Methods
 
     /// <summary>
-    /// CreateNewGame
+    /// Create a new blank save data for player
     /// </summary>
-    public void CreateNewGame(string aName)
+    public void CreateNewGame(string playerName)
     {
-        CreateSaveGameObject(aName);
+        CreateSaveGameObject(playerName);
         SaveGame();
     }
 
     /// <summary>
-    /// SaveGame
+    /// Save save data to file
     /// </summary>
     public void SaveGame()
     {
-        if(null == saveData)
+        if(null != saveData)
         {
-            LoadGame();
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(gamesavePath);
+            bf.Serialize(file, saveData);
+            file.Close();
         }
-
-
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
-        bf.Serialize(file, saveData);
-        file.Close();
     }
 
     /// <summary>
-    /// 
+    /// Check if there is a save file
     /// </summary>
     public bool IsThereSave()
     {
-        return File.Exists(Application.persistentDataPath + "/gamesave.save");
+        return File.Exists(gamesavePath);
     }
 
 
     /// <summary>
-    /// LoadGame
+    /// Load save data from file
     /// </summary>
     public void LoadGame()
     {
-
-        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        if (File.Exists(gamesavePath))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
-            saveData = (pLAB_KJPOCGameData)bf.Deserialize(file);
+            FileStream file = File.Open(gamesavePath, FileMode.Open);
+            saveData = (pLAB_KJPOCGameData) bf.Deserialize(file);
             file.Close();
-
-        }
-        else
-        {
-            //CreateNewGame();
         }
     }
+
     #endregion
 }

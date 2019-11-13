@@ -54,20 +54,19 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
     /// 
     /// </summary>
     private void Start(){
-        continueButton.interactable = pLab_KJPOCSaveGame.instance.IsThereSave();
+        continueButton.interactable = pLab_KJPOCSaveGame.Instance.IsThereSave();
     }
     /// <summary>
     /// 
     /// </summary>
     /// <param name="aName"></param>
-    public void StartNewGame(string aName = ""){
+    public void StartNewGame(){
         string name = playerNameInputField.text.ToString();
 
         if(name.Length < 1){
             name = "Pelaaja";
         }
-
-        pLab_KJPOCSaveGame.instance.CreateNewGame(name);
+        pLab_KJPOCSaveGame.Instance.CreateNewGame(name);
         SceneManager.LoadScene("Level_001 AR");
     }
 
@@ -75,6 +74,7 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
     /// 
     /// </summary>
     public void PlayerNameQuery(){
+        areUSureDialog.SetActive(false);
         nameDialog.SetActive(true);
     }
 
@@ -82,11 +82,11 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
     /// 
     /// </summary>
     public void PrepareToStartNewGame(){
-        if (pLab_KJPOCSaveGame.instance.IsThereSave()) {
+        if (pLab_KJPOCSaveGame.Instance.IsThereSave()) {
             areUSureDialog.SetActive(true);
-        }else{
+        }
+        else {
             StartNewGame();
-
         }
     }
 
@@ -102,7 +102,7 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
     }
 
     public void LoadGame() {
-        pLab_KJPOCSaveGame.instance.LoadGame();
+        pLab_KJPOCSaveGame.Instance.LoadGame();
         SceneManager.LoadScene("Level_001 AR");
     }
 

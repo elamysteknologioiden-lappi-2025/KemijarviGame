@@ -130,15 +130,9 @@ public class pLab_ObjectFollow : MonoBehaviour {
                 Vector3 aa = transform.transform.localEulerAngles;
                 aa.y += angle;
                 transform.transform.localEulerAngles = aa;
-
-            
-
-
-
         }
-
         
-            if (Input.touchCount == 2)
+        if (Input.touchCount == 2)
         {
             // Store both touches.
             Touch touchZero = Input.GetTouch(0);
@@ -155,19 +149,12 @@ public class pLab_ObjectFollow : MonoBehaviour {
             // Find the difference in the distances between each frame.
             float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-
-
             zoomValue += (deltaMagnitudeDiff/1000)*-1;
+            zoomValue = Mathf.Clamp01(zoomValue);
 
-            if (zoomValue < 0)
-                zoomValue = 0;
-            if (zoomValue > 1)
-                zoomValue = 1;
         }
         
         transform.position = followObject.transform.position;
-
-
 
         cameraTransform.transform.localPosition = new Vector3(0, ((camearaMaxHeight - cameraMinHeight) * zoomValue) + cameraMinHeight, ((cameraMaxDistance - cameraMinDistance) * zoomValue) + cameraMinDistance);
 

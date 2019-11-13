@@ -130,24 +130,24 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
     void Update() {
 
-        #if UNITY_EDITOR
+        // #if UNITY_EDITOR
         
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000f))
-            {
-                pLab_NPC npc = hit.collider.gameObject.GetComponent<pLab_NPC>();
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //     RaycastHit hit;
+        //     if (Physics.Raycast(ray, out hit, 1000f))
+        //     {
+        //         pLab_NPC npc = hit.collider.gameObject.GetComponent<pLab_NPC>();
 
-                if (null != npc)
-                {
-                    npc.ActivateNPC();
-                }
-            }
-        }
+        //         if (null != npc)
+        //         {
+        //             npc.ActivateNPC();
+        //         }
+        //     }
+        // }
 
-        #endif
+        // #endif
 
         // newPos = new Vector3((float)( pLab_GeoLocation.instance.UtmX - pLab_GeoMap.instance.UtmX),
         //     0f, (float)(pLab_GeoLocation.instance.UtmY - pLab_GeoMap.instance.UtmY));

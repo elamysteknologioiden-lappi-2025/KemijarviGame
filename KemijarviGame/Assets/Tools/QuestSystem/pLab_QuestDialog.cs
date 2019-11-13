@@ -130,7 +130,7 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// <summary>
     /// done
     /// </summary>
-    private bool done = false;
+    private bool done = true;
 
     /// <summary>
     /// Currently "loaded" character gameobject with the animator
@@ -185,11 +185,10 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// ReturnQuest
     /// </summary>
     public void ReturnQuest(){
-        Debug.Log("Return quest");
         bgImage.sprite = Resources.Load<Sprite>("BGImages/" + quest.bgEndImage);
-        returnQuest = true; 
+        returnQuest = true;
 
-        if (ShowFullText(currentEndNode)) {
+        if (ShowFullText()) {
             return;
         }
 
@@ -213,18 +212,17 @@ public class pLab_QuestDialog : MonoBehaviour{
         if (returnQuest){
             ReturnQuest();
             return;
-        }
-
-        if (ShowFullText(currentNode)) {
+        } else if (ShowFullText()) {
             return;
         }
 
         currentNode = quest.DoQuest();
 
         if (currentNode == null){
-            if (quest.questType == 1){
+            if (quest.questType == 1)
+            {
                 if(quest.endNodes.Count == 0)
-                qManager.ChangeQuestStatus(3, quest.questID);
+                    qManager.ChangeQuestStatus(3, quest.questID);
                 else
                     qManager.ChangeQuestStatus(2, quest.questID);
             }
@@ -236,7 +234,6 @@ public class pLab_QuestDialog : MonoBehaviour{
         }
 
         UpdateDialogUIFromNode(currentNode);
-
         
         gameObject.SetActive(true);
     }
@@ -267,11 +264,11 @@ public class pLab_QuestDialog : MonoBehaviour{
             currentAnimatorGo = GameObject.Instantiate(Resources.Load<GameObject>("Characters/" + node.image + "_game"), rawCameraTransform);
         }
         
-        title.text = isPlayerNode ? pLab_KJPOCSaveGame.instance.saveData.playerName : node.title;
+        title.text = isPlayerNode ? pLab_KJPOCSaveGame.Instance.SaveData.playerName : node.title;
 
         playerDialog.SetActive(isPlayerNode);
         playerImage.SetActive(isPlayerNode);
-        
+
         characterImage.gameObject.SetActive(!isPlayerNode);
         characterDialog.SetActive(!isPlayerNode);
 
@@ -291,19 +288,23 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// <summary>
     /// Show the whole text at once if not already shown
     /// </summary>
-    /// <param name="node"></param>
     /// <returns>True if the whole text not already shown</returns>
-    private bool ShowFullText(pLab_QuestNode node) {
+    private bool ShowFullText() {
         bool textWasNotDone = false;
 
-        if (done == false && node != null) {
-            if (currentAnimator != null) {
-                currentAnimator.SetTrigger("Stop");
-            }
+        if (!done) {
             done = true;
-            text.text = node.text;
+            textWasNotDone = true;
+        }
+
+        text.text = stringText;
+
+        if (currentAnimator != null) {
+            currentAnimator.SetTrigger("Stop");
+        }
+
+        if (coroutine != null) {
             StopCoroutine(coroutine);
-            textWasNotDone = true;;
         }
 
         return textWasNotDone;
@@ -324,12 +325,7 @@ public class pLab_QuestDialog : MonoBehaviour{
             int textCount = text.text.Length;
 
             if (textCount == stringText.Length - 1) {
-                text.text = stringText;
-                if (currentAnimator != null) {
-                    currentAnimator.SetTrigger("Stop");
-                }
-
-                done = true;
+                ShowFullText();
             } else {
                 text.text = stringText.Substring(0, textCount + 1);
             }

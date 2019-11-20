@@ -93,6 +93,8 @@ public class pLab_NPC : MonoBehaviour{
 
     #region Properties
     
+    public int Id { get { return id; } }
+    
     #endregion
 
 

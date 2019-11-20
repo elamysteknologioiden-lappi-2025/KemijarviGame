@@ -37,18 +37,109 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+/// <summary>
+/// Handles UI and logical transitions between Map and AR-modes
+/// </summary>
 public class pLab_KJPOCMapARTransition : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    #region Variables
+
+    [SerializeField]
+    private Button transitionToARButton;
+
+    [SerializeField]
+    private Button transitionToMapButton;
+    
+    [SerializeField]
+    [Tooltip("All objects that should be enabled for AR, and disabled otherwise")]
+    private List<GameObject> setActiveForAR = new List<GameObject>();
+
+    #endregion
+
+    #region Inherited Methods
+    
+    private void OnEnable() {
+        if (transitionToARButton != null) {
+            transitionToARButton.onClick.AddListener(TransitionToAR);
+        }
+
+        if (transitionToMapButton != null) {
+            transitionToMapButton.onClick.AddListener(TransitionToMap);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnDisable() {
+        if (transitionToARButton != null) {
+            transitionToARButton.onClick.RemoveListener(TransitionToAR);
+        }
+
+        if (transitionToMapButton != null) {
+            transitionToMapButton.onClick.RemoveListener(TransitionToMap);
+        }
     }
+
+    private void Start() {
+        NavigationMode currentNavigationMode = pLab_KJPOCGameManager.Instance != null ? pLab_KJPOCGameManager.Instance.NavigationMode : NavigationMode.Map;
+        ChangeNavigationMode(currentNavigationMode);
+    }
+
+    #endregion
+
+    #region Public Methods
+
+    /// <summary>
+    /// Transition to AR-mode. Enables AR specific objects.
+    /// </summary>
+    public void TransitionToAR() {
+        ChangeNavigationMode(NavigationMode.AR);
+    }
+
+    /// <summary>
+    /// Transition to Map-mode. Disabled AR specific objects
+    /// </summary>
+    public void TransitionToMap() {
+        ChangeNavigationMode(NavigationMode.Map);
+    }
+
+    /// <summary>
+    /// Changes navigation mode. Handles transition and informs GameManager
+    /// </summary>
+    /// <param name="navigationMode"></param>
+    public void ChangeNavigationMode(NavigationMode navigationMode) {
+        bool isARMode = navigationMode == NavigationMode.AR;
+        
+        if (pLab_KJPOCGameManager.Instance != null) {
+            pLab_KJPOCGameManager.Instance.NavigationMode = navigationMode;
+        }
+
+        if (transitionToMapButton != null) {
+            transitionToMapButton.gameObject.SetActive(isARMode);
+        }
+
+        if (transitionToARButton != null) {
+            transitionToARButton.gameObject.SetActive(!isARMode);
+        }
+
+        ToggleARObjects(isARMode);
+
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    /// <summary>
+    /// Toggle active state of all AR-objects
+    /// </summary>
+    /// <param name="isOn"></param>
+    private void ToggleARObjects(bool isOn) {
+        for(int i = 0; i < setActiveForAR.Count; i++) {
+            setActiveForAR[i].SetActive(isOn);
+        }
+    }
+
+    #endregion
 }

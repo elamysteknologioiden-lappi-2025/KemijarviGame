@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8c745784f6f184b91e475841eb744a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playableGeoArea: {fileID: 11400000, guid: 2d6a80e24f7a78a458f3d70114112168, type: 2}
+  playableGeoArea: {fileID: 0}
   locationProvider: {fileID: 0}
   alertIndicatorCanvasObj: {fileID: 868251776874637104}
   disableCanvas: {fileID: 868251778674607066}

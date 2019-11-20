@@ -621,7 +621,12 @@ public class pLab_OSMReader : MonoBehaviour {
 
                 gameObject.layer = layer;
 
-                MeshCollider meshCollider = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+                MeshCollider meshCollider = gameObject.GetComponent<MeshCollider>();
+
+                if (meshCollider == null) {
+                    meshCollider = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+                }
+                
                 meshCollider.sharedMesh = gameObject.GetComponent<MeshFilter>().sharedMesh;
 
                 FixOnTopLayers(gameObject);

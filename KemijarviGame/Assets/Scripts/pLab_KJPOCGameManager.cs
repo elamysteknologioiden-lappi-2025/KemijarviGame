@@ -38,12 +38,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum NavigationMode {
+    Map = 0,
+    AR = 1
+}
+
 public class pLab_KJPOCGameManager : MonoBehaviour
 {
 
     #region Variables
 
+    private NavigationMode navigationMode = NavigationMode.Map;
 
+    #endregion
+
+    #region Properties
+
+    public NavigationMode NavigationMode { get { return navigationMode; } set { navigationMode = value; } }
+    
     #endregion
 
     #region Singleton

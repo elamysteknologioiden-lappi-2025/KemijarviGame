@@ -59,10 +59,10 @@ public class pLab_SceneSwitcherWindow : EditorWindow
     private bool showBuildScenes = true;
     private bool showAllScenes = true;
 
-    private string showBuildScenesPrefKey = "SceneSwitcherWindow.ShowBuildScenes";
-    private string showAllScenesPrefKey = "SceneSwitcherWindow.ShowAllScenes";
-    private string showFavoriteScenesPrefKey = "SceneSwitcherWindow.ShowFavoriteScenes";
-    private string favoriteScenesPrefKey = "SceneSwitcherWindow.FavoriteScenes";
+    private const string SHOW_BUILD_SCENES_PREF_KEY = "SceneSwitcherWindow.ShowBuildScenes";
+    private const string SHOW_ALL_SCENES_PREF_KEY = "SceneSwitcherWindow.ShowAllScenes";
+    private const string SHOW_FAVORITE_SCENES_PREF_KEY = "SceneSwitcherWindow.ShowFavoriteScenes";
+    private const string FAVORITE_SCENES_PREF_KEY = "SceneSwitcherWindow.FavoriteScenes";
 
 
     private FavoriteScenes favorites = new FavoriteScenes();
@@ -212,15 +212,15 @@ public class pLab_SceneSwitcherWindow : EditorWindow
     /// Save favorites and user preferences
     /// </summary>
     private void SavePrefs() {
-        EditorPrefs.SetBool(showBuildScenesPrefKey, showBuildScenes);
-        EditorPrefs.SetBool(showAllScenesPrefKey, showAllScenes);
-        EditorPrefs.SetBool(showFavoriteScenesPrefKey, showFavorites);
+        EditorPrefs.SetBool(SHOW_BUILD_SCENES_PREF_KEY, showBuildScenes);
+        EditorPrefs.SetBool(SHOW_ALL_SCENES_PREF_KEY, showAllScenes);
+        EditorPrefs.SetBool(SHOW_FAVORITE_SCENES_PREF_KEY, showFavorites);
 
         if (favorites != null && favorites.scenes.Count > 0) {
             string favoritesAsJson = EditorJsonUtility.ToJson(favorites);
-            PlayerPrefs.SetString(favoriteScenesPrefKey, favoritesAsJson);
+            PlayerPrefs.SetString(FAVORITE_SCENES_PREF_KEY, favoritesAsJson);
         } else {
-            PlayerPrefs.DeleteKey(favoriteScenesPrefKey);
+            PlayerPrefs.DeleteKey(FAVORITE_SCENES_PREF_KEY);
         }
     }
 
@@ -228,17 +228,17 @@ public class pLab_SceneSwitcherWindow : EditorWindow
     /// Load favorites and window preferences
     /// </summary>
     private void LoadPrefs() {
-        if (EditorPrefs.HasKey(showBuildScenesPrefKey))
-            showBuildScenes = EditorPrefs.GetBool(showBuildScenesPrefKey);
+        if (EditorPrefs.HasKey(SHOW_BUILD_SCENES_PREF_KEY))
+            showBuildScenes = EditorPrefs.GetBool(SHOW_BUILD_SCENES_PREF_KEY);
 
-        if (EditorPrefs.HasKey(showAllScenesPrefKey))
-            showAllScenes = EditorPrefs.GetBool(showAllScenesPrefKey);
+        if (EditorPrefs.HasKey(SHOW_ALL_SCENES_PREF_KEY))
+            showAllScenes = EditorPrefs.GetBool(SHOW_ALL_SCENES_PREF_KEY);
 
-        if (EditorPrefs.HasKey(showFavoriteScenesPrefKey))
-            showFavorites = EditorPrefs.GetBool(showFavoriteScenesPrefKey);
+        if (EditorPrefs.HasKey(SHOW_FAVORITE_SCENES_PREF_KEY))
+            showFavorites = EditorPrefs.GetBool(SHOW_FAVORITE_SCENES_PREF_KEY);
         
-        if (PlayerPrefs.HasKey(favoriteScenesPrefKey)) {
-            string favoritesAsJson = PlayerPrefs.GetString(favoriteScenesPrefKey);
+        if (PlayerPrefs.HasKey(FAVORITE_SCENES_PREF_KEY)) {
+            string favoritesAsJson = PlayerPrefs.GetString(FAVORITE_SCENES_PREF_KEY);
 
             if (favoritesAsJson != "") {
                 try {

@@ -1890,7 +1890,7 @@ GameObject:
   - component: {fileID: 1690273953}
   - component: {fileID: 1690273954}
   m_Layer: 0
-  m_Name: singletons
+  m_Name: SaveManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1922,12 +1922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89abc9c4d7ecd6c44a37c4d1bf50b549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveData:
-    questSystem:
-      nodes: []
-      endNodes: []
-    score: 0
-    playerName: 
 --- !u!1 &1729358122
 GameObject:
   m_ObjectHideFlags: 0

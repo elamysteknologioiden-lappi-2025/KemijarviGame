@@ -57,6 +57,10 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
     [Tooltip("All objects that should be enabled for AR, and disabled otherwise")]
     private List<GameObject> setActiveForAR = new List<GameObject>();
 
+    [SerializeField]
+    [Tooltip("All objects that should be enabled for Map, and disabled otherwise")]
+    private List<GameObject> setActiveForMap = new List<GameObject>();
+
     #endregion
 
     #region Inherited Methods
@@ -91,14 +95,14 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
     #region Public Methods
 
     /// <summary>
-    /// Transition to AR-mode. Enables AR specific objects.
+    /// Transition to AR-mode. Enables AR-specific objects.
     /// </summary>
     public void TransitionToAR() {
         ChangeNavigationMode(NavigationMode.AR);
     }
 
     /// <summary>
-    /// Transition to Map-mode. Disabled AR specific objects
+    /// Transition to Map-mode. Disables AR-specific objects
     /// </summary>
     public void TransitionToMap() {
         ChangeNavigationMode(NavigationMode.Map);
@@ -110,7 +114,7 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
     /// <param name="navigationMode"></param>
     public void ChangeNavigationMode(NavigationMode navigationMode) {
         bool isARMode = navigationMode == NavigationMode.AR;
-        
+
         if (pLab_KJPOCGameManager.Instance != null) {
             pLab_KJPOCGameManager.Instance.NavigationMode = navigationMode;
         }
@@ -124,6 +128,7 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
         }
 
         ToggleARObjects(isARMode);
+        ToggleMapObjects(!isARMode);
 
     }
 
@@ -138,6 +143,16 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
     private void ToggleARObjects(bool isOn) {
         for(int i = 0; i < setActiveForAR.Count; i++) {
             setActiveForAR[i].SetActive(isOn);
+        }
+    }
+
+    /// <summary>
+    /// Toggle active state of all Map-objects
+    /// </summary>
+    /// <param name="isOn"></param>
+    private void ToggleMapObjects(bool isOn) {
+        for(int i = 0; i < setActiveForMap.Count; i++) {
+            setActiveForMap[i].SetActive(isOn);
         }
     }
 

@@ -183,9 +183,6 @@ public class pLab_ARTrueNorthFinder : MonoBehaviour
     [SerializeField]
     private int maxCompassModeSampleSize = 50;
 
-    [SerializeField]
-    private GameObject findingWithCompassIndicator;
-
     private bool hasCompassHeading = false;
 
     private CalculationPhase calculationPhase = CalculationPhase.Stopped;

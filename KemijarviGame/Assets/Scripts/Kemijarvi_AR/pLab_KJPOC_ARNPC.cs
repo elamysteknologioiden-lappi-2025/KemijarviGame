@@ -37,6 +37,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// NPC-class for AR-mode
@@ -44,11 +45,29 @@ using UnityEngine;
 public class pLab_KJPOC_ARNPC : MonoBehaviour
 {
 
+    #region Variables
+
     [SerializeField]
     private int npcId;
 
     private pLab_NPC npc;
 
+    [SerializeField]
+    private GameObject highlightObject;
+
+    #region Debug Variables
+    [SerializeField]
+    private Image debugImage;
+    
+    private Color32 normalColor = Color.white;
+
+    private Color32 debugColor = Color.red;
+    #endregion Debug Variables
+
+    #endregion
+
+    #region Inherited Methods
+    
     private void Awake() {
         //Find the NPC corresponding to npcId
         pLab_NPC[] npcs = GameObject.FindObjectsOfType<pLab_NPC>();
@@ -60,17 +79,54 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Activate corresponding NPC to get or return a quest. Calls ActivateNPC of the normal NPC
-    /// </summary>
-    public void ActivateNPC() {
-        if (npc != null) {
-            npc.ActivateNPC();
+    private void Update() {
+        if (highlightObject != null) {
+            ToggleHighlight(npc != null && (npc.HasActiveQuest || npc.HasActiveQuestReturn));
         }
     }
 
     private void OnMouseUpAsButton() {
         ActivateNPC();
-        Debug.Log("Clicked AR NPC: " + npc?.name);
     }
+
+    #endregion
+
+    #region Public Methods
+
+    /// <summary>
+    /// Activate corresponding NPC to get or return a quest. Calls ActivateNPC of the normal NPC
+    /// </summary>
+    public void ActivateNPC() {
+        if (npc != null) {
+            DebugHighlight();
+            npc.ActivateNPC();
+        }
+    }
+        
+    #endregion
+
+    #region Private Methods
+
+    /// <summary>
+    /// Toggle highlight of this NPC based on isOn
+    /// </summary>
+    /// <param name="isOn"></param>
+    private void ToggleHighlight(bool isOn) {
+        if (highlightObject != null) {
+            highlightObject.SetActive(isOn);
+        }    
+    }
+
+    #endregion
+    
+    #region Debug
+
+    private void DebugHighlight() {
+        if (debugImage != null) {
+            Color32 newColor = debugImage.color == normalColor ? debugColor : normalColor;
+            debugImage.color = newColor;
+        }
+    }
+
+    #endregion
 }

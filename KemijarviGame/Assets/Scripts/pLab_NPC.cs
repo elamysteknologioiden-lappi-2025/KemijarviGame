@@ -94,6 +94,8 @@ public class pLab_NPC : MonoBehaviour{
     #region Properties
     
     public int Id { get { return id; } }
+    public bool HasActiveQuest { get { return hasActiveQuest; } }
+    public bool HasActiveQuestReturn { get { return hasActiveQuestReturn; } }
     
     #endregion
 

@@ -56,14 +56,14 @@ public class pLab_QuestManager : MonoBehaviour{
 
 
     /// <summary>
-    /// questDialog
+    /// Quest dialog gameobject
     /// </summary>
-    [SerializeField]private GameObject questDialog;
+    [SerializeField] private GameObject questDialog;
 
     /// <summary>
-    /// endDialog
+    /// End dialog gameobject
     /// </summary>
-    [SerializeField]private GameObject endDialog;
+    [SerializeField] private GameObject endDialog;
 
     /// <summary>
     /// currentQuest
@@ -76,14 +76,6 @@ public class pLab_QuestManager : MonoBehaviour{
     void Start(){
         CheckQuest();
     }
-
-    /*
-    private void OnEnable() {
-        //Maybe we should do this here instead
-        //so if we disable stuff between mode changes,this stuff will update also
-        CheckQuest();
-    }
-    */
 
     /// <summary>
     /// CheckQuest
@@ -169,11 +161,20 @@ public class pLab_QuestManager : MonoBehaviour{
     /// <param name="aQuestID"></param>
     public void ChangeQuestStatus(int aStatus, int aQuestID){
 
-        pLab_KJPOCSaveGame.Instance.SaveData.
-            questSystem.nodes.Find(x => x.questID == aQuestID).status = aStatus;
+        QuestItem questItem = pLab_KJPOCSaveGame.Instance.SaveData.
+            questSystem.nodes.Find(x => x.questID == aQuestID);
+
+        if (questItem != null) {
+            questItem.status = aStatus;
+        }
+            
         if(aStatus == 3) {
-            OnDisableQuest(currentQuest.npcId);
-            OnDisableQuest(currentQuest.endPoint);
+
+            if (OnDisableQuest != null) {
+                OnDisableQuest(currentQuest.npcId);
+                OnDisableQuest(currentQuest.endPoint);  
+            }
+
             currentQuest = null;
         }
 

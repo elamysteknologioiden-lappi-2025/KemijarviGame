@@ -2859,5 +2859,10 @@ PrefabInstance:
       propertyPath: locationProvider
       value: 
       objectReference: {fileID: 2018715823}
+    - target: {fileID: 924579739, guid: e6b65878235600e4ab0853ed56b353e9, type: 3}
+      propertyPath: playableGeoArea
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d6a80e24f7a78a458f3d70114112168,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6b65878235600e4ab0853ed56b353e9, type: 3}

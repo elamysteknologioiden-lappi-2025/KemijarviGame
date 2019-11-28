@@ -151,7 +151,13 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
     
 
     
-    private List<pLab_PointOfInterest> PointOfInterests{ get { return pointOfInterestSet?.PointOfInterests; } }
+    private List<pLab_PointOfInterest> PointOfInterests{
+        get 
+        {
+            return pointOfInterestSet != null && pointOfInterestSet.PointOfInterests != null ? pointOfInterestSet.PointOfInterests : new List<pLab_PointOfInterest>();
+        }
+    }
+
     public List<POITrackerData> PoiTrackerDatas { get { return poiTrackerDatas; } }
     
     #endregion
@@ -270,11 +276,13 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
 
     #region Event Handlers
 
-    private void OnARSessionStateChange(ARSessionStateChangedEventArgs obj)
+    private void OnARSessionStateChange(ARSessionStateChangedEventArgs evt)
     {
         previousUpdateAccuracy = 9999f;
         // CheckDistances();
-        RecheckPOITrackings();
+        if (evt.state == ARSessionState.SessionTracking) {
+            RecheckPOITrackings();
+        }
     }
 
     private void OnNorthHeadingUpdated(object sender, pLab_NorthHeadingUpdatedEventArgs e)
@@ -320,26 +328,21 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
     /// </summary>
     private void RecheckPOITrackings() {
         pLab_LatLon currentLocation = locationProvider.Location;
+        if (currentLocation == null) return;
+
         Vector3 currentARCameraPosition = arCameraTransform.position;
         float devicePosY = currentARCameraPosition.y;
         currentARCameraPosition.y = 0;
 
         float groundLevel = deviceElevationEstimater != null ? deviceElevationEstimater.GroundLevelEstimate : 0f;
+        if (PointOfInterests == null || PointOfInterests.Count == 0) return;
 
-        for(int i = 0; i < poiTrackerDatas.Count; i++) {
-            POITrackerData trackerData = poiTrackerDatas[i];
+        for(int i = 0; i < PointOfInterests.Count; i++) {
 
-            pLab_PointOfInterest poi = trackerData.POI;
-
-            pLab_PointOfInterestCanvasBase poiCanvas = trackerData.POICanvas;
-            pLab_PointOfInterestObjectBase poiObject = trackerData.POIObject;
-
+            pLab_PointOfInterest poi = PointOfInterests[i];
 
             //Calculate the distance between the points
-            // float distanceBetween = GeoTools.DistanceBetweenPointsPythagoras(currentLocation, poi.Coordinates);
             float distanceBetween = currentLocation.DistanceToPointPythagoras(poi.Coordinates);
-            float trueNorthHeadingDifference = arTrueNorthFinder != null ? arTrueNorthFinder.Heading : 0;
-
 
             bool onlyUpdateHeight = false;
 
@@ -368,36 +371,15 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
                 }
             }
 
-           
-            // switch(poi.TrackingState) {
 
-            //     case POITrackingState.NotTracking:
-            //         if (distanceBetween <= poi.TrackingRadius) {
-            //             StartTrackingPOI(poi);
-            //         }
-            //         break;
+            POITrackerData trackerData = poiTrackerDatas.Find(x => x.POI == poi);
 
-            //     case POITrackingState.FarTracking:
-            //         if (distanceBetween >= poi.TrackingExitRadius) {
-            //             //If the distance between the points is larger than trigger radius + exit margin
-            //             //So with 100m trigger radius and 20m exit margin, the point must be 120m away to disable tracking
-            //             //This is to avoid object from repeatably disappearing and appearing
-            //             StopTrackingPOI(poi);
-            //         } else if (distanceBetween <= poi.CloseTrackingRadius) {
-            //             poi.TrackingState = POITrackingState.CloseTracking;
-            //         }
-            //         break;
+            if (trackerData == null) continue;
 
-            //     case POITrackingState.CloseTracking:
-            //         if (distanceBetween >= poi.CloseTrackingExitRadius) {
-            //             poi.TrackingState = POITrackingState.FarTracking;
-            //         } else {
-            //             //Close Tracking is true AND poi is inside the closeTrackingRadius
-            //             onlyUpdateHeight = true;
-            //         }
+            float trueNorthHeadingDifference = arTrueNorthFinder != null ? arTrueNorthFinder.Heading : 0;
 
-            //         break;
-            // }
+            pLab_PointOfInterestCanvasBase poiCanvas = trackerData.POICanvas;
+            pLab_PointOfInterestObjectBase poiObject = trackerData.POIObject;
 
             //If we only update the height, set the heights and continue to the next POI
             if (onlyUpdateHeight) {
@@ -412,26 +394,6 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
 
                 continue;
             }
-
-            // if (!poi.CloseTracking) {
-            //     if (distanceBetween <= poi.CloseTrackingRadius) {
-            //         poi.TrackingState = POITrackingState.CloseTracking;
-            //     }
-            // } else if (poi.CloseTracking && distanceBetween >=  poi.CloseTrackingExitRadius) {
-            //     poi.TrackingState = POITrackingState.FarTracking;
-            // } else {
-            //     //Close Tracking is true AND poi is inside the closeTrackingRadius
-            //     if (poiObject != null) {
-            //         poiObject.SetPositionY(groundLevel, devicePosY);
-            //     }
-
-            //     //Update poi's canvas position
-            //     if (poiCanvas != null) {
-            //         poiCanvas.UpdatePositionY(groundLevel, devicePosY);
-            //     }
-
-            //     continue;
-            // }
 
             Vector3 newPos = Vector3.zero;
 
@@ -523,40 +485,6 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Checks the distances to every point of interest in the pointOfInterests-list
-    /// and enables or disables tracking based on POI trigger radius.
-    /// </summary>
-    // private void CheckDistances() {
-    //     if (locationProvider != null && locationProvider.Location != null) {
-    //         LatLon currentLocation = locationProvider.Location;
-
-    //         for(int i = 0; i < PointOfInterests.Count; i++) {
-    //             PointOfInterest poi = PointOfInterests[i];
-
-    //             float distanceBetween = poi.Coordinates.DistanceToPointPythagoras(currentLocation);
-
-    //             //If the distance between the points is less than trigger radius, enable tracking
-    //             if (!poi.Tracking) {
-    //                 if (distanceBetween <= poi.TrackingRadius) {
-    //                     CreateObjectsForPOI(poi);
-    //                 }
-    //             }
-    //             else if (distanceBetween >= poi.TrackingExitRadius) {
-    //                 //If the distance between the points is larger than trigger radius + exit margin
-    //                 //So with 100m trigger radius and 20m exit margin, the point must be 120m away to disable tracking
-    //                 //This is to avoid object from repeatably disappearing and appearing
-    //                 StopTrackingPOI(poi);
-    //             }
-
-    //             //Debug
-    //             if (pointOfInterestDebug != null && !poi.Tracking) {
-    //                 pointOfInterestDebug.UpdateItem(poi, distanceBetween);
-    //             }
-    //             //END Debug 
-    //         }
-    //     }
-    // }
 
     /// <summary>
     /// Enable tracking for Point of Interest. Create 3D-model and canvas objects.

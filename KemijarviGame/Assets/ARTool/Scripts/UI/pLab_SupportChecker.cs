@@ -89,9 +89,6 @@ public class pLab_SupportChecker : MonoBehaviour
     [SerializeField]
     private string attemptingInstallText = "Attempting install...";
 
-
-
-
     public static event EventHandler<SupportCheckDoneEventArgs> OnSupportCheckDone;
 
     private void Awake() {
@@ -154,8 +151,8 @@ public class pLab_SupportChecker : MonoBehaviour
         if (ARSession.state == ARSessionState.Ready)
         {
             // To start the ARSession, we just need to enable it.
-            SendSupportCheckDoneEvent(true);
             SetARSessionEnabled(true);
+            SendSupportCheckDoneEvent(true);
         }
         else
         {
@@ -170,6 +167,10 @@ public class pLab_SupportChecker : MonoBehaviour
                     // In this case, we enable a button which allows the user
                     // to try again in the event they decline the update the first time.
                     SetInstallButtonActive(true);
+                    break;
+                default:
+                    SetARSessionEnabled(true);
+                    SendSupportCheckDoneEvent(true);
                     break;
             }
 
@@ -188,11 +189,8 @@ public class pLab_SupportChecker : MonoBehaviour
 
             OnSupportCheckDone(this, args);
         }
-
-
+        
         this.gameObject.SetActive(false);
-
-
     }
 
     /// <summary>

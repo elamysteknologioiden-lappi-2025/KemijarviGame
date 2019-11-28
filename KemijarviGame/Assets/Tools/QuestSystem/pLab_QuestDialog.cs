@@ -147,6 +147,12 @@ public class pLab_QuestDialog : MonoBehaviour{
     /// </summary>
     private WaitForSeconds waitTimeSeconds;
 
+    public delegate void QuestDialogActivityChangedEvent(bool questDialogActive);
+    /// <summary>
+    /// Event for when quest dialog activity is changed
+    /// </summary>
+    public static event QuestDialogActivityChangedEvent OnQuestDialogActivityChangedEvent;
+
 
     #region Inherited Methods
     
@@ -154,14 +160,29 @@ public class pLab_QuestDialog : MonoBehaviour{
         waitTimeSeconds = new WaitForSeconds(waitTimePerCharacter);
     }
 
-    private void OnEnable() {
-        coroutine = WaitAndPrint();
+    private void Start() {
+        if (OnQuestDialogActivityChangedEvent != null) {
+            OnQuestDialogActivityChangedEvent(gameObject.activeInHierarchy);
+        }
     }
 
-    private void OnDisable(){
+    private void OnEnable() {
+        coroutine = WaitAndPrint();
+
+        if (OnQuestDialogActivityChangedEvent != null) {
+            OnQuestDialogActivityChangedEvent(true);
+        }
+    }
+
+    private void OnDisable() {
         done = true;
+
         if (coroutine != null) {
             StopCoroutine(coroutine);
+        }
+
+        if (OnQuestDialogActivityChangedEvent != null) {
+            OnQuestDialogActivityChangedEvent(false);
         }
     }
 
@@ -195,13 +216,11 @@ public class pLab_QuestDialog : MonoBehaviour{
         currentEndNode = quest.FinalizeQuest();
 
         if (currentEndNode == null){
-            gameObject.SetActive(false);
+            SetActiveState(false);
             qManager.ChangeQuestStatus(3, quest.questID);
-            return;
+        } else {
+            UpdateDialogUIFromNode(currentEndNode);
         }
-
-        UpdateDialogUIFromNode(currentEndNode);
-
     }
 
     /// <summary>
@@ -229,18 +248,24 @@ public class pLab_QuestDialog : MonoBehaviour{
             if (quest.questType == 2){
                 qManager.ChangeQuestStatus(2, quest.questID);
             }
-            gameObject.SetActive(false);
-            return;
+            SetActiveState(false);
+        } else {
+            UpdateDialogUIFromNode(currentNode);
+            SetActiveState(true);
         }
-
-        UpdateDialogUIFromNode(currentNode);
-        
-        gameObject.SetActive(true);
     }
 
     #endregion
 
     #region Private Methods
+
+    /// <summary>
+    /// Sets quest dialog gameobject active or inactive based on isOn
+    /// </summary>
+    /// <param name="isOn">Should the gameobject be activated</param>
+    private void SetActiveState(bool isOn) {
+        gameObject.SetActive(isOn);
+    }
 
     /// <summary>
     /// Updates the dialog window taking info from the node

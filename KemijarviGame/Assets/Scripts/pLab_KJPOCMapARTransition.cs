@@ -34,10 +34,12 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 /// <summary>
 /// Handles UI and logical transitions between Map and AR-modes
@@ -73,6 +75,11 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
         if (transitionToMapButton != null) {
             transitionToMapButton.onClick.AddListener(TransitionToMap);
         }
+
+        pLab_QuestDialog.OnQuestDialogActivityChangedEvent += OnQuestDialogActivityChanged;
+
+        ARSession.stateChanged += OnARSessionStateChanged;
+
     }
 
     private void OnDisable() {
@@ -83,6 +90,10 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
         if (transitionToMapButton != null) {
             transitionToMapButton.onClick.RemoveListener(TransitionToMap);
         }
+
+        pLab_QuestDialog.OnQuestDialogActivityChangedEvent -= OnQuestDialogActivityChanged;
+
+        ARSession.stateChanged -= OnARSessionStateChanged;
     }
 
     private void Start() {
@@ -127,8 +138,8 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
             transitionToARButton.gameObject.SetActive(!isARMode);
         }
 
-        ToggleARObjects(isARMode);
         ToggleMapObjects(!isARMode);
+        ToggleARObjects(isARMode);
 
     }
 
@@ -156,5 +167,57 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Event Handlers
+
+    /// <summary>
+    /// Event handler for ARSessionStateChanged-event. If state is ARSessionState.Unsupported, the option to choose AR-mode is deactivated
+    /// </summary>
+    /// <param name="evt"></param>
+    private void OnARSessionStateChanged(ARSessionStateChangedEventArgs evt)
+    {
+        if (evt.state == ARSessionState.Unsupported) {
+            ChangeNavigationMode(NavigationMode.Map);
+
+            if (transitionToMapButton != null) {
+                transitionToMapButton.gameObject.SetActive(false);
+            }
+
+            if (transitionToARButton != null) {
+                transitionToARButton.gameObject.SetActive(false);
+            }
+
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Event handler for OnQuestDialogActivityChangedEvent. Changes activity of the transition UI-buttons
+    /// </summary>
+    /// <param name="questDialogActive"></param>
+    private void OnQuestDialogActivityChanged(bool questDialogActive)
+    {
+        //Both buttons inactive if the quest dialog is open
+        bool isARButtonActive = false;
+        bool isMapButtonActive = false;
+
+        if (!questDialogActive)
+        {
+            NavigationMode currentMode = pLab_KJPOCGameManager.Instance != null ? pLab_KJPOCGameManager.Instance.NavigationMode : NavigationMode.Map;
+
+            isARButtonActive = currentMode == NavigationMode.Map;
+            isMapButtonActive = currentMode == NavigationMode.AR;
+        }
+        
+        if (transitionToMapButton != null) {
+            transitionToMapButton.gameObject.SetActive(isMapButtonActive);
+        }
+
+        if (transitionToARButton != null) {
+            transitionToARButton.gameObject.SetActive(isARButtonActive);
+        }
+
+    }
     #endregion
 }

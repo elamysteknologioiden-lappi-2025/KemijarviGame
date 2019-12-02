@@ -34,10 +34,10 @@
 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// NPC-class for AR-mode
@@ -53,22 +53,14 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
     private pLab_NPC npc;
 
     [SerializeField]
-    private GameObject highlightObject;
-
-    #region Debug Variables
-    [SerializeField]
-    private Image debugImage;
-    
-    private Color32 normalColor = Color.white;
-
-    private Color32 debugColor = Color.red;
-    #endregion Debug Variables
+    private pLab_KJPOC_ARNPCCanvas npcCanvas;
 
     #endregion
 
     #region Inherited Methods
     
     private void Awake() {
+
         //Find the NPC corresponding to npcId
         pLab_NPC[] npcs = GameObject.FindObjectsOfType<pLab_NPC>();
 
@@ -79,10 +71,19 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
         }
     }
 
-    private void Update() {
-        if (highlightObject != null) {
-            ToggleHighlight(npc != null && (npc.HasActiveQuest || npc.HasActiveQuestReturn));
-        }
+    private void OnEnable() {
+        pLab_QuestManager.OnActivateQuest += OnActivateQuest;
+        pLab_QuestManager.OnActivateQuestReturn += OnActivateQuestReturn;
+        pLab_QuestManager.OnDisableQuest += OnDisableQuest;
+
+        CheckQuestIconState();
+    }
+
+
+    private void OnDisable() {
+        pLab_QuestManager.OnActivateQuest -= OnActivateQuest;
+        pLab_QuestManager.OnActivateQuestReturn -= OnActivateQuestReturn;
+        pLab_QuestManager.OnDisableQuest -= OnDisableQuest;
     }
 
     private void OnMouseUpAsButton() {
@@ -98,8 +99,7 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
     /// </summary>
     public void ActivateNPC() {
         if (npc != null) {
-            DebugHighlight();
-            npc.ActivateNPC();
+            npc.ActivateNPC(false);
         }
     }
         
@@ -108,25 +108,109 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
     #region Private Methods
 
     /// <summary>
-    /// Toggle highlight of this NPC based on isOn
+    /// Checks quest icon state, and activates or deactivates quest icon
     /// </summary>
-    /// <param name="isOn"></param>
-    private void ToggleHighlight(bool isOn) {
-        if (highlightObject != null) {
-            highlightObject.SetActive(isOn);
-        }    
+    private void CheckQuestIconState() {
+        if (npc != null) {
+            if (npc.HasActiveQuest) {
+                ActivateQuest();
+            } else if (npc.HasActiveQuestReturn) {
+                ActivateQuestReturn();
+            } else {
+                DisableQuest();
+            }
+        }
     }
 
-    #endregion
-    
-    #region Debug
+    /// <summary>
+    /// Checks if highlight of this NPC should be on or off
+    /// </summary>
+    /// <param name="isOn"></param>
+    private void CheckHighlight() {
+        if (npc != null && npcCanvas != null) {
+            bool highlightEnabled = npc.HasActiveQuest || npc.HasActiveQuestReturn;
+            npcCanvas.ToggleHighlight(highlightEnabled);
+        }
+    }
 
-    private void DebugHighlight() {
-        if (debugImage != null) {
-            Color32 newColor = debugImage.color == normalColor ? debugColor : normalColor;
-            debugImage.color = newColor;
+    /// <summary>
+    /// Activates available quest icon
+    /// </summary>
+    private void ActivateQuest()
+    {
+        if (npcCanvas != null) {
+            npcCanvas.ShowAvailableQuestIcon();
+        }
+
+        CheckHighlight();
+    }
+    
+    /// <summary>
+    /// Activates quest return icon
+    /// </summary>
+    private void ActivateQuestReturn()
+    {
+        if (npcCanvas != null) {
+            npcCanvas.ShowQuestReturnIcon();
+        }
+
+        CheckHighlight();
+    }
+
+    /// <summary>
+    /// Disables quest icon
+    /// </summary>
+    private void DisableQuest() {
+        if (npcCanvas != null) {
+            npcCanvas.HideQuestIcon();
         }
     }
 
     #endregion
+
+
+    #region Event Handlers
+
+    /// <summary>
+    /// Event handler for OnActivateQuest-event. Activates quest if NPC id matches
+    /// </summary>
+    /// <param name="aId"></param>
+    /// <param name="aCurrentQuest"></param>
+    /// <param name="startPoint"></param>
+    private void OnActivateQuest(int aId, Quest aCurrentQuest, bool startPoint)
+    {
+        if (aId == npcId) {
+            ActivateQuest();
+        }
+    }
+
+
+
+    /// <summary>
+    /// Event handler for OnActivateQuestReturn-event. Activates quest return if NPC id matches
+    /// </summary>
+    /// <param name="aId"></param>
+    /// <param name="aCurrentQuest"></param>
+    /// <param name="startPoint"></param>
+    private void OnActivateQuestReturn(int aId, Quest aCurrentQuest, bool startPoint) {
+        if (aId == npcId) {
+            ActivateQuestReturn();
+        }
+    }
+
+
+    /// <summary>
+    /// Event handler for OnDisableQuest-event. Disabled quest if NPC id matches
+    /// </summary>
+    /// <param name="aId"></param>
+    private void OnDisableQuest(int aId)
+    {
+        if (aId == npcId) {
+            DisableQuest();
+        }
+    }
+
+
+    #endregion
+
 }

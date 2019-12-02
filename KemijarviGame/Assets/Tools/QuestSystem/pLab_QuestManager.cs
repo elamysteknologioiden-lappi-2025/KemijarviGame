@@ -94,7 +94,6 @@ public class pLab_QuestManager : MonoBehaviour{
                         StartQuestLate("Quests/" + item.questID + "_Quest");
                     } else if (item.type == 6) {
                         item.status = 3;
-
                         endDialog.SetActive(true);
                     }
                 }
@@ -118,6 +117,10 @@ public class pLab_QuestManager : MonoBehaviour{
                     if (OnActivateQuestReturn != null) {
                         OnActivateQuestReturn(currentQuest.endPoint, currentQuest, false);
                     }
+                }
+
+                if (item.status == 3 && item.type == 6) {
+                    endDialog.SetActive(true);
                 }
             }
         }

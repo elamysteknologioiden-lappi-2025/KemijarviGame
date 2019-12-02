@@ -68,9 +68,11 @@ public class pLab_NPC : MonoBehaviour{
     [SerializeField]
     private GameObject returnQuestPointSymbol;
 
+    private Animator questPointSymbolAnimator;
 
-    [SerializeField]
-    private GameObject tempHighlightIcon;
+    private Animator returnQuestPointSymbolAnimator;
+
+    private const string ANIMATOR_HIGHLIGHT_PARAMETER = "HighlightEnabled";
 
     /// <summary>
     /// currentQuest
@@ -88,6 +90,8 @@ public class pLab_NPC : MonoBehaviour{
 
     private bool hasActiveQuest = false;
     private bool hasActiveQuestReturn = false;
+
+    private bool isHighlighted = false;
 
     #endregion
 
@@ -108,10 +112,7 @@ public class pLab_NPC : MonoBehaviour{
         pLab_QuestManager.OnActivateQuest += ActivateQuest;
         pLab_QuestManager.OnActivateQuestReturn += ActivateQuestReturn;
         pLab_QuestManager.OnDisableQuest += DisableQuest;
-
-        ToggleHighlight((hasActiveQuest || hasActiveQuestReturn) && IsPlayerInsideActivationRadius());
     }
-
 
     /// <summary>
     /// OnDisable
@@ -122,16 +123,36 @@ public class pLab_NPC : MonoBehaviour{
         pLab_QuestManager.OnDisableQuest -= DisableQuest;
     }
 
+    private void Awake() {
+        if (questPointSymbol != null) {
+            questPointSymbolAnimator = questPointSymbol.GetComponent<Animator>();
+        }
+
+        if (returnQuestPointSymbol != null) {
+            returnQuestPointSymbolAnimator = returnQuestPointSymbol.GetComponent<Animator>();
+        }
+    }
+
     private void Start() {
         if (playerTransform == null) {
             GameObject playerGo = GameObject.FindGameObjectWithTag("Player");
             playerTransform = playerGo.transform;
         }
+
+        ToggleHighlight(false);
+
     }
 
     private void Update() {
         //This could may be done when player actually moves
-        ToggleHighlight((hasActiveQuest || hasActiveQuestReturn) && IsPlayerInsideActivationRadius());
+        CheckHighlight();
+    }
+
+    private void OnMouseUpAsButton() {
+        //Chech that there is not a UI element in front
+        if (!EventSystem.current.IsPointerOverGameObject()) {
+            ActivateNPC();
+        }
     }
 
     #endregion
@@ -196,10 +217,11 @@ public class pLab_NPC : MonoBehaviour{
     }
 
     /// <summary>
-    /// ActivateNPC
+    /// Activate NPC to fetch or return a quest. Checks if player is close enough to the player
     /// </summary>
-    public void ActivateNPC(){
-        if (currentQuest == null || !IsPlayerInsideActivationRadius()) return;
+    public void ActivateNPC(bool checkRadius = true) {
+
+        if (checkRadius && currentQuest == null || !IsPlayerInsideActivationRadius()) return;
 
         questDialog.gameObject.SetActive(true);
 
@@ -221,22 +243,45 @@ public class pLab_NPC : MonoBehaviour{
     }
 
     /// <summary>
-    /// Toggle highlight of this NPC. Indicating the player is close
+    /// Toggle highlight of this NPC. Indicating the player is close, and NPC has either an active quest or an active quest to return
     /// </summary>
     /// <param name="isOn"></param>
     public void ToggleHighlight(bool isOn) {
-        //TODO: Insert the actual highlight here
-        if (tempHighlightIcon != null) {
-            tempHighlightIcon.SetActive(isOn);
+        isHighlighted = isOn;
+
+        if (isOn) {
+            if (hasActiveQuest) {
+                if (questPointSymbolAnimator != null) {
+                    questPointSymbolAnimator.SetBool(ANIMATOR_HIGHLIGHT_PARAMETER, true);
+                }
+            } else if (hasActiveQuestReturn) {
+                if (returnQuestPointSymbolAnimator != null) {
+                    returnQuestPointSymbolAnimator.SetBool(ANIMATOR_HIGHLIGHT_PARAMETER, true);
+                }
+            }
+        } else {
+            if (questPointSymbolAnimator != null) {
+                questPointSymbolAnimator.SetBool(ANIMATOR_HIGHLIGHT_PARAMETER, false);
+            }
+
+            if (returnQuestPointSymbolAnimator != null) {
+                returnQuestPointSymbolAnimator.SetBool(ANIMATOR_HIGHLIGHT_PARAMETER, false);
+            }
         }
     }
 
-    private void OnMouseUpAsButton() {
-        //Chech that there is not a UI element in front
-        if (!EventSystem.current.IsPointerOverGameObject()) {
-            ActivateNPC();
+    #endregion
+
+    #region Private Methods
+    /// <summary>
+    /// Checks if highlight should be on or off, and toggles it.
+    /// </summary>
+    private void CheckHighlight() {
+        bool shouldBeHighlighted = (hasActiveQuest || hasActiveQuestReturn) && IsPlayerInsideActivationRadius();
+
+        if (shouldBeHighlighted != isHighlighted) {
+            ToggleHighlight(shouldBeHighlighted);
         }
     }
-
     #endregion
 }

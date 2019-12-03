@@ -73,6 +73,8 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     [SerializeField]
     private pLab_LocationProvider locationProvider;
 
+    private const string ANIMATOR_SPEED_PARAMETER = "MovementSpeed";
+
     #endregion
 
     #region // From Base Class
@@ -196,7 +198,7 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
         // transform.position = desiredPos;
         timme += Time.deltaTime;
-        characterAnimator.SetFloat("Speed", speed);
+        characterAnimator.SetFloat(ANIMATOR_SPEED_PARAMETER, speed);
 
         transform.position = Vector3.Lerp(startPosition, desiredPos, fracJourneya);
 

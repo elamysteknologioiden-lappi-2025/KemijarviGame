@@ -720,6 +720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9166833488785669580}
   - component: {fileID: 1278214964207538358}
+  - component: {fileID: 8410707013570266273}
   m_Layer: 0
   m_Name: Aale
   m_TagString: Untagged
@@ -762,6 +763,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &8410707013570266273
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290739613431730143}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.75
+  m_Height: 10.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 5.25, z: 0}
 --- !u!1 &5450726103413336163
 GameObject:
   m_ObjectHideFlags: 0

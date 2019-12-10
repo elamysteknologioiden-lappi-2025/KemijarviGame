@@ -20,7 +20,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -5539425301511039189, guid: f359f7ac035ab1c45b153098543fab68,
       type: 3}
-    m_Threshold: 50
+    m_Threshold: 25
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -29,7 +29,7 @@ BlendTree:
   m_BlendParameter: MovementSpeed
   m_BlendParameterY: Blend
   m_MinThreshold: 0.1
-  m_MaxThreshold: 50
+  m_MaxThreshold: 25
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
@@ -135,7 +135,7 @@ AnimatorState:
   m_Motion: {fileID: 6067073838875436353, guid: f359f7ac035ab1c45b153098543fab68,
     type: 3}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: MovementSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: MovementSpeed

@@ -37,8 +37,6 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
-
-
 using Assets.Tools.OSMRoad.Scripts.Objects;
 using Assets.Tools.OSMRoad.Scripts.XmlObjects;
 using System;
@@ -48,9 +46,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using UnityEditor;
-#if UNITY_EDITOR //Editor only tag
 using UnityEditor.SceneManagement;
-#endif
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
@@ -92,6 +88,8 @@ public enum InfraType {
 /// pLab_OSMReader
 /// </summary>
 public class pLab_OSMReader : MonoBehaviour {
+
+    public OSMEditorData editorData;
 
     /// <summary>
     /// XML document to load OSM data into
@@ -315,7 +313,12 @@ public class pLab_OSMReader : MonoBehaviour {
     /// <returns></returns>
     public OSMEditorData Open() {
 #if UNITY_EDITOR //Editor only tag
-        OSMEditorData asset = AssetDatabase.LoadAssetAtPath("Assets/OSMDATA_" + EditorSceneManager.GetActiveScene().name + ".asset", typeof(OSMEditorData)) as OSMEditorData;
+        string[] assetGuids = AssetDatabase.FindAssets(string.Format("t:{0} {1}", typeof(OSMEditorData).Name, "OSMDATA_" + EditorSceneManager.GetActiveScene().name));
+        OSMEditorData asset = null;
+        if (assetGuids.Length > 0) {
+            asset = (OSMEditorData) AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assetGuids[0]), typeof(OSMEditorData));
+        }
+        // OSMEditorData asset = AssetDatabase.LoadAssetAtPath("Assets/OSMDATA_" + EditorSceneManager.GetActiveScene().name + ".asset", typeof(OSMEditorData)) as OSMEditorData;
         if (asset == null) {
             asset = Create();
         }
@@ -463,15 +466,10 @@ public class pLab_OSMReader : MonoBehaviour {
                 }
             }
             pLAB_GeoUtils.LatLongtoUTM(minLat, minLon, out UTMN_Zero, out UTME_Zero);
-
-
         }
 
 
-        if (GameObject.Find("GeoMap")) {
-             GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmX = UTME_Zero;
-             GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmY = UTMN_Zero;
-        }
+
 
 
         Create(content, 1, UTMN_Zero, UTME_Zero);
@@ -498,15 +496,30 @@ public class pLab_OSMReader : MonoBehaviour {
     /// <param name="aRequestCount"></param>
     /// <returns></returns>
     IEnumerator GetRequestCoroutine(string aRequest, int aBlockCount, int aRequestCount) {
-        using (WWW www = new WWW(aRequest)) {
-            yield return www;
-            Create(www.text, aBlockCount);
-            readyCounter++;
-            if (readyCounter == aRequestCount) {
-                HandleMultiPoly();
-                finishedGeneratingMap = true;
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(aRequest)) {
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.isNetworkError || webRequest.isHttpError) {
+                Debug.LogError($"Error requesting map data for blockCount {aBlockCount}: {webRequest.error}");
+            }
+            else {
+                Create(webRequest.downloadHandler.text, aBlockCount);
+                readyCounter++;
+                if (readyCounter == aRequestCount) {
+                    HandleMultiPoly();
+                    finishedGeneratingMap = true;
+                }
             }
         }
+        // using (WWW www = new WWW(aRequest)) {
+        //     yield return www;
+        //     Create(www.text, aBlockCount);
+        //     readyCounter++;
+        //     if (readyCounter == aRequestCount) {
+        //         HandleMultiPoly();
+        //         finishedGeneratingMap = true;
+        //     }
+        // }
     }
 
     /// <summary>
@@ -528,9 +541,7 @@ public class pLab_OSMReader : MonoBehaviour {
     /// Save OSMEDitorData
     /// </summary>
     public void SaveOSMEditorData() {
-#if UNITY_EDITOR //Editor only tag
         AssetDatabase.SaveAssets();
-#endif
     }
 
     /// <summary>
@@ -621,12 +632,7 @@ public class pLab_OSMReader : MonoBehaviour {
 
                 gameObject.layer = layer;
 
-                MeshCollider meshCollider = gameObject.GetComponent<MeshCollider>();
-
-                if (meshCollider == null) {
-                    meshCollider = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
-                }
-                
+                MeshCollider meshCollider = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
                 meshCollider.sharedMesh = gameObject.GetComponent<MeshFilter>().sharedMesh;
 
                 FixOnTopLayers(gameObject);
@@ -702,18 +708,6 @@ public class pLab_OSMReader : MonoBehaviour {
 
                     MeshCollider meshCollider = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
                     meshCollider.sharedMesh = gameObject.GetComponent<MeshFilter>().sharedMesh;
-
-
-                    Mesh mesh = wayobjects[wayobjects.Count - 1].gameObject.GetComponent<MeshFilter>().sharedMesh;
-                    Vector3[] vertices = mesh.vertices;
-                    Vector2[] uvs = new Vector2[vertices.Length];
-                    Debug.LogError("vertices.Length" + vertices.Length);
-                    for (int uv = 0; uv < vertices.Length; uv++) {
-                        uvs[uv] = new Vector2(vertices[uv].x, vertices[uv].z);
-                    }
-
-                    wayobjects[wayobjects.Count - 1].gameObject.GetComponent<MeshFilter>().sharedMesh.uv = uvs;
-
 
                     FixOnTopLayers(gameObject);
 
@@ -1522,7 +1516,7 @@ public class pLab_OSMReader : MonoBehaviour {
                     }
                 }
                 vectorsWall.Add(new Vector3((float)(y - UTME_Zero), 0, (float)(x - UTMN_Zero)));
-                vectorsWall.Add(new Vector3((float)(y - UTME_Zero), 0.3f, (float)(x - UTMN_Zero)));
+                vectorsWall.Add(new Vector3((float)(y - UTME_Zero), 4f, (float)(x - UTMN_Zero)));
                 if (j < (buildCount - 1)) {
                     vectors.Add(new Vector2((float)(y - UTME_Zero), (float)(x - UTMN_Zero)));
                 }
@@ -1536,7 +1530,7 @@ public class pLab_OSMReader : MonoBehaviour {
 
             List<Vector3> testList = new List<Vector3>() ;
             for (int ii = 0; ii < vertices2D.Length; ii++) {
-                testList.Add ( new Vector3(vertices2D[ii].x, 0.3f, vertices2D[ii].y));
+                testList.Add ( new Vector3(vertices2D[ii].x, 4f, vertices2D[ii].y));
             }
 
             poly.outside = testList;
@@ -1647,22 +1641,22 @@ public class pLab_OSMReader : MonoBehaviour {
             MeshFilter mFilter = roadsObjects[i].gameObject.AddComponent<MeshFilter>();
             MeshRenderer mRender = roadsObjects[i].gameObject.AddComponent<MeshRenderer>();
 
-            float width = 8f;
+            float width = 4f;
 
             switch (category) {
                 case "road":
                     if (roads[i].CategoryType == (int)CategoryType.ECycleWay) {
-                        width = 4f;
+                        width = 2f;
                     }
                     if (roads[i].CategoryType == (int)CategoryType.EMainRoad) {
-                        width = 8f;
+                        width = 6f;
                     }
                     break;
                 case "railway":
-                    width = 6f;
+                    width = 3f;
                     break;
                 case "stream":
-                    width = 6f;
+                    width = 2f;
                     break;
             }
 
@@ -1880,7 +1874,7 @@ public class pLab_OSMReader : MonoBehaviour {
         NavMeshData navData = NavMeshBuilder.BuildNavMeshData(
             NavMesh.GetSettingsByID(0),
             buildSources,
-            new Bounds(new Vector3((float)aY, 0, (float)aX), new Vector3(10000, 100, 10000)),
+            new Bounds(new Vector3((float)aY, 0, (float)aX), new Vector3(1000, 100, 1000)),
             Vector3.down,
             Quaternion.Euler(Vector3.up));
 

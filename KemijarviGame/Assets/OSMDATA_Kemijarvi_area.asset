@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 941b6b485ee4efb4d8078758b6d30ac6, type: 3}
+  m_Name: OSMDATA_Kemijarvi_area
+  m_EditorClassIdentifier: 
+  waterMaterial: {fileID: 2100000, guid: d435fda01c8de0d488b0e3dc3f7a34ee, type: 2}
+  roadMaterial: {fileID: 2100000, guid: 863222b58a0bf444699fa63e2ab9437f, type: 2}
+  railwayMaterial: {fileID: 0}
+  wallMaterial: {fileID: 2100000, guid: 2f1921d7caafd4641a1ff025d734f31e, type: 2}
+  roofMaterial: {fileID: 2100000, guid: cbf7f250d95b85946b24c5649364ab47, type: 2}
+  green1Material: {fileID: 2100000, guid: 886e853e48cc65a4f9dd44c9d6d80ab5, type: 2}
+  green2Material: {fileID: 2100000, guid: fffa923cd4e25b54088b2580d4251307, type: 2}
+  green3Material: {fileID: 2100000, guid: 08b528e705b56aa438659d43488bfc74, type: 2}
+  brownMaterial: {fileID: 2100000, guid: e11416afa6f8e3148bbfc3bc0fd571f1, type: 2}
+  wetlandMaterial: {fileID: 2100000, guid: a56e2fad1a18aaf459bc2f9b750b8749, type: 2}
+  osmDataFile: 
+  minLat: 66.7002000
+  minLon: 27.4047000
+  maxLat: 66.7177000
+  maxLon: 27.4721000

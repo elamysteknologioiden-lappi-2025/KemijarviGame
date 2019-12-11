@@ -82,11 +82,15 @@ public class pLab_EditorOSM : Editor {
     #region // Public Methods
 
     public override void OnInspectorGUI() {
-        pLab_OSMReader osmReader = (pLab_OSMReader)target;
+        pLab_OSMReader osmReader = (pLab_OSMReader) target;
 
-        if (null == editorData) {
-            editorData = osmReader.Open();
+        osmReader.editorData = (OSMEditorData) EditorGUILayout.ObjectField("Editor data", osmReader.editorData, typeof(OSMEditorData), false);
+        if (null == osmReader.editorData) {
+            osmReader.editorData = osmReader.Open();
         }
+
+        editorData = osmReader.editorData;
+
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Min Lat");
@@ -134,7 +138,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Water Material");
-        Material waterMaterial = (Material)EditorGUILayout.ObjectField("material", editorData.waterMaterial, typeof(Material));
+        Material waterMaterial = (Material)EditorGUILayout.ObjectField("", editorData.waterMaterial, typeof(Material), false);
         if (waterMaterial != editorData.waterMaterial) {
             editorData.waterMaterial = waterMaterial;
             EditorUtility.SetDirty(editorData);
@@ -145,7 +149,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Roof Material");
-        Material roofMaterial = (Material)EditorGUILayout.ObjectField("material", editorData.roofMaterial, typeof(Material));
+        Material roofMaterial = (Material)EditorGUILayout.ObjectField("", editorData.roofMaterial, typeof(Material), false);
         if (roofMaterial != editorData.roofMaterial) {
             editorData.roofMaterial = roofMaterial;
             EditorUtility.SetDirty(editorData);
@@ -156,7 +160,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Road Material");
-        Material roadMaterial = (Material)EditorGUILayout.ObjectField("material", editorData.roadMaterial, typeof(Material));
+        Material roadMaterial = (Material)EditorGUILayout.ObjectField("", editorData.roadMaterial, typeof(Material), false);
 
         if (roadMaterial != editorData.roadMaterial) {
             editorData.roadMaterial = roadMaterial;
@@ -168,7 +172,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Wall Material");
-        Material wallMaterial = (Material)EditorGUILayout.ObjectField("material", editorData.wallMaterial, typeof(Material));
+        Material wallMaterial = (Material)EditorGUILayout.ObjectField("", editorData.wallMaterial, typeof(Material), false);
         if (wallMaterial != editorData.wallMaterial) {
             editorData.wallMaterial = wallMaterial;
             EditorUtility.SetDirty(editorData);
@@ -179,7 +183,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Green1 Material");
-        Material green1Material = (Material)EditorGUILayout.ObjectField("material", editorData.green1Material, typeof(Material));
+        Material green1Material = (Material)EditorGUILayout.ObjectField("", editorData.green1Material, typeof(Material), false);
         if (green1Material != editorData.green1Material) {
             editorData.green1Material = green1Material;
             EditorUtility.SetDirty(editorData);
@@ -190,7 +194,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Green2 Material");
-        Material green2Material = (Material)EditorGUILayout.ObjectField("material", editorData.green2Material, typeof(Material));
+        Material green2Material = (Material)EditorGUILayout.ObjectField("", editorData.green2Material, typeof(Material), false);
         if (green2Material != editorData.green2Material) {
             editorData.green2Material = green2Material;
             EditorUtility.SetDirty(editorData);
@@ -200,7 +204,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Green3 Material");
-        Material green3Material = (Material)EditorGUILayout.ObjectField("material", editorData.green3Material, typeof(Material));
+        Material green3Material = (Material)EditorGUILayout.ObjectField("", editorData.green3Material, typeof(Material), false);
         if (green3Material != editorData.green3Material) {
             editorData.green3Material = green3Material;
             EditorUtility.SetDirty(editorData);
@@ -210,7 +214,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Brown Material");
-        Material brownMaterial = (Material)EditorGUILayout.ObjectField("material", editorData.brownMaterial, typeof(Material));
+        Material brownMaterial = (Material)EditorGUILayout.ObjectField("", editorData.brownMaterial, typeof(Material), false);
         if (brownMaterial != editorData.brownMaterial) {
             editorData.brownMaterial = brownMaterial;
             EditorUtility.SetDirty(editorData);
@@ -220,7 +224,7 @@ public class pLab_EditorOSM : Editor {
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Wetland Material");
-        Material wetlandMaterial = (Material)EditorGUILayout.ObjectField("material", editorData.wetlandMaterial, typeof(Material));
+        Material wetlandMaterial = (Material)EditorGUILayout.ObjectField("", editorData.wetlandMaterial, typeof(Material), false);
         if (wetlandMaterial != editorData.wetlandMaterial) {
             editorData.wetlandMaterial = wetlandMaterial;
             EditorUtility.SetDirty(editorData);
@@ -239,16 +243,19 @@ public class pLab_EditorOSM : Editor {
         if (GUILayout.Button("Load From file")) {
 
             string path = EditorUtility.OpenFilePanel("Select OSM file", "", "osm");
-             osmReader.GenerateMapFromFile(path,
-                editorData.waterMaterial, 
-                editorData.roofMaterial, 
-                editorData.wallMaterial, 
-                editorData.roadMaterial,
-                editorData.green1Material,
-                editorData.green2Material, 
-                editorData.green3Material, 
-                editorData.brownMaterial,
-                editorData.wetlandMaterial);
+            if (path != "") {
+                osmReader.GenerateMapFromFile(path,
+                    editorData.waterMaterial, 
+                    editorData.roofMaterial, 
+                    editorData.wallMaterial, 
+                    editorData.roadMaterial,
+                    editorData.green1Material,
+                    editorData.green2Material, 
+                    editorData.green3Material, 
+                    editorData.brownMaterial,
+                    editorData.wetlandMaterial);
+            }
+
         }
 
     }

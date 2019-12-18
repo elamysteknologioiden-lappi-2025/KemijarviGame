@@ -564,11 +564,14 @@ public class pLab_OSMReader : MonoBehaviour {
 
         utmX = utmX - UTMN_Zero;
         utmY = utmY - UTME_Zero;
-
-        if (GameObject.Find("GeoMap")) {
-            // GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmX = utmY;
-            // GameObject.Find("GeoMap").GetComponent<pLab_GeoMap>().UtmY = utmX;
+        
+        pLab_GeoMap geoMap = GameObject.FindObjectOfType<pLab_GeoMap>();
+        
+        if (geoMap != null) {
+            geoMap.UtmX = utmY;
+            geoMap.UtmY = utmX;
         }
+
         foreach (XmlNode attr in elementList) {
             double UTMN = 0;
             double UTME = 0;

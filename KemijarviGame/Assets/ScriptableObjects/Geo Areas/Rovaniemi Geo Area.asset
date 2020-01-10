@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffff847b2e2448945ba2e69086e7ec71, type: 3}
   m_Name: Rovaniemi Geo Area
   m_EditorClassIdentifier: Assembly-CSharp::pLab_GeoArea
-  latMin: 66.482474
+  latMin: 66.478964
   lonMin: 25.656218
   latMax: 66.515821
   lonMax: 25.773157

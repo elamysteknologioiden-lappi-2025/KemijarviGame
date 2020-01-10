@@ -72,11 +72,12 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
     }
 
     private void OnEnable() {
+        CheckQuestIconState();
+
         pLab_QuestManager.OnActivateQuest += OnActivateQuest;
         pLab_QuestManager.OnActivateQuestReturn += OnActivateQuestReturn;
         pLab_QuestManager.OnDisableQuest += OnDisableQuest;
 
-        CheckQuestIconState();
     }
 
 
@@ -181,6 +182,8 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
     {
         if (aId == npcId) {
             ActivateQuest();
+        } else {
+            CheckHighlight();
         }
     }
 
@@ -195,6 +198,8 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
     private void OnActivateQuestReturn(int aId, Quest aCurrentQuest, bool startPoint) {
         if (aId == npcId) {
             ActivateQuestReturn();
+        } else {
+            CheckHighlight();
         }
     }
 

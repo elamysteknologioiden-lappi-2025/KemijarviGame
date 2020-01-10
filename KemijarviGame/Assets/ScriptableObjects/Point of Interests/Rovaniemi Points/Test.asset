@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a23cc72d52a724ba59d8993adcfbfc, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  poiName: Lyyli
+  description: Lyyli on kiva
+  icon: {fileID: 0}
+  objectPrefab: {fileID: 1387282488151261120, guid: cfcbe904f98d89742b25a01727d2f025,
+    type: 3}
+  modelPrefab: {fileID: 5973669079691071266, guid: 8a9ad13fbdd28b8469ef028e364e4607,
+    type: 3}
+  canvasPrefab: {fileID: 1531612421245766800, guid: 81b51d0f1e6350646b279cbc9acccb9e,
+    type: 3}
+  coordinates:
+    lat: 66.481712
+    lon: 25.71929
+  trackingRadius: 2000
+  trackingExitMargin: 100
+  closeTrackingRadius: 30
+  closeTrackingExitMargin: 20
+  positionMode: 0
+  facingDirectionHeading: 0
+  relativeHeight: 0

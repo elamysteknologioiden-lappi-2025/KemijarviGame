@@ -70,8 +70,7 @@ public class pLab_ObjectFollow : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    void Update () {
+    void LateUpdate () {
 
         /*
         Debug.LogError(cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position));
@@ -79,10 +78,6 @@ public class pLab_ObjectFollow : MonoBehaviour {
 
         Vector2 touch = Input.mousePosition;
         Vector2 touchZeroPrevPos = touch - deltaPosition;
-
-
-
-
 
         Vector2 screenPos = cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position);
         //screenPos.z = 0;
@@ -92,11 +87,6 @@ public class pLab_ObjectFollow : MonoBehaviour {
 
 
         float angle = Vector3.SignedAngle(prevLo, nowLo, Vector3.forward);
-
-        Debug.LogError(Vector3.SignedAngle(prevLo, nowLo, Vector3.up));
-        Debug.LogError(Vector3.SignedAngle(prevLo, nowLo, Vector3.down));
-        Debug.LogError(Vector3.SignedAngle(prevLo, nowLo, Vector3.left));
-        Debug.LogError(Vector3.SignedAngle(prevLo, nowLo, Vector3.forward));
 
         Vector3 aa = transform.transform.localEulerAngles;
         aa.y += angle;

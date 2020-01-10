@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffff847b2e2448945ba2e69086e7ec71, type: 3}
   m_Name: Kemijarvi Geo Area
   m_EditorClassIdentifier: Assembly-CSharp::pLab_GeoArea
-  latMin: 66.7002
+  latMin: 66.7001
   lonMin: 27.4047
   latMax: 66.7177
-  lonMax: 27.4721
+  lonMax: 27.4533

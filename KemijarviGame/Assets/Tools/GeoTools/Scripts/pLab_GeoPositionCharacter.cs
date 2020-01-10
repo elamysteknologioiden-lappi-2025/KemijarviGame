@@ -90,6 +90,8 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
     bool initialPositioningDone = false;
 
+    private float lastTimeClicked = 0;
+
 
 
     #endregion
@@ -136,6 +138,35 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
     void Update() {
 
+        if (geoCharacterMoveType == GeoCharacterMoveType.EDirectPoint) {
+            if (Input.GetMouseButtonUp(0)) {
+                bool castRay = false;
+
+                if (lastTimeClicked != 0) {
+                    if (Time.time - lastTimeClicked < 0.5f) {
+                        //Double click
+                        castRay = true;
+                    }
+                }
+
+                if (Input.touchCount >= 2) castRay = false;
+
+                if (castRay) {
+                    RaycastHit rayHit;
+
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(ray, out rayHit, 200)) {
+                        if (!rayHit.transform.gameObject.tag.Equals("NPC")) {
+                            newPos = rayHit.point;
+                        }
+                    }
+                }
+
+                lastTimeClicked = Time.time;
+            }
+        }
+
         // If moved, compute new pos;
         if (Vector3.Distance(newPos, desiredPos) > 0.1f) {
 
@@ -168,27 +199,27 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
             characterTransform.localEulerAngles = localRot;
         }
 
-        if (distance > 0) {
+        if (speed >= 0.05f) {
             float distCovered = (Time.time - startTime) * speed;
-            // Debug.Log($"Dist before: {distCovered}, after: {distCoveredVector}");
             
             float distanceCoveredRatio = distCovered / distance;
 
-            if(speed == 0)
-            {
-                distanceCoveredRatio = 1;
-            }
+            // if(speed == 0)
+            // {
+            //     distanceCoveredRatio = 1;
+            // }
 
             if(distanceCoveredRatio > 1)
             {
                 distanceCoveredRatio = 1;
                 speed = 0;
+                characterAnimator.SetFloat(ANIMATOR_SPEED_PARAMETER, speed);
             }
-
-            characterAnimator.SetFloat(ANIMATOR_SPEED_PARAMETER, speed);
 
 
             transform.position = Vector3.Lerp(startPosition, desiredPos, distanceCoveredRatio);
+            //transform.position = Vector3.Lerp(startPosition, desiredPos, Time.deltaTime);
+            // transform.position = transform.position + ((desiredPos - transform.position).normalized * speed * Time.deltaTime);
         }
     }
 
@@ -204,7 +235,8 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     /// <param name="e"></param>
     private void OnLocationUpdated(object sender, pLab_LocationUpdatedEventArgs e)
     {
-        CalculateNewPosition(e.location);
+        if (geoCharacterMoveType == GeoCharacterMoveType.EGps)
+            CalculateNewPosition(e.location);
     }
 
     /// <summary>

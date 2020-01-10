@@ -38,20 +38,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Rotates world canvas to face the camera.
+/// </summary>
 public class pLab_WorldCanvasFaceCamera : MonoBehaviour
 {
+
+    #region Variables
 
     private Transform myTransform;
 
     private Transform cameraTransform;
 
+    #endregion
+
+    #region Inherited Methods
+
     private void Start() {
         myTransform = this.transform;
-        cameraTransform = Camera.main.transform;
+
     }
 
-    void LateUpdate()
-    {
-        myTransform.rotation = cameraTransform.rotation;
+    private void OnEnable() {
+        if (Camera.main != null)
+            cameraTransform = Camera.main.transform;
     }
+
+    private void LateUpdate()
+    {
+        if (cameraTransform != null)
+            myTransform.rotation = cameraTransform.rotation;
+    }
+
+    #endregion
+
 }

@@ -39,8 +39,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Camera script which follows object. Has touch support for turning and zooming the camera
+/// </summary>
 public class pLab_ObjectFollow : MonoBehaviour {
 
+    #region Variables
+    
     [SerializeField]
     private GameObject followObject;
 
@@ -51,50 +56,81 @@ public class pLab_ObjectFollow : MonoBehaviour {
     private float zoomValue = 0f;
 
     [SerializeField]
-    private GameObject cameraTransform;
+    private GameObject cameraGameobject;
+
+    private Transform cameraTransform;
+
+    private Camera cameraCam;
 
 
-    private float camearaMinAngle = 15f;
-    private float camearaMaxAngle = 40f;
+    [SerializeField]
+    private float cameraMinAngle = 15f;
+    [SerializeField]
+    private float cameraMaxAngle = 40f;
 
+    [SerializeField]
     private float cameraMinHeight = -75f;
+    [SerializeField]
     private float camearaMaxHeight = 0f;
 
-    private float cameraMinDistance = -55f;
+    [SerializeField]
+    private float cameraMinDistance = -30f;
+    [SerializeField]
     private float cameraMaxDistance = -100f;
-    Vector2 deltaPosition;
-    // Use this for initialization
-    void Start () {
 
-         deltaPosition = Input.mousePosition;
+    #if UNITY_EDITOR
+    private Vector3 prevMousePosition;
+    #endif
 
+    #endregion
+
+
+    #region Inherited Methods
+
+    void Awake() {
+        if (cameraGameobject != null) {
+            cameraTransform = cameraGameobject.transform;
+            cameraCam = cameraGameobject.GetComponent<Camera>();
+        }
     }
+
+    // Use this for initialization
+    // void Start () {
+
+        //  deltaPosition = Input.mousePosition;
+
+    // }
+    
 
     void LateUpdate () {
 
-        /*
-        Debug.LogError(cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position));
+        #if UNITY_EDITOR
+        //For testing in the editor
+        if (Input.GetMouseButtonDown(1)) {
+            prevMousePosition = Input.mousePosition;
+        }
+        if (Input.GetMouseButton(1)) {
+            Vector2 deltaPos = prevMousePosition - Input.mousePosition;
 
+            float xDelta = deltaPos.x;
 
-        Vector2 touch = Input.mousePosition;
-        Vector2 touchZeroPrevPos = touch - deltaPosition;
+            if (Mathf.Abs(xDelta) > 1f) {
+                Vector3 aa = transform.localEulerAngles;
+                aa.y += xDelta;
+                transform.localEulerAngles = aa;
+            }
 
-        Vector2 screenPos = cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position);
-        //screenPos.z = 0;
+            prevMousePosition = Input.mousePosition;
+        }
 
-        Vector3 prevLo = deltaPosition - screenPos;
-        Vector3 nowLo = touch - screenPos;
+        float scrollDeltaY = -Mathf.Clamp(Input.mouseScrollDelta.y, -5, 5);
 
+        if (Mathf.Abs(scrollDeltaY) > 0.1f) {
+            zoomValue = Mathf.Clamp01(zoomValue + scrollDeltaY/10f);
+        }
 
-        float angle = Vector3.SignedAngle(prevLo, nowLo, Vector3.forward);
-
-        Vector3 aa = transform.transform.localEulerAngles;
-        aa.y += angle;
-        transform.transform.localEulerAngles = aa;
-
-
-        deltaPosition = Input.mousePosition;
-        */
+        #endif
+        
 
         if (Input.touchCount == 1)
         {
@@ -105,7 +141,8 @@ public class pLab_ObjectFollow : MonoBehaviour {
             float mmm = touch.deltaPosition.magnitude;
 
 
-            Vector2 screenPos = cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            //Vector2 screenPos = cameraTransform.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+            Vector2 screenPos = cameraCam.WorldToScreenPoint(transform.position);
             //screenPos.z = 0;
 
             Vector3 prevLo = touchZeroPrevPos - screenPos;
@@ -114,12 +151,12 @@ public class pLab_ObjectFollow : MonoBehaviour {
 
             float angle = Vector3.SignedAngle(prevLo, nowLo, Vector3.forward);
 
-            float sh = Screen.height;
-            float sw = Screen.width;
+            // float sh = Screen.height;
+            // float sw = Screen.width;
 
-                Vector3 aa = transform.transform.localEulerAngles;
-                aa.y += angle;
-                transform.transform.localEulerAngles = aa;
+            Vector3 aa = transform.localEulerAngles;
+            aa.y += angle;
+            transform.localEulerAngles = aa;
         }
         
         if (Input.touchCount == 2)
@@ -146,9 +183,9 @@ public class pLab_ObjectFollow : MonoBehaviour {
         
         transform.position = followObject.transform.position;
 
-        cameraTransform.transform.localPosition = new Vector3(0, ((camearaMaxHeight - cameraMinHeight) * zoomValue) + cameraMinHeight, ((cameraMaxDistance - cameraMinDistance) * zoomValue) + cameraMinDistance);
+        cameraTransform.localPosition = new Vector3(0, ((camearaMaxHeight - cameraMinHeight) * zoomValue) + cameraMinHeight, ((cameraMaxDistance - cameraMinDistance) * zoomValue) + cameraMinDistance);
 
-        cameraTransform.transform.localEulerAngles = new Vector3(((camearaMaxAngle - camearaMinAngle) * zoomValue) + camearaMinAngle,0,0);
+        cameraTransform.localEulerAngles = new Vector3(((cameraMaxAngle - cameraMinAngle) * zoomValue) + cameraMinAngle,0,0);
 
 
         Vector3 tasa = new Vector3(0, zoomValue * 0f, 0);
@@ -156,4 +193,6 @@ public class pLab_ObjectFollow : MonoBehaviour {
         rings.transform.localPosition = tasa;
         rings.transform.localScale = scala;
     }
+
+    #endregion
 }

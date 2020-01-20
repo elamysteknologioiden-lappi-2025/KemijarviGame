@@ -115,6 +115,18 @@ public class pLab_KJPOCSaveGame : MonoBehaviour
         SaveGame();
     }
 
+    /// <summary>
+    /// Unity calls this function when application is paused
+    /// </summary>
+    private void OnApplicationPause(bool isPaused) {
+        #if !UNITY_EDITOR
+        if (isPaused) {
+            SaveGame();
+        }
+        #endif
+
+    }
+
     #endregion
 
     #region // Private Methods

@@ -59,7 +59,6 @@ public class pLab_BuildingInfo : MonoBehaviour
     void Update()
     {
         if (camTransform != null) {
-            transform.LookAt(camTransform.transform);
             transform.rotation = Quaternion.LookRotation(transform.position - camTransform.transform.position);
         }
     }

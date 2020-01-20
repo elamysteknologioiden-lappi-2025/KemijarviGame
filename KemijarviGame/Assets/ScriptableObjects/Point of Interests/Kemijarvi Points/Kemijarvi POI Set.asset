@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointOfInterests:
   - {fileID: 11400000, guid: e2c7287b1dd56e44280fa8bcf3a33913, type: 2}
+  - {fileID: 11400000, guid: f7530ce9394131f48aa9753a1719886d, type: 2}
+  - {fileID: 11400000, guid: 34621c1e90dfa5e4eaaf35ab31fb99eb, type: 2}
+  - {fileID: 11400000, guid: a473a8366366c414bbd46ec2b580f995, type: 2}

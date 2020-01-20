@@ -74,6 +74,9 @@ public class pLab_QuestManager : MonoBehaviour{
     /// Start
     /// </summary>
     void Start(){
+        if (questDialog != null) {
+            questDialog.SetActive(false);
+        }
         CheckQuest();
     }
 
@@ -141,7 +144,7 @@ public class pLab_QuestManager : MonoBehaviour{
     /// <param name="aFilePath"></param>
     public void StartQuest(string aFilePath){
         LoadCurrentQuest(aFilePath);
-        questDialog.gameObject.SetActive(true);
+        questDialog.SetActive(true);
         questDialog.GetComponent<pLab_QuestDialog>().ActivateQuest(currentQuest);
     }
 
@@ -158,7 +161,7 @@ public class pLab_QuestManager : MonoBehaviour{
     }
 
     /// <summary>
-    /// ChangeQuestStatus
+    /// Change quest's status
     /// </summary>
     /// <param name="aStatus"></param>
     /// <param name="aQuestID"></param>

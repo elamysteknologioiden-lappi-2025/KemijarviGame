@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941b6b485ee4efb4d8078758b6d30ac6, type: 3}
   m_Name: OSMDATA_Demo
   m_EditorClassIdentifier: 
-  minLat: 66.7002000
-  minLon: 27.4047000
-  maxLat: 66.7177000
-  maxLon: 27.4721000
+  minLat: 66.7002
+  minLon: 27.4047
+  maxLat: 66.7177
+  maxLon: 27.4721
   waterMaterial: {fileID: 2100000, guid: d435fda01c8de0d488b0e3dc3f7a34ee, type: 2}
   roadMaterial: {fileID: 2100000, guid: 863222b58a0bf444699fa63e2ab9437f, type: 2}
   railwayMaterial: {fileID: 0}

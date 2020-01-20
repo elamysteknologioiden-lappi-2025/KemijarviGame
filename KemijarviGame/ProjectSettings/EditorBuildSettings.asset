@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Level_001.unity
     guid: a078d7187e1374045b6f82c416957849
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level_001 AR.unity
     guid: b37575688a6685c42beaaefbfc3205d0
+  - enabled: 1
+    path: Assets/Scenes/Level_001 AR Kemijarvi.unity
+    guid: 59805c048ea9134498554afa4e559dcc
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c64f72e6c727b2742aaede664fd30ebd,
       type: 2}

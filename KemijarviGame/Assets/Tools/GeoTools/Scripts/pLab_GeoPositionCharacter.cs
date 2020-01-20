@@ -126,7 +126,13 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     private void OnEnable() {
         if (locationProvider != null) {
             locationProvider.OnLocationUpdated += OnLocationUpdated;
+
+            if (geoCharacterMoveType == GeoCharacterMoveType.EGps) {
+                TeleportToLocation(locationProvider.Location);
+            }
+
         }
+
     }
 
 
@@ -134,6 +140,8 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
         if (locationProvider != null) {
             locationProvider.OnLocationUpdated -= OnLocationUpdated;
         }
+
+        initialPositioningDone = false;
     }
 
     void Update() {
@@ -249,9 +257,31 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
             0f, (float)(coordinates.UTMY - pLab_GeoMap.instance.UtmY));
 
         if (!initialPositioningDone) {
-            transform.position = newPos;
+            TeleportToPosition(newPos);
             initialPositioningDone = true;
         }
+    }
+
+    /// <summary>
+    /// Teleport character to a location (GPS-coordinates)
+    /// </summary>
+    /// <param name="location"></param>
+    private void TeleportToLocation(pLab_LatLon location) {
+        pLab_UTMCoordinates coordinates = new pLab_UTMCoordinates(location);
+        Vector3 newPosition = new Vector3((float)(coordinates.UTMX - pLab_GeoMap.instance.UtmX),
+            0f, (float)(coordinates.UTMY - pLab_GeoMap.instance.UtmY));
+        
+        if (!initialPositioningDone) {
+            TeleportToPosition(newPosition);
+            initialPositioningDone = true;
+        }
+    }
+    /// <summary>
+    /// Teleport character to a position (World coordinates)
+    /// </summary>
+    /// <param name="pos"></param>
+    private void TeleportToPosition(Vector3 pos) {
+        transform.position = pos;
     }
 
     #endregion
@@ -261,25 +291,6 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
     #region // Public Functions
 
-
-    // public void ChangeMoveType(Slider slider) {
-    //     geoCharacterMoveType = (GeoCharacterMoveType)slider.value;
-    // }
-
-    // /// <summary>
-    // /// SetObjectToPosition
-    // /// </summary>
-    // /// <param name="aPos"></param>
-    // public void SetObjectToPosition(Vector2 aPos) {
-
-    //     Ray ray = Camera.main.ScreenPointToRay(aPos);
-    //     RaycastHit hit;
-    //     if (Physics.Raycast(ray, out hit, 1000f)) {
-    //        // objectTransform.position = hit.point;
-    //     }
-    //     hitPos = hit.point;
-
-    // }
 
     #endregion
 

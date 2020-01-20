@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rovaniemi Kirkko
   m_EditorClassIdentifier: 
   poiName: Rovaniemi Kirkko
-  description: "Kirkko on hyv\xE4 paikka"
+  description: 
   icon: {fileID: 0}
   objectPrefab: {fileID: 1387282488151261120, guid: cfcbe904f98d89742b25a01727d2f025,
     type: 3}

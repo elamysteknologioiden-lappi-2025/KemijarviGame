@@ -176,6 +176,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC Eerik Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8526828881355393545, guid: 3d70e7cb44f5c5e45b37ed23f39bec6c,
+        type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 4615688688136632346, guid: 3d70e7cb44f5c5e45b37ed23f39bec6c,
         type: 3}
       propertyPath: m_LocalPosition.x

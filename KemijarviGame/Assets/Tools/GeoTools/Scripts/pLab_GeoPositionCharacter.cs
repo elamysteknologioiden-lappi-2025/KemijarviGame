@@ -164,9 +164,20 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
 
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                    if (Physics.Raycast(ray, out rayHit, 200)) {
-                        if (!rayHit.transform.gameObject.tag.Equals("NPC")) {
-                            newPos = rayHit.point;
+                    if (Physics.Raycast(ray, out rayHit, 400)) {
+                        bool hitGround = true;
+                        string hitTag = rayHit.transform.gameObject.tag;
+                        string hitLayer = LayerMask.LayerToName(rayHit.transform.gameObject.layer);
+
+                        if (hitTag.Equals("NPC") || hitLayer.Equals("Water")) {
+                            hitGround = false;
+                        }
+
+
+                        if (hitGround) {
+                            Vector3 rayHitPoint = rayHit.point;
+                            rayHitPoint.y = 0f;
+                            newPos = rayHitPoint;
                         }
                     }
                 }

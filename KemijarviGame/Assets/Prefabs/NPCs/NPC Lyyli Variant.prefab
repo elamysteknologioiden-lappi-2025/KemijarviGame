@@ -30,6 +30,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC Lyyli Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 552160690343939323, guid: b59e317a64e98ae4190234df1991d067,
+        type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 3599206096133455592, guid: b59e317a64e98ae4190234df1991d067,
         type: 3}
       propertyPath: m_LocalPosition.x

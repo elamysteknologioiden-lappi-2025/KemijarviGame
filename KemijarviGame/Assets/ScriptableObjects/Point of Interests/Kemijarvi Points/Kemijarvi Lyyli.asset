@@ -19,11 +19,11 @@ MonoBehaviour:
     type: 3}
   modelPrefab: {fileID: 5973669079691071266, guid: 8a9ad13fbdd28b8469ef028e364e4607,
     type: 3}
-  canvasPrefab: {fileID: 1531612421245766800, guid: 8a6cd4573d0f62b4a91cfa6fc4c2a239,
+  canvasPrefab: {fileID: 1531612421245766800, guid: 81b51d0f1e6350646b279cbc9acccb9e,
     type: 3}
   coordinates:
-    lat: 66.712
-    lon: 27.428
+    lat: 66.71528
+    lon: 27.43312
   trackingRadius: 100
   trackingExitMargin: 20
   closeTrackingRadius: 20

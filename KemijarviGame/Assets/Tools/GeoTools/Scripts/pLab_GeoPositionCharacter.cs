@@ -39,6 +39,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR;
 
 
@@ -147,11 +148,11 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     void Update() {
 
         if (geoCharacterMoveType == GeoCharacterMoveType.EDirectPoint) {
-            if (Input.GetMouseButtonUp(0)) {
+            if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject()) {
                 bool castRay = false;
 
                 if (lastTimeClicked != 0) {
-                    if (Time.time - lastTimeClicked < 0.5f) {
+                    if (Time.time - lastTimeClicked < 0.4f) {
                         //Double click
                         castRay = true;
                     }

@@ -67,7 +67,7 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
             name = "Pelaaja";
         }
         pLab_KJPOCSaveGame.Instance.CreateNewGame(name);
-        SceneManager.LoadScene("Level_001 AR Kemijarvi");
+        SceneManager.LoadScene("Level_001 AR Kemijarvi DEMO");
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
 
     public void LoadGame() {
         pLab_KJPOCSaveGame.Instance.LoadGame();
-        SceneManager.LoadScene("Level_001 AR Kemijarvi");
+        SceneManager.LoadScene("Level_001 AR Kemijarvi DEMO");
     }
 
 }

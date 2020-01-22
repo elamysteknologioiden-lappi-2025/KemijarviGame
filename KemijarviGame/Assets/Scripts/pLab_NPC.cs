@@ -221,7 +221,7 @@ public class pLab_NPC : MonoBehaviour{
     /// </summary>
     public void ActivateNPC(bool checkRadius = true) {
 
-        if (checkRadius && currentQuest == null || !IsPlayerInsideActivationRadius()) return;
+        if (currentQuest == null || (checkRadius && !IsPlayerInsideActivationRadius())) return;
 
         questDialog.gameObject.SetActive(true);
 

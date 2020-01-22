@@ -38,6 +38,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// NPC-class for AR-mode
@@ -88,6 +89,7 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
     }
 
     private void OnMouseUpAsButton() {
+
         ActivateNPC();
     }
 
@@ -212,6 +214,8 @@ public class pLab_KJPOC_ARNPC : MonoBehaviour
     {
         if (aId == npcId) {
             DisableQuest();
+        } else {
+            CheckHighlight();
         }
     }
 

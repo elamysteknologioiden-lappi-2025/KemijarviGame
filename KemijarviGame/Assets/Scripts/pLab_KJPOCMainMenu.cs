@@ -3,6 +3,7 @@
  * Lisence      : BSD 3-Clause License
  * Copyright    : Lapland University of Applied Sciences
  * Authors      : Toni Westerlund (toni.westerlund@lapinamk.fi)
+                  Arto Söderström (arto.soderstrom@lapinamk.fi)
  * BSD 3-Clause License
  *
  * Copyright (c) 2019, Lapland University of Applied Sciences
@@ -40,26 +41,54 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// MainMenu-script
+/// </summary>
 public class pLab_KJPOCMainMenu : MonoBehaviour
 {
-    [SerializeField]private Button continueButton;
+    #region Variables
 
-    [SerializeField]private GameObject areUSureDialog;
+    [SerializeField] private Button continueButton;
 
-    [SerializeField]private GameObject nameDialog;
+    [SerializeField] private GameObject areUSureDialog;
+
+    [SerializeField] private GameObject nameDialog;
 
     [SerializeField] private InputField playerNameInputField;
 
-    /// <summary>
-    /// 
-    /// </summary>
+    [SerializeField] private string mainSceneName = "Level_001 AR Kemijarvi";
+
+    #endregion
+
+    #region Inherited Methods
+
     private void Start(){
         continueButton.interactable = pLab_KJPOCSaveGame.Instance.IsThereSave();
     }
+
+    private void Update(){
+        if (Application.platform == RuntimePlatform.Android){
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                Application.Quit();
+            }
+        }
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private void LoadMainScene() {
+        SceneManager.LoadScene(mainSceneName);
+    }
+
+    #endregion
+
+    #region Public Methods
+
     /// <summary>
-    /// 
+    /// Starts a new fresh game
     /// </summary>
-    /// <param name="aName"></param>
     public void StartNewGame(){
         string name = playerNameInputField.text.ToString();
 
@@ -67,11 +96,11 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
             name = "Pelaaja";
         }
         pLab_KJPOCSaveGame.Instance.CreateNewGame(name);
-        SceneManager.LoadScene("Level_001 AR Kemijarvi DEMO");
+        SceneManager.LoadScene("Level_001 AR");
     }
 
     /// <summary>
-    /// 
+    /// Set player name query element active
     /// </summary>
     public void PlayerNameQuery(){
         areUSureDialog.SetActive(false);
@@ -79,7 +108,7 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Sets "are you sure" dialog active if there is a save. Otherwise starts a new game
     /// </summary>
     public void PrepareToStartNewGame(){
         if (pLab_KJPOCSaveGame.Instance.IsThereSave()) {
@@ -91,19 +120,12 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Loads gamesave and loads the main scene
     /// </summary>
-    private void Update(){
-        if (Application.platform == RuntimePlatform.Android){
-            if (Input.GetKeyDown(KeyCode.Escape)) {
-                Application.Quit();
-            }
-        }
-    }
-
     public void LoadGame() {
         pLab_KJPOCSaveGame.Instance.LoadGame();
-        SceneManager.LoadScene("Level_001 AR Kemijarvi DEMO");
+        LoadMainScene();
     }
 
+    #endregion
 }

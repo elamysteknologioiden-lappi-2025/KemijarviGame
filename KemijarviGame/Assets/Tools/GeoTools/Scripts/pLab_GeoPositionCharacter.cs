@@ -44,7 +44,7 @@ using UnityEngine.XR;
 
 
 /// <summary>
-/// GeoCharacterMoveType
+/// Type of character movement
 /// </summary>
 enum GeoCharacterMoveType {
     ENone,
@@ -264,6 +264,7 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     /// </summary>
     /// <param name="latLon"></param>
     private void CalculateNewPosition(pLab_LatLon latLon) {
+        if (latLon == null) return;
         pLab_UTMCoordinates coordinates = new pLab_UTMCoordinates(latLon);
         newPos = new Vector3((float)(coordinates.UTMX - pLab_GeoMap.instance.UtmX),
             0f, (float)(coordinates.UTMY - pLab_GeoMap.instance.UtmY));

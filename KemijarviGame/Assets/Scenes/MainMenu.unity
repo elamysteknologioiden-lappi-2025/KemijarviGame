@@ -1483,6 +1483,7 @@ MonoBehaviour:
   areUSureDialog: {fileID: 687422067}
   nameDialog: {fileID: 704783676}
   playerNameInputField: {fileID: 1895191901}
+  mainSceneName: Level_001 AR
 --- !u!4 &1107716309
 Transform:
   m_ObjectHideFlags: 0

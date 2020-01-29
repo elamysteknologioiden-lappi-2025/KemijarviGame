@@ -40,11 +40,9 @@ using UnityEngine;
 
 public class pLab_UTMCoordinates
 {
-    [SerializeField]
-    private double utmX;
+    private double utmX = 0;
 
-    [SerializeField]
-    private double utmY;
+    private double utmY = 0;
 
     public double UTMX { get { return utmX; } set { utmX = value; } }
     
@@ -60,7 +58,9 @@ public class pLab_UTMCoordinates
     }
 
     public pLab_UTMCoordinates(pLab_LatLon latLon) {
-        pLab_GeoTools.LatLongtoUTM(latLon.Lat, latLon.Lon, out this.utmY, out this.utmX);
+        if (latLon != null) {
+            pLab_GeoTools.LatLongtoUTM(latLon.Lat, latLon.Lon, out this.utmY, out this.utmX);
+        }
     }
 
     public override string ToString() {

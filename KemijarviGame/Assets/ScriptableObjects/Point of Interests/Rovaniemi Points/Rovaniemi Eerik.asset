@@ -22,12 +22,12 @@ MonoBehaviour:
   canvasPrefab: {fileID: 1531612421245766800, guid: 81b51d0f1e6350646b279cbc9acccb9e,
     type: 3}
   coordinates:
-    lat: 66.48138
-    lon: 25.719258
+    lat: 66.482034
+    lon: 25.71899
   trackingRadius: 2000
   trackingExitMargin: 100
   closeTrackingRadius: 30
   closeTrackingExitMargin: 20
   positionMode: 0
-  facingDirectionHeading: 0
+  facingDirectionHeading: 90
   relativeHeight: 0

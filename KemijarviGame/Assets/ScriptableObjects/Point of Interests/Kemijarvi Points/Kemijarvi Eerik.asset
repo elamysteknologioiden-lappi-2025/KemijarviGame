@@ -24,10 +24,10 @@ MonoBehaviour:
   coordinates:
     lat: 66.713552
     lon: 27.428731
-  trackingRadius: 2000
-  trackingExitMargin: 100
-  closeTrackingRadius: 30
-  closeTrackingExitMargin: 20
+  trackingRadius: 35
+  trackingExitMargin: 15
+  closeTrackingRadius: 20
+  closeTrackingExitMargin: 10
   positionMode: 0
   facingDirectionHeading: 0
   relativeHeight: 0

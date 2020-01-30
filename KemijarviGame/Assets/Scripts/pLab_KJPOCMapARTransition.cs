@@ -49,6 +49,8 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
 
     #region Variables
 
+    private const string AR_BUTTON_ANIMATOR_HIGHLIGHT_PARAMETER = "HighlightEnabled";
+
     [SerializeField]
     private Button transitionToARButton;
 
@@ -63,10 +65,18 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
     [Tooltip("All objects that should be enabled for Map, and disabled otherwise")]
     private List<GameObject> setActiveForMap = new List<GameObject>();
 
+    private Animator transitionToARButtonAnimator;
+
     #endregion
 
     #region Inherited Methods
-    
+
+    private void Awake() {
+        if (transitionToARButton != null) {
+            transitionToARButtonAnimator = transitionToARButton.GetComponent<Animator>();
+        }
+    }
+
     private void OnEnable() {
         if (transitionToARButton != null) {
             transitionToARButton.onClick.AddListener(TransitionToAR);
@@ -141,6 +151,18 @@ public class pLab_KJPOCMapARTransition : MonoBehaviour
         ToggleMapObjects(!isARMode);
         ToggleARObjects(isARMode);
 
+    }
+
+    /// <summary>
+    /// Highlights or disables the button based on isHighlighted.
+    /// </summary>
+    /// <param name="isHighlighted"></param>
+    public void ToggleARButtonHighlight(bool isHighlighted) {
+        transitionToARButton.interactable = isHighlighted;
+
+        if (transitionToARButtonAnimator != null) {
+            transitionToARButtonAnimator.SetBool(AR_BUTTON_ANIMATOR_HIGHLIGHT_PARAMETER, isHighlighted);
+        }
     }
 
     #endregion

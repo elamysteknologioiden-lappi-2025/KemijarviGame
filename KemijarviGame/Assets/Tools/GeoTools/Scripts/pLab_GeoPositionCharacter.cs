@@ -280,6 +280,8 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
     /// </summary>
     /// <param name="location"></param>
     private void TeleportToLocation(pLab_LatLon location) {
+        if (location == null) return;
+        
         pLab_UTMCoordinates coordinates = new pLab_UTMCoordinates(location);
         Vector3 newPosition = new Vector3((float)(coordinates.UTMX - pLab_GeoMap.instance.UtmX),
             0f, (float)(coordinates.UTMY - pLab_GeoMap.instance.UtmY));

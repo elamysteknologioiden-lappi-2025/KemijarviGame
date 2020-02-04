@@ -24,7 +24,7 @@ MonoBehaviour:
   coordinates:
     lat: 66.715203
     lon: 27.439153
-  trackingRadius: 35
+  trackingRadius: 30
   trackingExitMargin: 15
   closeTrackingRadius: 20
   closeTrackingExitMargin: 10

@@ -317,7 +317,6 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
         if (updatePositions) {
             previousUpdateAccuracy = accuracy;
             previousUpdateTimestamp = e.timestamp;
-            // CheckDistances();
             RecheckPOITrackings();
         }
     }
@@ -423,9 +422,9 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
                     newPos = new Vector3(UTMDifference.x, 0, UTMDifference.y);
 
                     //For debugging
-                    bearing = Vector3.SignedAngle(Vector3.forward, newPos.normalized, Vector3.up);
-                    bearing = pLab_MathConversions.DegAngle0To360(bearing);
-                    bearing = pLab_MathConversions.DegToRad(bearing);
+                    // bearing = Vector3.SignedAngle(Vector3.forward, newPos.normalized, Vector3.up);
+                    // bearing = pLab_MathConversions.DegAngle0To360(bearing);
+                    // bearing = pLab_MathConversions.DegToRad(bearing);
                     //END debug
                     distanceBetween = newPos.magnitude;
                     break;
@@ -449,7 +448,7 @@ public class pLab_ARPointOfInterestManager : MonoBehaviour
                 poiCanvas.UpdateDistance(distanceBetween);
             }
 
-            if (updateDebug) {
+            if (updateDebug && pointOfInterestDebug != null) {
                 pointOfInterestDebug.UpdateItem(poi, distanceBetween, bearing, newPos);
             }
         }

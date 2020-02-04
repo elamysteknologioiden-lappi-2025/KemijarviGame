@@ -96,7 +96,7 @@ public class pLab_KJPOCMainMenu : MonoBehaviour
             name = "Pelaaja";
         }
         pLab_KJPOCSaveGame.Instance.CreateNewGame(name);
-        SceneManager.LoadScene("Level_001 AR");
+        LoadMainScene();
     }
 
     /// <summary>

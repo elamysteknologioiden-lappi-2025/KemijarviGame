@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: 001_Water_simple
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _RECEIVE_SHADOWS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -72,8 +72,8 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _Smoothness: 0.845
+    - _ReceiveShadows: 0
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -83,7 +83,7 @@ Material:
     m_Colors:
     - Color_2C347892: {r: 0.504717, g: 0.72334653, b: 1, a: 0}
     - Color_FAD0E353: {r: 0, g: 0.42326775, b: 0.8631574, a: 0}
-    - _BaseColor: {r: 0, g: 0.45445806, b: 0.6981132, a: 1}
+    - _BaseColor: {r: 0.0045834924, g: 0.6510903, b: 0.9716981, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

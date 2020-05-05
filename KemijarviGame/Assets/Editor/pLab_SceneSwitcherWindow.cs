@@ -64,8 +64,12 @@ public class pLab_SceneSwitcherWindow : EditorWindow
     private const string SHOW_FAVORITE_SCENES_PREF_KEY = "SceneSwitcherWindow.ShowFavoriteScenes";
     private const string FAVORITE_SCENES_PREF_KEY = "SceneSwitcherWindow.FavoriteScenes";
 
+    private const int WINDOW_MAX_WIDTH = 500;
     private bool focusOnFilter = true;
     private bool isEditing = false;
+    private bool deletionEnabled = true;
+
+    private float showNotificationForSeconds = 2.5f;
 
     private FavoriteScenes favorites = new FavoriteScenes();
     private string filterText = "";
@@ -76,7 +80,7 @@ public class pLab_SceneSwitcherWindow : EditorWindow
     [MenuItem("Tools/Scene Switcher %q")]
     internal static void Init()
     {
-        pLab_SceneSwitcherWindow window = (pLab_SceneSwitcherWindow) GetWindow(typeof(pLab_SceneSwitcherWindow), false, "Scene Switcher");
+        pLab_SceneSwitcherWindow window = (pLab_SceneSwitcherWindow) GetWindow<pLab_SceneSwitcherWindow>("Scene Switcher");
         window.focusOnFilter = true;
         window.Refresh();
     }
@@ -84,32 +88,17 @@ public class pLab_SceneSwitcherWindow : EditorWindow
     internal void OnGUI()
     {
         GUILayout.Space(4);
-        Event e = Event.current;
 
-        //Move focus to filter-textfield on CTRL + F
-        if (e.keyCode == KeyCode.F && e.control) {
-            focusOnFilter = true;
-        }
-        else if (e.keyCode == KeyCode.R && e.control) {
-            if (e.type == EventType.KeyUp)  {
-                //Refresh on CTRL + R
-                Refresh();
-            }
+        HandleKeyboardEvents();
 
-            //Use the event so it won't be passed on to anything else
-            e.Use();
-        }
-
-        GUIStyle buttonStyle = new GUIStyle(GUI.skin.GetStyle("Button")) { alignment = TextAnchor.MiddleLeft };
-
-        EditorGUILayout.BeginVertical();
+        EditorGUILayout.BeginVertical(GUILayout.MaxWidth(WINDOW_MAX_WIDTH));
 
         EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
-        // GUILayout.Label(EditorGUIUtility.IconContent("ViewToolZoom"), GUILayout.ExpandWidth(false));
+
         GUI.SetNextControlName("FilterTextField");
         filterText = EditorGUILayout.TextField(filterText, EditorStyles.toolbarSearchField);
         GUIStyle toolbarCancelStyle = GUI.skin.GetStyle("ToolbarSeachCancelButton");
-        bool cleared = GUILayout.Button(EditorGUIUtility.IconContent("d_winbtn_graph_close_h"), toolbarCancelStyle, GUILayout.ExpandWidth(false));
+        bool cleared = GUILayout.Button(EditorGUIUtility.IconContent("winbtn_graph_close_h", "|Clear filter"), toolbarCancelStyle, GUILayout.ExpandWidth(false));
 
         if (cleared) {
             filterText = "";
@@ -129,7 +118,7 @@ public class pLab_SceneSwitcherWindow : EditorWindow
             createNewScene = true;
         }
         
-        bool refresh = GUILayout.Button(EditorGUIUtility.IconContent("d_Refresh", "|Refresh"), EditorStyles.toolbarButton, GUILayout.ExpandWidth(false));
+        bool refresh = GUILayout.Button(EditorGUIUtility.IconContent("Refresh", "|Refresh"), EditorStyles.toolbarButton, GUILayout.ExpandWidth(false));
         isEditing = GUILayout.Toggle(isEditing, EditorGUIUtility.IconContent("d_editicon.sml", "|Edit mode: Rename or remove scenes"), EditorStyles.toolbarButton, GUILayout.ExpandWidth(false));
 
         if (refresh) {
@@ -142,232 +131,162 @@ public class pLab_SceneSwitcherWindow : EditorWindow
         this.scrollPos = EditorGUILayout.BeginScrollView(this.scrollPos, false, false);
 
         GUILayout.Space(4);
-        GUIStyle favoritesFoldoutStyle = new GUIStyle(EditorStyles.foldout);
-        favoritesFoldoutStyle.fontStyle = FontStyle.Bold;
 
-        EditorGUILayout.BeginHorizontal();
-        showFavorites = EditorGUILayout.Foldout(showFavorites, "Favorites", true, favoritesFoldoutStyle);
+        #region Favorite Scenes
+
+        if (favorites.scenes.Count > 0) {
+            GUIStyle favoritesFoldoutStyle = new GUIStyle(EditorStyles.foldout);
+            favoritesFoldoutStyle.fontStyle = FontStyle.Bold;
+
+            showFavorites = EditorGUILayout.Foldout(showFavorites, "Favorites", true, favoritesFoldoutStyle);
 
 
-        EditorGUILayout.EndHorizontal();
-
-        if (showFavorites) {
-            for(int i = 0; i < favorites.scenes.Count; i++) {
-                string assetPath = AssetDatabase.GUIDToAssetPath(favorites.scenes[i]);
-                if (assetPath != null && assetPath != "") {
-                    string sceneName = Path.GetFileNameWithoutExtension(assetPath);
-                    if (!sceneName.ToLower().Contains(filterText)) continue;
-                    EditorGUILayout.BeginHorizontal();
-                    bool favorite = GUILayout.Button(EditorGUIUtility.IconContent("Favorite", "|Remove from favorites"), EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
-                    bool pressed = false;
-
-                    if (isEditing) {
-                        EditorGUILayout.BeginHorizontal();
-
-                        string newSceneName = EditorGUILayout.DelayedTextField(sceneName, GUILayout.Height(20));
-
-                        if (newSceneName != null && newSceneName != "" && newSceneName != sceneName) {
-                            string statusMessage = AssetDatabase.RenameAsset(assetPath, newSceneName);
-                            AssetDatabase.Refresh();
-
-                            if (statusMessage == "") {
-                                //Everything went ok
-                                Debug.Log($"Renamed {assetPath} to {newSceneName}");
-                            } else {
-                                //There was an error
-                                Debug.LogError($"Error renaming scene: {statusMessage}");
-                            }
-                        }
-
-                        bool deleteAsset = GUILayout.Button(EditorGUIUtility.IconContent("TreeEditor.Trash", "|Delete scene asset"), EditorStyles.miniButton, GUILayout.ExpandWidth(false));
-
-                        if (deleteAsset) {
-                            bool wasRemoved = AssetDatabase.DeleteAsset(assetPath);
-
-                            if (wasRemoved) {
-                                Debug.Log($"Deleted scene at {assetPath}");
-                                ToggleFavorite(favorites.scenes[i]);
-                                AssetDatabase.Refresh();
-                            } else {
-                                Debug.LogError($"Failed to delete scene at {assetPath}");
-                            }
-
-                        }
-
-                        EditorGUILayout.EndHorizontal();
-                    } else {
-                        pressed = GUILayout.Button(string.Format("{0}", sceneName), buttonStyle);
-                    }
-
-                    EditorGUILayout.EndHorizontal();
-
-                    //If favorite button was clicked
-                    if (favorite) {
-                        ToggleFavorite(favorites.scenes[i]);
-                    }
-                    //If button was pressed
-                    if (pressed)
-                    {
-                        OpenScene(assetPath);
-                    }
-                }
+            if (showFavorites) {
+                string[] guids = favorites.scenes.ToArray();
+                DrawScenesList(guids);
             }
-        }
- 
-        GUILayout.Space(10);
-        showBuildScenes = EditorGUILayout.Foldout(showBuildScenes, "Scenes In Build", true);
 
-
-        if (showBuildScenes) {
-            for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
-            {
-                EditorBuildSettingsScene scene = EditorBuildSettings.scenes[i];
-                if (scene.path != null && scene.path != "") {
-                    string sceneGuid = scene.guid.ToString();
-                    string sceneName = Path.GetFileNameWithoutExtension(scene.path);
-                    if (!sceneName.ToLower().Contains(filterText)) continue;
-
-                    EditorGUILayout.BeginHorizontal();
-                    bool isFavorite = favorites.scenes.Contains(scene.guid.ToString());
-
-                    bool favorite = GUILayout.Button(EditorGUIUtility.IconContent(isFavorite ? "Favorite" : "d_favorite", isFavorite ? "|Remove from favorites" : "|Add to favorites"), EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
-
-                    bool pressed = false;
-
-                    if (isEditing) {
-                        EditorGUILayout.BeginHorizontal();
-
-                        string newSceneName = EditorGUILayout.DelayedTextField(sceneName, GUILayout.Height(20));
-                        string assetPath = scene.path;
-
-                        if (newSceneName != null && newSceneName != "" && newSceneName != sceneName) {
-                            string statusMessage = AssetDatabase.RenameAsset(assetPath, newSceneName);
-                            AssetDatabase.Refresh();
-
-                            if (statusMessage == "") {
-                                //Everything went ok
-                                Debug.Log($"Renamed {assetPath} to {newSceneName}");
-                            } else {
-                                //There was an error
-                                Debug.LogError($"Error renaming scene: {statusMessage}");
-                            }
-                        }
-
-                        bool deleteAsset = GUILayout.Button(EditorGUIUtility.IconContent("TreeEditor.Trash", "|Delete scene asset"), EditorStyles.miniButton, GUILayout.ExpandWidth(false));
-
-                        if (deleteAsset) {
-                            bool wasRemoved = AssetDatabase.DeleteAsset(assetPath);
-
-                            if (wasRemoved) {
-                                Debug.Log($"Deleted scene at {assetPath}");
-                                if (favorites.scenes.IndexOf(sceneGuid) != -1) {
-                                    ToggleFavorite(sceneGuid);
-                                }
-                                AssetDatabase.Refresh();
-                            } else {
-                                Debug.LogError($"Failed to delete scene at {assetPath}");
-                            }
-
-                        }
-
-                        EditorGUILayout.EndHorizontal();
-                    } else {
-                        pressed = GUILayout.Button(string.Format("{0}", sceneName), buttonStyle);
-                    }
-
-                    if (favorite) {
-                        ToggleFavorite(sceneGuid);
-                    }
-
-                    EditorGUILayout.EndHorizontal();
-                    //If button was pressed
-                    if (pressed)
-                    {
-                        OpenScene(scene.path);
-                    }
-                }
-            }
+            GUILayout.Space(6);
         }
 
-        GUILayout.Space(10);
+        #endregion
+
+        #region Build Scenes
+
+        if (EditorBuildSettings.scenes.Length > 0) {
+            showBuildScenes = EditorGUILayout.Foldout(showBuildScenes, "Scenes In Build", true);
+
+            if (showBuildScenes) {
+                string[] guids = new string[EditorBuildSettings.scenes.Length];
+                for(int i = 0; i < EditorBuildSettings.scenes.Length; i++) {
+                    guids[i] = EditorBuildSettings.scenes[i].guid.ToString();
+                }
+
+                DrawScenesList(guids);
+            }
+
+            GUILayout.Space(6);
+        }
+
+        #endregion
+
+        #region All Scenes
 
         showAllScenes = EditorGUILayout.Foldout(showAllScenes, "All Scenes", true);
 
         if (showAllScenes) {
             string[] guids = AssetDatabase.FindAssets("t:Scene");
-
-            for(int i = 0; i < guids.Length; i++) {
-                string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
-                string sceneName = Path.GetFileNameWithoutExtension(assetPath);
-                if (!sceneName.ToLower().Contains(filterText)) continue;
-
-                EditorGUILayout.BeginHorizontal();
-
-                bool isFavorite = favorites.scenes.Contains(guids[i]);
-                bool favorite = GUILayout.Button(EditorGUIUtility.IconContent(isFavorite ? "Favorite" : "d_favorite", isFavorite ? "|Remove from favorites" : "|Add to favorites"), EditorStyles.boldLabel, GUILayout.ExpandWidth(false));
-                bool pressed = false;
-
-                if (isEditing) {
-                    EditorGUILayout.BeginHorizontal();
-
-                    string newSceneName = EditorGUILayout.DelayedTextField(sceneName, GUILayout.Height(20));
-
-                    if (newSceneName != null && newSceneName != "" && newSceneName != sceneName) {
-                        string statusMessage = AssetDatabase.RenameAsset(assetPath, newSceneName);
-                        AssetDatabase.Refresh();
-
-                        if (statusMessage == "") {
-                            //Everything went ok
-                            Debug.Log($"Renamed {assetPath} to {newSceneName}");
-                        } else {
-                            //There was an error
-                            Debug.LogError($"Error renaming scene: {statusMessage}");
-                        }
-                    }
-
-                    bool deleteAsset = GUILayout.Button(EditorGUIUtility.IconContent("TreeEditor.Trash", "|Delete scene asset"), EditorStyles.miniButton, GUILayout.ExpandWidth(false));
-
-                    if (deleteAsset) {
-                        bool wasRemoved = AssetDatabase.DeleteAsset(assetPath);
-
-                        if (wasRemoved) {
-                            Debug.Log($"Deleted scene at {assetPath}");
-                            if (favorites.scenes.IndexOf(guids[i]) != -1) {
-                                ToggleFavorite(guids[i]);
-                            }
-
-                            AssetDatabase.Refresh();
-                        } else {
-                            Debug.LogError($"Failed to delete scene at {assetPath}");
-                        }
-
-                    }
-
-                    EditorGUILayout.EndHorizontal();
-
-                } else {
-                    pressed = GUILayout.Button(string.Format("{0}", sceneName), buttonStyle);
-                }
-
-                EditorGUILayout.EndHorizontal();
-
-                //If favorite button was clicked
-                if (favorite) {
-                    ToggleFavorite(guids[i]);
-                }
-
-                if (pressed) {
-                    OpenScene(assetPath);
-                }
-            }
+            DrawScenesList(guids);
         }
 
         GUILayout.Space(10);
+        #endregion
+
         EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
 
         if (createNewScene) {
             CreateNewScene();
+        }
+
+    }
+
+    /// <summary>
+    /// Handles keyboard events e.g. for refreshing, editing etc.
+    /// </summary>
+    private void HandleKeyboardEvents() {
+        Event e = Event.current;
+
+        //Move focus to filter-textfield on CTRL + F
+        if (e.keyCode == KeyCode.F && e.control) {
+            focusOnFilter = true;
+        }
+        else if (e.keyCode == KeyCode.R && e.control) {
+            if (e.type == EventType.KeyUp)  {
+                //Refresh on CTRL + R
+                Refresh();
+            }
+
+            //Use the event so it won't be passed on to anything else
+            e.Use();
+        } else if (e.keyCode == KeyCode.E && e.control) {
+            if (e.type == EventType.KeyUp) {
+                isEditing = !isEditing;
+            }
+
+            e.Use();
+        }
+    }
+
+    /// <summary>
+    /// Draws a list of scenes
+    /// </summary>
+    /// <param name="sceneGuids"></param>
+    private void DrawScenesList(string[] sceneGuids) {
+        GUIStyle buttonStyle = new GUIStyle(GUI.skin.GetStyle("Button")) { alignment = TextAnchor.MiddleLeft };
+        for(int i = 0; i < sceneGuids.Length; i++) {
+            string assetPath = AssetDatabase.GUIDToAssetPath(sceneGuids[i]);
+            string sceneName = Path.GetFileNameWithoutExtension(assetPath);
+            if (!sceneName.ToLower().Contains(filterText)) continue;
+
+            EditorGUILayout.BeginHorizontal();
+
+            bool isFavorite = favorites.scenes.Contains(sceneGuids[i]);
+            bool favorite = GUILayout.Button(EditorGUIUtility.IconContent(isFavorite ? "Favorite" : "d_Favorite", isFavorite ? "|Remove from favorites" : "|Add to favorites"), EditorStyles.miniButton, GUILayout.ExpandWidth(false));
+            bool pressed = false;
+
+            if (!favorite && isEditing) {
+
+                string newSceneName = EditorGUILayout.DelayedTextField(sceneName);
+
+                if (newSceneName != null && newSceneName != "" && newSceneName != sceneName) {
+                    string statusMessage = AssetDatabase.RenameAsset(assetPath, newSceneName);
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+
+                    if (statusMessage == "") {
+                        //Everything went ok
+                        Debug.Log($"Renamed {assetPath} to {newSceneName}");
+                        ShowNotification(new GUIContent($"Renamed {assetPath} to {newSceneName}"), showNotificationForSeconds);
+                    } else {
+                        //There was an error
+                        Debug.LogError($"Error renaming scene: {statusMessage}");
+                    }
+                }
+                else {
+                    bool deleteAsset = deletionEnabled && GUILayout.Button(EditorGUIUtility.IconContent("TreeEditor.Trash", "|Delete scene asset"), EditorStyles.miniButton, GUILayout.ExpandWidth(false));
+
+                    if (deleteAsset
+                    && EditorUtility.DisplayDialog("Delete confirmation", $"Are you sure you want to delete scene at {assetPath}", "Yes, delete", "No, do not delete")) {
+                        bool wasRemoved = AssetDatabase.DeleteAsset(assetPath);
+
+                        if (wasRemoved) {
+                            Debug.Log($"Deleted scene at {assetPath}");
+                            if (favorites.scenes.IndexOf(sceneGuids[i]) != -1) {
+                                ToggleFavorite(sceneGuids[i]);
+                            }
+                            AssetDatabase.SaveAssets();
+                            AssetDatabase.Refresh();
+                            ShowNotification(new GUIContent($"Deleted scene at {assetPath}"), showNotificationForSeconds);
+                        } else {
+                            Debug.LogError($"Failed to delete scene at {assetPath}");
+                        }
+                    }
+                }
+            } else {
+                pressed = GUILayout.Button(string.Format("{0}", sceneName), buttonStyle);
+            }
+
+            EditorGUILayout.EndHorizontal();
+
+            //If favorite button was clicked
+            if (favorite) {
+                ToggleFavorite(sceneGuids[i]);
+            }
+
+            if (pressed) {
+                OpenScene(assetPath);
+            }
         }
     }
 
@@ -438,6 +357,8 @@ public class pLab_SceneSwitcherWindow : EditorWindow
         } else {
             favorites.scenes.Add(guid);
         }
+
+        SaveFavoritesToPrefs();
     }
 
     /// <summary>
@@ -448,6 +369,13 @@ public class pLab_SceneSwitcherWindow : EditorWindow
         EditorPrefs.SetBool(SHOW_ALL_SCENES_PREF_KEY, showAllScenes);
         EditorPrefs.SetBool(SHOW_FAVORITE_SCENES_PREF_KEY, showFavorites);
 
+        SaveFavoritesToPrefs();
+    }
+
+    /// <summary>
+    /// Saves favorites to prefs
+    /// </summary>
+    private void SaveFavoritesToPrefs() {
         if (favorites != null && favorites.scenes.Count > 0) {
             string favoritesAsJson = EditorJsonUtility.ToJson(favorites);
             PlayerPrefs.SetString(FAVORITE_SCENES_PREF_KEY, favoritesAsJson);
@@ -460,6 +388,7 @@ public class pLab_SceneSwitcherWindow : EditorWindow
     /// Load favorites and window preferences
     /// </summary>
     private void LoadPrefs() {
+
         if (EditorPrefs.HasKey(SHOW_BUILD_SCENES_PREF_KEY))
             showBuildScenes = EditorPrefs.GetBool(SHOW_BUILD_SCENES_PREF_KEY);
 

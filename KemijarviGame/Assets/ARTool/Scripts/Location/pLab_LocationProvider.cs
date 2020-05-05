@@ -86,6 +86,8 @@ public class pLab_LocationProvider : MonoBehaviour
 
     private LocationInfo latestLocationInfo;
 
+    private bool wasGpsEnabled = false;
+
 
     #region Debug Variables
     [Header("Debug")]
@@ -143,8 +145,24 @@ public class pLab_LocationProvider : MonoBehaviour
     void Start()
     {
         wait = new WaitForSeconds(1f);
-
+        wasGpsEnabled = Input.location.isEnabledByUser;
         StartPollLocationRoutine();
+
+    }
+
+    void Update() {
+        if (wasGpsEnabled != Input.location.isEnabledByUser) {
+            wasGpsEnabled = Input.location.isEnabledByUser;
+
+            //Turned on
+            if (wasGpsEnabled) {
+                StartPollLocationRoutine();
+            }
+            //Turned off
+            else {
+                StopPollLocationRoutine();
+            }
+        }
 
     }
 
@@ -165,13 +183,13 @@ public class pLab_LocationProvider : MonoBehaviour
             if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
             {
                 Permission.RequestUserPermission(Permission.FineLocation);
+                yield return wait;
             }
-
         #endif
 
         if (!Input.location.isEnabledByUser)
         {
-            Debug.Log("Location not enabled by user");
+            // Debug.Log("Location not enabled by user");
             yield break;
         }
 
@@ -253,14 +271,18 @@ public class pLab_LocationProvider : MonoBehaviour
     #region Private Methods
 
     private void StartPollLocationRoutine() {
-        if (pollRoutine != null) {
-            StopCoroutine(pollRoutine);
-        }
+        StopPollLocationRoutine();
 
         if (useFakeData) {
             pollRoutine = StartCoroutine(PollLocationRoutineFake());
         } else {
             pollRoutine = StartCoroutine(PollLocationRoutine());
+        }
+    }
+
+    private void StopPollLocationRoutine() {
+        if (pollRoutine != null) {
+            StopCoroutine(pollRoutine);
         }
     }
 

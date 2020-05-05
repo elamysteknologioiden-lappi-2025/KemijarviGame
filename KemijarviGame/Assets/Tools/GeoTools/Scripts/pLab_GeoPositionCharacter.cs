@@ -197,6 +197,9 @@ public class pLab_GeoPositionCharacter : MonoBehaviour {
             distance = Vector3.Distance(startPosition, desiredPos);
 
             if (distance > 0) {
+                if (distance > 500) {
+                    TeleportToPosition(desiredPos);
+                }
                 speed = Mathf.Clamp(distance, 0.05f, 25f);
             } else {
                 speed = 0;
